@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<title>A code sample of how to make an API call using C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p align="left"><font size="2" face="Verdana">A code sample of how to make an API call
+using C#. This program enables you to find out which drive letter is the removable, fixed,
+remote or a CD-ROM Drive&nbsp;<br>
+</font><br>
+<nobr><font face="Verdana" size="2" color="#FFFFFF">sing System;<br>
+</font><font face="Verdana" size="2" color="#400040">using System.Runtime.InteropServices;<br>
+class Test<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public enum DriveType<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_UNKNOWN = 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_NO_ROOT_DIR = 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_REMOVABLE = 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_FIXED = 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_REMOTE = 4,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_CDROM = 5,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DRIVE_RAMDISK = 6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static public void Main(string[] args)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveType driveType =
+Test.GetDriveType(args[0]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(<b>&quot;Drive {0} is
+type {1}&quot;</b>, args[0], driveType);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[DllImport(<b>&quot;kernel32.dll&quot;</b>)]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public static extern DriveType GetDriveType(string rootPathName);<br>
+}</font></nobr></p>
+</body>
+</html>

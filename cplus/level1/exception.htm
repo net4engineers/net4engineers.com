@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<title>New Page 37</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Verdana">/<font size="2">* exception handlers to catch these different
+types of exceptions.<br>
+<br>
+When running the program, enter 0 for normal execution,<br>
+1 or 2 to throw and catch an integer value, 3 to throw and<br>
+catch a string. Any other value causes an object of type<br>
+MyError to be thrown. This will not be caught by the program.<br>
+<br>
+*/<br>
+<br>
+#include &lt;iostream&gt;<br>
+#include &lt;string&gt;<br>
+using namespace std;<br>
+<br>
+class MyError {}; // no body required -<br>
+// compiler will make a<br>
+// default constructor<br>
+<br>
+void createError() // no exception specification,<br>
+{ // so any type can be thrown<br>
+int x = 0, type;<br>
+cout &lt;&lt; &quot;Type of exception to throw? (0 for none) &quot;;<br>
+cin &gt;&gt; type;<br>
+<br>
+switch (type) {<br>
+case 0: break; // no exception thrown<br>
+case 1: throw 42; // integer literal thrown<br>
+case 2: throw x; // integer thrown<br>
+case 3: throw string(&quot;oops!&quot;); // string object thrown<br>
+default: throw MyError(); // instance of MyError thrown<br>
+// (invokes default constructor)<br>
+}<br>
+<br>
+}<br>
+<br>
+int main()<br>
+{<br>
+try {<br>
+<br>
+createError();<br>
+cout &lt;&lt; &quot;Phew - no exceptions!&quot; &lt;&lt; endl; // these statements execute<br>
+return 0; // only if '0' was entered in<br>
+// createError<br>
+}<br>
+catch (int e) {<br>
+cerr &lt;&lt; &quot;Integer exception caught, value = &quot; &lt;&lt; e &lt;&lt; endl;<br>
+return 1;<br>
+}<br>
+catch (string&amp; e) {<br>
+cerr &lt;&lt; &quot;String exception caught, value = &quot; &lt;&lt; e &lt;&lt; endl;<br>
+return 1;<br>
+}<br>
+<br>
+// Note: there is no exception handler for MyError,<br>
+// so exceptions of this type remain uncaught and<br>
+// will cause the program to abort (and dump core)...<br>
+}</font> </font></p>
+</body>
+</html>

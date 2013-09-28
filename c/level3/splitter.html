@@ -1,0 +1,204 @@
+<html>
+
+<head>
+<title>New Page 10</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>File-Splitter In C</b></font></big></p>
+
+<p>/******************************<br>
+******&nbsp;&nbsp;&nbsp; Fsplit 1.0 ************<br>
+******************************/<br>
+<br>
+<br>
+/* include the necessary header files */<br>
+#include&lt;dos.h&gt;<br>
+#include&lt;dir.h&gt;<br>
+#include&lt;stdlib.h&gt;<br>
+#include&lt;stdio.h&gt;<br>
+#include&lt;string.h&gt;<br>
+#include&lt;fcntl.h&gt;<br>
+#include&lt;io.h&gt;<br>
+#include&lt;sys/stat.h&gt;<br>
+<br>
+main()<br>
+{<br>
+&nbsp;&nbsp;&nbsp; /* FILE pointer to batch file used for merging the obtained parts */<br>
+&nbsp;&nbsp;&nbsp; FILE *f;<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* this structure is used to find whether the file exists or not <br>
+&nbsp;&nbsp;&nbsp; and to find its total size */<br>
+&nbsp;&nbsp;&nbsp; struct ffblk file_info;<br>
+<br>
+&nbsp;&nbsp;&nbsp; char name[80], *buffer, pname[80], dig[4], fname[80], *ptr;<br>
+&nbsp;&nbsp;&nbsp; long size, psize;<br>
+&nbsp;&nbsp;&nbsp; /* psize holds the size of each part */<br>
+<br>
+&nbsp;&nbsp;&nbsp; int chunck = 1024, times, parts, left, i, j, source, target, len;<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* set file access mode to binary */<br>
+&nbsp;&nbsp;&nbsp; _fmode = O_BINARY;<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* get name of the file from the user */<br>
+&nbsp;&nbsp;&nbsp; printf(&quot;Enter the name of file to split : &quot;);<br>
+&nbsp;&nbsp;&nbsp; scanf(&quot;%s&quot;,name);<br>
+<br>
+&nbsp;&nbsp;&nbsp; if (findfirst(name, &amp;file_info, FA_DIREC) != 0)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* if file to split is not found then display
+error message and quit */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Error accessing %s\n&quot;,name);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; /* get file size from ffblk structure */<br>
+size = file_info.ff_fsize;<br>
+<br>
+&nbsp;&nbsp;&nbsp; printf(&quot;Size of %s is %ld bytes &quot;,name,size);<br>
+&nbsp;&nbsp;&nbsp; printf(&quot; = %0.2f Kb = %0.2f
+Mb\n&quot;,(float)size/1024,(float)size/1024/1024);<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* accept number of parts */<br>
+&nbsp;&nbsp;&nbsp; printf(&quot;Enter number of parts : &quot;);<br>
+&nbsp;&nbsp;&nbsp; scanf(&quot;%d&quot;,&amp;parts);<br>
+<br>
+&nbsp;&nbsp;&nbsp; if (parts &lt; 2 || parts &gt; 999)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Check the number of parts and
+restart again\n&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* find out the size of each part */<br>
+&nbsp;&nbsp;&nbsp; psize = (long) size / parts;<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* if size of each part is less than 1024 make chunk size to part size
+*/<br>
+&nbsp;&nbsp;&nbsp; if (psize &lt;= chunck)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chunck = psize;<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; /* find the number of iterations */<br>
+&nbsp;&nbsp;&nbsp; times = psize / chunck;<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* find the number of bytes left out in each part when copying them in
+chunks <br>
+&nbsp;&nbsp;&nbsp; for example if part size is 2050 bytes then in first iteration 1024
+bytes and in<br>
+&nbsp;&nbsp;&nbsp; the next iteration another 1024 bytes are copied. The remaining 2 bytes
+are to <br>
+&nbsp;&nbsp;&nbsp; be copied seperately */<br>
+&nbsp;&nbsp;&nbsp; left = psize - times*chunck;<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* open source file in read mode */&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; source = open(name, O_RDONLY|O_BINARY, 0);<br>
+&nbsp;&nbsp;&nbsp; if (source == -1)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Error opening %s\n&quot;,name);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* initialize buffer */<br>
+&nbsp;&nbsp;&nbsp; buffer = (char *) malloc(chunck);<br>
+&nbsp;&nbsp;&nbsp; if (buffer == NULL)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Insufficient memory\n&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* find the absolute file name from the path name */<br>
+&nbsp;&nbsp;&nbsp; ptr = strrchr(name,'\\');<br>
+&nbsp;&nbsp;&nbsp; if (ptr != NULL)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ptr++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcpy(fname,ptr);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcpy(fname, name);<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* find the position at which . is present in the file name */<br>
+&nbsp;&nbsp;&nbsp; ptr = strstr(fname,&quot;.&quot;);<br>
+&nbsp;&nbsp;&nbsp; if (ptr != NULL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *(ptr + 1) = '\0';<br>
+&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcat(fname,&quot;.&quot;);<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; /* pname holds the individual part name */<br>
+&nbsp;&nbsp;&nbsp; strcpy(pname,fname);<br>
+<br>
+&nbsp;&nbsp;&nbsp; /* fname has the name of the batch file */<br>
+&nbsp;&nbsp;&nbsp; strcat(fname,&quot;bat&quot;);<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; f = fopen(fname,&quot;w&quot;);<br>
+&nbsp;&nbsp;&nbsp; if (f == NULL)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Error opening batch file\n&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; strcpy(fname,pname);<br>
+&nbsp;&nbsp;&nbsp; fprintf(f,&quot;COPY /b &quot;);<br>
+&nbsp;&nbsp;&nbsp; for(i = 1; i &lt;= parts; i++)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcpy(pname,fname);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sprintf(dig, &quot;%0.3d&quot;,i);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcat(pname,dig);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;%s\n&quot;,pname);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fprintf(f,&quot;%s&quot;,pname);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (i &lt; parts)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fprintf(f,&quot; +
+&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; target = creat(pname, S_IWRITE);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (target &lt; 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Error
+creating split file\n&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (i &lt; parts)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(j = 1;j &lt;=times;
+j++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+len = read(source, buffer, chunck);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (write(target, buffer, chunck) &lt; 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len = read(source,
+buffer, left);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; write(target, buffer,
+len);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((len =
+read(source, buffer, chunck)) &gt; 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if(write(target, buffer, len) &lt; 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(target);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; ptr = strrchr(name,'\\');<br>
+&nbsp;&nbsp;&nbsp; if (ptr != NULL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fprintf(f,&quot; %s\n&quot;,ptr+1);<br>
+&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fprintf(f,&quot; %s\n&quot;,name);<br>
+&nbsp;&nbsp;&nbsp; fclose(f);<br>
+<br>
+&nbsp;&nbsp;&nbsp; close(source);<br>
+&nbsp;&nbsp;&nbsp; free(buffer);<br>
+<br>
+&nbsp;&nbsp;&nbsp; printf(&quot;\nProgrammed by Pankaj Batra\nPre final yr.
+B.Tech\nInformation Technology\nJind institute of engg. &amp; technology\n&quot;);<br>
+&nbsp;&nbsp;&nbsp; printf(&quot;E-mail : batra_pankaj11@yahoo.com\n&quot;);<br>
+}</p>
+</body>
+</html>

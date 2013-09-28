@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<title>New Page 2</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p>// Program to illustrate the concept of hiding methods<br>
+<br>
+using System;<br>
+<br>
+class CBase<br>
+{<br>
+public void MyMethod()<br>
+{<br>
+Console.WriteLine(&quot;This is the Base class&quot;);<br>
+}<br>
+}<br>
+<br>
+class CChild:CBase<br>
+{<br>
+new public void MyMethod()<br>
+{<br>
+Console.WriteLine(&quot;This is the Child class&quot;);<br>
+}<br>
+}<br>
+<br>
+class CRunApp<br>
+{<br>
+public static void Main()<br>
+{<br>
+CChild child = new CChild();<br>
+child.MyMethod(); // call method from child object<br>
+CBase bbase = new CChild();<br>
+bbase.MyMethod(); // call method from base object<br>
+((CBase)child).MyMethod(); // what do u think this will do ?<br>
+}<br>
+}</p>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<html>
+
+<head>
+<title>Usage of Operator Overloading in C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<font class="smallblack">
+
+<p><font face="Verdana">Usage of Operator Overloading in C#</font><font face="Verdana"
+size="2"><br>
+</font><font class="smallblack" face="Verdana" size="2"><br>
+Here is simple and easy example of operator overloading.</font></p>
+
+<p><font face="Verdana" size="2">using System;<br>
+<br>
+class Rectangle<br>
+{<br>
+&nbsp; private int iHeight;<br>
+&nbsp; private int iWidth;<br>
+<br>
+&nbsp; public Rectangle()<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; Height=0;<br>
+&nbsp;&nbsp;&nbsp; Width=0;<br>
+&nbsp; }<br>
+&nbsp; public Rectangle(int w,int h)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; Width=w;<br>
+&nbsp;&nbsp;&nbsp; Height=h;<br>
+&nbsp; }<br>
+<br>
+&nbsp; public int Width<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; get<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return iWidth;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; set<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iWidth=value;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+&nbsp; public int Height<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; get<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return iHeight;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; set<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iHeight=value;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+<br>
+&nbsp; public int Area&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; get<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Height*Width;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+<br>
+&nbsp; /* OverLoading ==&nbsp; */<br>
+<br>
+&nbsp; public static bool operator==(Rectangle a,Rectangle b)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return ((a.Height==b.Height)&amp;&amp;(a.Width==b.Width));<br>
+&nbsp; }<br>
+<br>
+&nbsp; /* OverLoading != */<br>
+<br>
+&nbsp; public static bool operator!=(Rectangle a,Rectangle b)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return !(a==b);<br>
+&nbsp; }<br>
+<br>
+&nbsp; /* Overloding &gt; */<br>
+<br>
+&nbsp; public static bool operator&gt;(Rectangle a,Rectangle b)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return a.Area&gt;b.Area;<br>
+&nbsp; }<br>
+<br>
+&nbsp; /* Overloading &lt; */<br>
+&nbsp; public static bool operator &lt; (Rectangle a,Rectangle b)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return !(a &gt; b);<br>
+&nbsp; }<br>
+<br>
+&nbsp; /* Overloading &gt;= */<br>
+<br>
+&nbsp; public static bool operator &gt;= (Rectangle a,Rectangle b)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return (a&gt;b)||(a==b);<br>
+&nbsp; }<br>
+<br>
+&nbsp; /* Overloading &lt;= */<br>
+<br>
+&nbsp; public static bool operator &lt;= (Rectangle a,Rectangle b)<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return (a &lt; b)||(a==b);<br>
+&nbsp; }<br>
+<br>
+&nbsp; public override String ToString()<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; return &quot;Height=&quot; + Height + &quot;,Width=&quot; + Width;<br>
+&nbsp; }<br>
+&nbsp; public static void Main()<br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; Rectangle objRect1 =new Rectangle();<br>
+&nbsp;&nbsp;&nbsp; Rectangle objRect2 =new Rectangle();<br>
+&nbsp;&nbsp;&nbsp; Rectangle objRect3 =new Rectangle(10,15);<br>
+&nbsp;&nbsp;&nbsp; objRect1.Height=15;<br>
+&nbsp;&nbsp;&nbsp; objRect1.Width=10;<br>
+&nbsp;&nbsp;&nbsp; objRect2.Height=25;<br>
+&nbsp;&nbsp;&nbsp; objRect2.Width=10;<br>
+&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle#1 &quot; + objRect1);<br>
+&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle#2 &quot; + objRect2);<br>
+&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle#3 &quot; + objRect3);<br>
+<br>
+&nbsp;&nbsp;&nbsp; if(objRect1==objRect2)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle1 &amp; Rectangle2 are
+Equal.&quot;);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(objRect1 &gt; objRect2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle1 is greater
+than Rectangle2&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle1 is lesser
+than Rectangle2&quot;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; if(objRect1==objRect3)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle1 &amp; Rectangle3 are
+Equal.&quot;);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;Rectangle1 &amp; Rectangle3 are not
+Equal.&quot;);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+}<br>
+<br>
+<br>
+Output:<br>
+=======<br>
+Rectangle#1 Height=15,Width=10<br>
+Rectangle#2 Height=25,Width=10<br>
+Rectangle#3 Height=15,Width=10<br>
+Rectangle1 is lesser than Rectangle2<br>
+Rectangle1 &amp; Rectangle3 are Equal.</font></font> </p>
+</body>
+</html>

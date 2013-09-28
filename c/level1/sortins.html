@@ -1,0 +1,40 @@
+<html>
+
+<head>
+<title>New Page 4</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><small><font face="Verdana">//TO SORT A SET OF 25 NOs. BY USING INSERTION SORT<br>
+#include&lt;stdio.h&gt; /*TO INCLUDE HEADER FILES*/<br>
+#include&lt;conio.h&gt;<br>
+#define MAX 5 /*MAX IS DEFINED AS 5*/<br>
+void main() /*BY WRITING VOID,MAIN DOES DOES NOT RETURN ANY VALUE*/<br>
+{<br>
+int nu[MAX],i,j,c; /*DECLARATION PART*/<br>
+clrscr();<br>
+printf(&quot;ENTER %d NOs.: &quot;,MAX);<br>
+for(i=0;i&lt;MAX;i++)<br>
+scanf(&quot;%d&quot;,&amp;nu[i]); /*STORES VALUE IN ARRAY*/<br>
+for(i=1;i&lt;MAX;i++)<br>
+{<br>
+if(nu[i]&lt;nu[0])<br>
+{<br>
+for(j=i;j&gt;0;j--)<br>
+{<br>
+c=nu[j];<br>
+nu[j]=nu[j-1];<br>
+nu[j-1]=c;<br>
+} /*END OF FOR*/<br>
+}<br>
+} /*END OF FOR*/<br>
+printf(&quot;AFTER SORTING:\n&quot;);<br>
+for(i=0;i&lt;MAX;i++)<br>
+printf(&quot;\t\t\t%d\n&quot;,nu[i]);<br>
+getch(); /*PRINT RESULT ON SCREEN*/<br>
+}</font></small></p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+
+<head>
+<title>New Page 1</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p>// Program to illustrate the concept of arrays in C#<br>
+<br>
+using System;<br>
+<br>
+class CArray<br>
+{<br>
+public static void Main()<br>
+{<br>
+int [] sd; // single dimensional array<br>
+int [,] td; // two dimensional array<br>
+int [][] jg; // jagged array<br>
+<br>
+// single dimensional array...<br>
+sd = new int[5];<br>
+Console.WriteLine(&quot;Array SD has the dimension: {0} and length:
+{1}&quot;,sd.Rank,sd.Length);<br>
+sd[0]=1; // assign some value...<br>
+<br>
+// rectangular two dimensional array...<br>
+td = new int[5,4];<br>
+Console.WriteLine(&quot;Array TD has the dimension: {0} and length:
+{1}&quot;,td.Rank,td.Length);<br>
+td[0,0]=1; // assign yet another value... <br>
+<br>
+// jagged multidimensional array...<br>
+jg = new int[2][];<br>
+jg[0] = new int[3];<br>
+jg[1] = new int[4];<br>
+Console.WriteLine(&quot;Array JG has the dimension: {0} and length:
+{1}&quot;,jg.Rank,jg.Length);<br>
+jg[0][0]=1; // assign yet another value... <br>
+<br>
+}<br>
+}</p>
+</body>
+</html>

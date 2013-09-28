@@ -1,0 +1,218 @@
+<html>
+
+<head>
+<title>C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<font class="smallblack">
+
+<p class="MsoNormal"><font face="Verdana">C# DateTime Structure &nbsp;</font></p>
+
+<p><font face="Verdana" size="2">Here is an example of how the DateTime Structure works
+for C#. It's extremely basic and very easy to follow.</font> </p>
+
+<pre><font face="Verdana" size="2">/*
+This program finds out your Age using the DateTime structure in C#.
+*/
+
+using System;
+
+class DOB{
+
+	private DateTime dtDob; 
+	private DateTime dtNow;
+	private DateTime dtAge;
+	private int intDay;
+	private int intMonth;
+	private int intYear;
+	private int intHour;
+	private int intMinute;
+	private TimeSpan tsAge;
+	private int intAgeYear;
+	private int intAgeMonths;
+	private int intAgeDays;
+	private int intAgeHours;
+	private int intAgeMinutes;
+	
+	
+	public static void Main (String[] args) {
+		
+		DOB objDob=new DOB();	
+		objDob.getDob();
+		objDob.createDateObjects();
+		
+	Console.WriteLine(&quot;Your Age in Years :&quot; + objDob.getAgeInYears());
+	Console.WriteLine(&quot;Your Age in Months :&quot; + objDob.getAgeInMonths());
+	Console.WriteLine(&quot;Your Age in Days :&quot; + objDob.getAgeInDays());
+	Console.WriteLine(&quot;Your Age in Hours : &quot; + objDob.getAgeInHours());
+	Console.WriteLine(&quot;Your Age in Minutes : &quot; + objDob.getAgeInMinutes());
+	Console.WriteLine(&quot;Your Accurate Age is : &quot; + objDob.getAgeInYears() 
++ &quot; Years &quot; +
+	objDob.getMonthDiff() + &quot; months &quot; + objDob.getDayDiff() + &quot; days&quot;);
+	}
+
+	/* get the date */
+	
+	private void getDob() {
+	
+		try {
+
+			Console.Write(&quot;Enter the Day u were born : &quot; );
+			intDay=Console.ReadLine().ToInt32();
+			Console.Write(&quot;Month : &quot;);
+			intMonth=Console.ReadLine().ToInt32();;
+			Console.Write(&quot;Year(yyyy) : &quot;);
+			intYear=Console.ReadLine().ToInt32();
+			Console.Write(&quot;Hour(0-23) : &quot;);
+			intHour=Console.ReadLine().ToInt32();
+			Console.Write(&quot;Minute(0-59) : &quot;);
+			intMinute=Console.ReadLine().ToInt32();
+		}
+
+		catch (Exception e) {
+			Console.WriteLine(e.StackTrace);
+			Environment.Exit(0);
+		}
+	}
+	
+	/* create the date objects */
+	private void createDateObjects() {
+	
+		dtDob=new DateTime(intYear,intMonth,intDay,intHour,intMinute,0);
+		dtNow=DateTime.Now;
+		
+		if (DateTime.Compare(dtNow,dtDob)==1)
+			tsAge=dtNow.Subtract(dtDob);
+		else {
+			Console.WriteLine(&quot;Future dates cannot be entered.&quot;);
+			Environment.Exit(0);
+		}
+		
+		dtAge=new DateTime(tsAge.Ticks);	
+		Console.WriteLine(&quot;Your date of birth :&quot; + dtDob.Format(&quot;F&quot;,null));
+	
+	}
+	
+	/*  calculates the age in Years */
+	private int getAgeInYears() {
+		intAgeYear=dtAge.Year-1;
+		return intAgeYear;
+	}
+
+	/* calculates the age in months */
+	private int getAgeInMonths() {
+		intAgeMonths=intAgeYear*12;
+		intAgeMonths=intAgeMonths+(dtAge.Month-1);
+		return intAgeMonths;
+	}
+
+	/* calculates the age in days */
+	private int getAgeInDays() {
+		if (dtDob.Year==dtNow.Year) {
+			intAgeDays=dtNow.DayOfYear-dtDob.DayOfYear;
+		}
+		else {
+			if(DateTime.IsLeapYear(dtDob.Year))
+				intAgeDays=366-dtDob.DayOfYear;
+			else
+				intAgeDays=365-dtDob.DayOfYear;
+
+			for (int i=dtDob.Year+1;i &lt; dtNow.Year;i++) {
+				if (DateTime.IsLeapYear(i)) 
+					intAgeDays+=366;
+				else
+					intAgeDays+=365;
+			}
+
+			intAgeDays+=dtNow.DayOfYear;
+		}
+		return intAgeDays;
+	}
+	
+	/* calculates the age in Hours */
+	private int getAgeInHours() {
+		intAgeHours=getAgeInDays() * 24;
+		intAgeHours=intAgeHours+(dtNow.Hour-dtDob.Hour);
+		return intAgeHours;
+	}
+	
+	/* calculates the age in Minutes */
+	private int getAgeInMinutes() {
+		intAgeMinutes=getAgeInHours() * 60;
+		intAgeMinutes=intAgeMinutes+(dtNow.Minute-dtDob.Minute);
+		return intAgeMinutes;
+	}
+	
+	/* calculates the month part of the accurate Age */
+	private int getMonthDiff() {
+		return getAgeInMonths()%12;
+	}
+	
+	/* calculates the day part of the accurate Age */
+	private int getDayDiff() {
+		int intDayTemp1=getAgeInDays();
+		int intDayTemp2;
+		int intTempYear;
+		int intTempMonth;
+		int intTempDay=intDay;
+		
+		if (dtNow.Year!=dtDob.Year) {
+				
+			if (1==dtNow.Month) {
+				intTempYear=dtNow.Year-1;
+				intTempMonth=12;
+			}
+			else {
+				if(dtNow.Day &lt; intTempDay)
+					intTempMonth=dtNow.Month-1;
+				else {
+					intTempMonth=dtNow.Month;
+					intTempDay=1;
+				}
+				intTempYear=dtNow.Year;
+			}
+		}
+		else {
+			if (1==dtNow.Month || dtDob.Month==dtNow.Month)
+				return getAgeInDays();
+			else {
+				if(dtNow.Day &lt; intTempDay)
+					intTempMonth=dtNow.Month-1;
+				else {
+					intTempMonth=dtNow.Month;
+					intTempDay=1;
+				}
+			}
+			intTempYear=intYear;
+		}
+		
+		dtNow=new DateTime(intTempYear,intTempMonth,intDay);
+			
+		intDayTemp2=getAgeInDays();
+
+		return intDayTemp1-intDayTemp2;
+	}
+}
+
+/*
+Result
+------
+D:\progs&gt;dob
+Enter the Day u were born : 1
+Month : 1
+Year(yyyy) : 2000
+Hour(0-23) : 1
+Minute(0-59) : 4
+Your date of birth :Saturday, January 01, 2000 1:04:00 AM
+Your Age in Years :1
+Your Age in Months :17
+Your Age in Days :520
+Your Age in Hours : 12489
+Your Age in Minutes : 749375
+Your Accurate Age is : 1 Years 5 months 3 days</font></pre>
+</font>
+</body>
+</html>

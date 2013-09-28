@@ -1,0 +1,230 @@
+<html>
+
+<head>
+<title>New Page 14</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Employee Database In C++</b></font></big></p>
+
+<p>//employee database<br>
+#include&lt;conio.h&gt;<br>
+#include&lt;fstream.h&gt;<br>
+#include&lt;iomanip.h&gt;<br>
+#include&lt;stdio.h&gt;<br>
+#include&lt;process.h&gt;<br>
+class emp<br>
+{<br>
+private:<br>
+struct person<br>
+{<br>
+char flag;<br>
+int id;<br>
+char name[25];<br>
+int age;<br>
+float sal;<br>
+char qual[15];<br>
+char desig[15];<br>
+}p;<br>
+fstream file;<br>
+public:<br>
+emp();<br>
+void addrec();<br>
+void listrec();<br>
+void modirec();<br>
+void delrec();<br>
+void recallrec();<br>
+void packrec();<br>
+void exit();<br>
+};<br>
+void emp::emp()<br>
+{<br>
+file.open(&quot;emp.dat&quot;,ios::binary|ios::in|ios::out);<br>
+if(!file)<br>
+{<br>
+cout&lt;&lt;endl&lt;&lt;&quot;unable to open file&quot;;<br>
+exit();<br>
+}<br>
+}<br>
+void emp::addrec()<br>
+{<br>
+char ch;<br>
+file.seekp(0L,ios::end);<br>
+do<br>
+{<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Enter emp
+id,name,age,salary,qualification,designation:&quot;&lt;&lt;endl;<br>
+cin&gt;&gt;p.id&gt;&gt;p.name&gt;&gt;p.age&gt;&gt;p.sal&gt;&gt;p.qual&gt;&gt;p.desig;<br>
+p.flag=' ';<br>
+file.write((char*)&amp;p,sizeof(p));<br>
+cout&lt;&lt;&quot;Add another record ?(Y/N)&quot;;<br>
+cin&gt;&gt;ch;<br>
+}while(ch=='y'||ch=='Y');<br>
+}<br>
+void emp::listrec()<br>
+{<br>
+int j=0,a;<br>
+file.seekg(0L,ios::beg);<br>
+cout&lt;&lt;&quot;S.No.
+&quot;&lt;&lt;setw(5)&lt;&lt;&quot;ID&quot;&lt;&lt;setw(20)&lt;&lt;&quot;Name&quot;&lt;&lt;setw(4)&lt;&lt;&quot;Age&quot;<br>
+&lt;&lt;setw(9)&lt;&lt;&quot;Salary&quot;&lt;&lt;endl;<br>
+while(file.read((char*)&amp;p,sizeof(p)));<br>
+{<br>
+if(p.flag!='*')<br>
+cout&lt;&lt;&quot;Record#&quot;&lt;&lt;j++<br>
+&lt;&lt;setw(6)&lt;&lt;p.id<br>
+&lt;&lt;setw(20)&lt;&lt;p.name<br>
+&lt;&lt;setw(4)&lt;&lt;p.age<br>
+&lt;&lt;setw(9)&lt;&lt;p.sal;<br>
+}<br>
+file.clear();<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Press any key...&quot;;<br>
+getch();<br>
+}<br>
+void emp::modirec()<br>
+{<br>
+int code;<br>
+int count=0;<br>
+long int pos;<br>
+cout&lt;&lt;&quot;Enter employee code:&quot;;<br>
+cin&gt;&gt;code;<br>
+file.seekg(0L,ios::beg);<br>
+while(file.read((char*)&amp;p,sizeof(p)))<br>
+{<br>
+if(p.id==code)<br>
+{<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Enter new records&quot;&lt;&lt;endl;<br>
+cout&lt;&lt;&quot;Enter emp
+id,name,age,salary,qualification,designation:&quot;&lt;&lt;endl;<br>
+cin&gt;&gt;p.id&gt;&gt;p.name&gt;&gt;p.age&gt;&gt;p.sal&gt;&gt;p.qual&gt;&gt;p.desig;<br>
+p.flag=' ';<br>
+pos=count*sizeof(p);<br>
+file.seekp(pos,ios::beg);<br>
+file.write((char*)&amp;p,sizeof(p));<br>
+return;<br>
+}<br>
+count++;<br>
+}<br>
+cout&lt;&lt;endl&lt;&lt;&quot;No employee in file with id =&quot;&lt;&lt;code;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Press any key...&quot;;<br>
+getch();<br>
+file.clear();<br>
+}<br>
+void emp::delrec()<br>
+{<br>
+int code;<br>
+long int pos;<br>
+int count=0;<br>
+cout&lt;&lt;&quot;Enter employee id:&quot;;<br>
+cin&gt;&gt;code;<br>
+file.seekg(0L,ios::beg);<br>
+while(file.read((char*)&amp;p,sizeof(p)))<br>
+{<br>
+if(p.id==code)<br>
+{<br>
+p.flag='*';<br>
+pos=count*sizeof(p);<br>
+file.seekp(pos,ios::beg);<br>
+file.write((char*)&amp;p,sizeof(p));<br>
+return;<br>
+}<br>
+count++;<br>
+}<br>
+cout&lt;&lt;endl&lt;&lt;&quot;No employee in file with id =&quot;&lt;&lt;code;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Press any key...&quot;;<br>
+getch();<br>
+file.clear();<br>
+}<br>
+void emp::recallrec()<br>
+{<br>
+int code;<br>
+long int pos;<br>
+int count=0;<br>
+cout&lt;&lt;&quot;Enter id:&quot;;<br>
+cin&gt;&gt;code;<br>
+file.seekg(0L,ios::beg);<br>
+while(file.read((char*)&amp;p,sizeof(p)))<br>
+{<br>
+if(p.id==code)<br>
+{<br>
+p.flag=' ';<br>
+pos=count*sizeof(p);<br>
+file.seekp(pos,ios::beg);<br>
+file.write((char*)&amp;p,sizeof(p));<br>
+return;<br>
+}<br>
+count++;<br>
+}<br>
+cout&lt;&lt;endl&lt;&lt;&quot;No employee in file with id =&quot;&lt;&lt;code;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Press any key...&quot;;<br>
+getch();<br>
+file.clear();<br>
+}<br>
+void emp::packrec()<br>
+{<br>
+ofstream outfile;<br>
+outfile.open(&quot;temp&quot;,ios::out);<br>
+file.seekg(0,ios::beg);<br>
+while(file.read((char*)&amp;p,sizeof(p)))<br>
+{<br>
+if(p.flag!='*')<br>
+outfile.write((char*)&amp;p,sizeof(p));<br>
+}<br>
+outfile.close();<br>
+file.close();<br>
+remove(&quot;emp.dat&quot;);<br>
+rename(&quot;temp&quot;,&quot;emp.dat&quot;);<br>
+file.open(&quot;emp.dat&quot;,ios::binary||ios::in||ios::out||ios::nocreate);<br>
+}<br>
+void emp::exit()<br>
+{<br>
+file.close();<br>
+}<br>
+void main()<br>
+{<br>
+char choice;<br>
+emp e;<br>
+do<br>
+{<br>
+clrscr();<br>
+cout&lt;&lt;&quot;1.Add records&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;2.List records&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;3.Modify record&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;4.Delete record&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;5.Recall records&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;6.Pack record&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;0.Exit&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Your choice?&quot;;<br>
+cin&gt;&gt;choice;<br>
+clrscr();<br>
+switch(choice)<br>
+{<br>
+case '1':<br>
+e.addrec();<br>
+break;<br>
+case '2':<br>
+e.listrec();<br>
+break;<br>
+case '3':<br>
+e.modirec();<br>
+break;<br>
+case '4':<br>
+e.delrec();<br>
+break;<br>
+case '5':<br>
+e.recallrec();<br>
+break;<br>
+case '6':<br>
+e.packrec();<br>
+break;<br>
+case '0':<br>
+e.exit();<br>
+exit(0);<br>
+}<br>
+}while(choice!=0);<br>
+}</p>
+</body>
+</html>

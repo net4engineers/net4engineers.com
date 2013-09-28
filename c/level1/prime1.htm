@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<title></title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<blockquote>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">/* prime1.c<span
+style="mso-spacerun: yes">&nbsp; </span>It prompts the user to enter an integer N. It prints out<o:p>
+</o:p> *<span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>if it is a prime or not. If not, it prints out a factor of N.<o:p>
+</o:p> */<o:p>
+</span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">#include <stdio.h>&lt;stdio.h&gt;
+</span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">int main(void) {<o:p>
+</o:p></span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp; </span>int n;<o:p>
+</o:p><span
+style="mso-spacerun: yes">&nbsp; </span>int i;<o:p>
+</o:p><span style="mso-spacerun: yes">&nbsp; </span>int flag;<o:p>
+</span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp; </span>printf(&quot;Enter value of N &gt; &quot;);<o:p>
+</o:p><span
+style="mso-spacerun: yes">&nbsp; </span>scanf(&quot;%d&quot;, &amp;n);<o:p>
+</span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp;</span>for (i=2, flag=1; (I&lt;(n/2)) &amp;&amp; flag;){<o:p>
+</o:p></span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp; </span>if ((n %I)==0)<o:p>
+</o:p>
+<span
+style="mso-bidi-font-family: Courier New">      </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>flag=0;<o:p>
+</o:p><span
+style="mso-spacerun: yes"> </span>else<o:p>
+</o:p>
+<span style="mso-spacerun: yes">      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>I++;<o:p>
+</o:p>}<o:p>
+</o:p>
+</span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">&nbsp;<o:p>
+</o:p>
+</span></font></small></pre>
+  <pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">if(flag)<o:p><span style="mso-spacerun: yes">&nbsp;&nbsp; </span>printf(&#147;%d is Prime \n&#148;,n);<o:p>
+else<o:p><span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>printf(&#147;%d has %d as a factor \n &#147;,n,I);<o:p>
+</o:p>
+</span></font></small>}</pre>
+</blockquote>
+
+<pre><span style="mso-bidi-font-family:&quot;Courier New&quot;"><small><font
+face="Verdana">&nbsp;<o:p></font></small></span></pre>
+</body>
+</html>

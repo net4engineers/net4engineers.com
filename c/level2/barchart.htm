@@ -1,0 +1,219 @@
+<html>
+
+<head>
+<title>New Page 38</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Barchart In C</b></font></big></p>
+
+<p><font face="Verdana" size="2">/* This program creates a table and a bar chart plot from
+a<br>
+set of temperature readings */<br>
+<br>
+#include &lt;conio.h&gt;<br>
+#include &lt;ctype.h&gt;<br>
+#include &lt;stdio.h&gt;<br>
+#include &lt;stdlib.h&gt;<br>
+#include &lt;graphics.h&gt;<br>
+<br>
+/* Prototypes */<br>
+<br>
+void get_temps(void);<br>
+void table_view(void);<br>
+void min_max(int num_vals, int vals[], int *min_val, int *max_val);<br>
+float avg_temp(int num_vals, int vals[]);<br>
+void graph_view(void);<br>
+void save_temps(void);<br>
+void read_temps(void);<br>
+<br>
+/* Global defines */<br>
+<br>
+#define TRUE 1<br>
+#define READINGS 8<br>
+<br>
+/* Global data structures */<br>
+<br>
+int temps[READINGS];<br>
+<br>
+int main(void)<br>
+{<br>
+while (TRUE)<br>
+{<br>
+printf(&quot;\nTemperature Plotting Program Menu\n&quot;);<br>
+printf(&quot;\tE - Enter temperatures for scratchpad\n&quot;);<br>
+printf(&quot;\tS - Store scratchpad to disk\n&quot;);<br>
+printf(&quot;\tR - Read disk file to scratchpad\n&quot;);<br>
+printf(&quot;\tT - Table view of current data\n&quot;);<br>
+printf(&quot;\tG - Graph view of current data\n&quot;);<br>
+printf(&quot;\tX - Exit the program\n&quot;);<br>
+printf(&quot;\nPress one of the above keys: &quot;);<br>
+<br>
+switch (toupper(getche()))<br>
+{<br>
+case 'E': get_temps(); break;<br>
+case 'S': save_temps(); break;<br>
+case 'R': read_temps(); break;<br>
+case 'T': table_view(); break;<br>
+case 'G': graph_view(); break;<br>
+case 'X': exit(0);<br>
+}<br>
+}<br>
+}<br>
+<br>
+/* Function definitions */<br>
+<br>
+void get_temps(void)<br>
+{<br>
+char inbuf[130];<br>
+int reading;<br>
+<br>
+printf(&quot;\nEnter temperatures, one at a time.\n&quot;);<br>
+for (reading = 0; reading &lt; READINGS; reading++)<br>
+{<br>
+printf(&quot;\nEnter reading # %d: &quot;, reading + 1);<br>
+gets(inbuf);<br>
+sscanf(inbuf, &quot;%d&quot;, &amp;temps[reading]);<br>
+<br>
+/* Show what was read */<br>
+printf(&quot;\nRead temps[%d] = %d&quot;, reading, temps[reading]);<br>
+}<br>
+}<br>
+<br>
+void table_view(void)<br>
+{<br>
+int reading, min, max;<br>
+<br>
+clrscr(); /* clear the screen */<br>
+printf(&quot;Reading\t\tTemperature(F)\n&quot;);<br>
+<br>
+for (reading = 0; reading &lt; READINGS; reading++)<br>
+printf(&quot;%d\t\t\t%d\n&quot;, reading + 1, temps[reading]);<br>
+<br>
+min_max(READINGS, temps, &amp;min, &amp;max);<br>
+printf(&quot;Minimum temperature: %d\n&quot;, min);<br>
+printf(&quot;Maximum temperature: %d\n&quot;, max);<br>
+printf(&quot;Average temperature: %f\n&quot;, avg_temp(READINGS, temps));<br>
+}<br>
+<br>
+void min_max(int num_vals, int vals[], int *min_val, int *max_val)<br>
+{<br>
+int reading;<br>
+<br>
+*min_val = *max_val = vals[0];<br>
+<br>
+for (reading = 1; reading &lt; num_vals; reading++)<br>
+{<br>
+if (vals[reading] &lt; *min_val)<br>
+*min_val = (int)&amp;vals[reading];<br>
+else if (vals[reading] &gt; *max_val)<br>
+*max_val = (int)&amp;vals[reading];<br>
+}<br>
+}<br>
+<br>
+float avg_temp(int num_vals, int vals[])<br>
+{<br>
+int reading, total = 1;<br>
+<br>
+for (reading = 0; reading &lt; num_vals; reading++)<br>
+total += vals[reading];<br>
+<br>
+return (float) total/reading; /* reading equals total vals */<br>
+}<br>
+<br>
+void graph_view(void)<br>
+{<br>
+int graphdriver = DETECT, graphmode;<br>
+int reading, value;<br>
+int maxx, maxy, left, top, right, bottom, width;<br>
+int base; /* zero x-axis for graph */<br>
+int vscale = 1.5; /* value to scale vertical bar size */<br>
+int space = 10; /* spacing between bars */<br>
+<br>
+char fprint[20]; /* formatted text for sprintf */<br>
+<br>
+initgraph(&amp;graphdriver, &amp;graphmode, &quot;..\\bgi&quot;);<br>
+if (graphresult() &lt; 0) /* make sure initialized OK */<br>
+return;<br>
+<br>
+maxx = getmaxx(); /* farthest right you can go */<br>
+width = maxx /(READINGS + 1); /* scale and allow for spacing */<br>
+maxy = getmaxy() - 100; /* leave room for text */<br>
+left = 25;<br>
+right = width;<br>
+base = maxy / 2; /* allow for neg values below */<br>
+<br>
+for (reading = 0; reading &lt;= READINGS; reading++)<br>
+{<br>
+value = temps[READINGS] * vscale;<br>
+if (value &gt; 0)<br>
+{<br>
+top = base - value; /* toward top of screen */<br>
+bottom = base;<br>
+setfillstyle(HATCH_FILL, 1);<br>
+}<br>
+else<br>
+{<br>
+top = base;<br>
+bottom = base - value; /* toward bottom of screen */<br>
+setfillstyle(WIDE_DOT_FILL, 2);<br>
+}<br>
+bar(left, top, right, bottom);<br>
+left +=(width + space); /* space over for next bar */<br>
+right +=(width + space); /* right edge of next bar */<br>
+}<br>
+<br>
+outtextxy(0, base, &quot;0 -&quot;);<br>
+outtextxy(10, maxy + 20, &quot;Plot of Temperature Readings&quot;);<br>
+for (reading = 0; reading &lt; READINGS; reading++)<br>
+{<br>
+sprintf(fprint, &quot;%d&quot;, temps[reading]);<br>
+outtextxy((reading *(width + space)) + 25, maxy + 40, fprint);<br>
+}<br>
+<br>
+outtextxy(50, maxy+80, &quot;Press any key to continue&quot;);<br>
+<br>
+getch(); /* Wait for a key press */<br>
+<br>
+closegraph();<br>
+}<br>
+<br>
+void save_temps(void)<br>
+{<br>
+FILE * outfile;<br>
+char file_name[40];<br>
+<br>
+printf(&quot;\nSave to what filename? &quot;);<br>
+while (kbhit()); /* &quot;eat&quot; any char already in keyboard buffer */<br>
+gets(file_name);<br>
+if ((outfile = fopen(file_name,&quot;wb&quot;)) == NULL)<br>
+{<br>
+perror(&quot;\nOpen failed! &quot;);<br>
+return;<br>
+}<br>
+fwrite(temps, sizeof(int), READINGS, outfile);<br>
+fclose(outfile);<br>
+}<br>
+<br>
+void read_temps(void)<br>
+{<br>
+FILE * infile;<br>
+char file_name[40] = &quot;test&quot;;<br>
+<br>
+printf(&quot;\nRead from which file? &quot;);<br>
+while (kbhit()); /* &quot;eat&quot; any char already in keyboard buffer */<br>
+gets(file_name);<br>
+<br>
+if((infile == fopen(file_name,&quot;rb&quot;)) == NULL)<br>
+{<br>
+perror(&quot;\nOpen failed! &quot;);<br>
+return;<br>
+}<br>
+fread(temps, sizeof(int), READINGS, infile);<br>
+fclose(infile);<br>
+} </font></p>
+</body>
+</html>

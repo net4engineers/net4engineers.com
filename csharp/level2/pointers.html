@@ -1,0 +1,61 @@
+<html>
+
+<head>
+<title>Pointers In C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p>&nbsp;</p>
+
+<table>
+  <tr>
+    <td vAlign="center" width="183%"><font size="2" face="Verdana">Here is a simple example of
+    how to use pointers using C#. It is short and easy to follow.&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="182%"><font face="Verdana"><font size="2"><b><u>Open Source:</u></b><br>
+    <br>
+    <br>
+    //Compilation<br>
+    //CSC FileName.CS<br>
+    <br>
+    using System;<br>
+    <br>
+    class Test<br>
+    {<br>
+    unsafe static void WriteLocations()&nbsp;<br>
+    {<br>
+    int *p;<br>
+    int i;<br>
+    i = 10;<br>
+    p = &amp;i;<br>
+    <br>
+    <br>
+    string addr;<br>
+    addr = int.Format((int) p, &quot;X&quot;);<br>
+    //To Format the Pointer to a String<br>
+    <br>
+    Console.WriteLine(addr);<br>
+    Console.WriteLine(*p);<br>
+    <br>
+    *p = 333;<br>
+    Console.WriteLine(i);<br>
+    //Change the Value using Pointer<br>
+    <br>
+    i = *(&amp;i) + 10;<br>
+    Console.WriteLine(i);<br>
+    <br>
+    }<br>
+    <br>
+    static void Main()&nbsp;<br>
+    {<br>
+    WriteLocations();<br>
+    }<br>
+    }</font> </font></td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,2356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://hackingtruths.box.sk/script1.htm -->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta content="Microsoft FrontPage 3.0" name="GENERATOR">
+<title>D:\n4e\hacking\script1.htm</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../header.html" NAME="head"  WIDTH="100%" HEIGHT="175" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->
+<h1 align="left"><font size="3" color="#000000" face="Bookman Old Style"><b>Shell
+Programming</b></font></h1>
+
+<h1 align="center"><small><small><font face="Verdana"><small>Shell Basics</small></font></small></small></h1>
+
+<ol>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#what_is_a_shell">What is a
+    Shell?</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#shell_types">Shell Types</a></font><small>
+    </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#grouping_commands">Grouping
+    Commands</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#io">I/O</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#regular_expressions">Regular
+    Expressions</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#quoting">Quoting</a></font><small>
+    </small></font></li>
+</ol>
+
+<hr noShade SIZE="3" width="92%">
+
+<h2><small><font face="Verdana">1.1&nbsp;<a name="what_is_a_shell"></a>What is a Shell?</font></small></h2>
+
+<p><small><font face="Verdana">Simply stated, a shell provides an interface to the
+operating system facilities including files, printing, hardware devices, and
+applications.&nbsp; This is a very broad definition indeed.&nbsp; It applies from
+something as simple as a telnet interface to a complex windowing system such as the Common
+Desktop Environment (CDE).&nbsp; It also transcends operating system brands.&nbsp; For
+example, a ksh session on an HP UNIX workstation is as much a shell as a DOS window is to
+a Microsoft Windows 95 PC or a DEC windows session is to a VAX/VMS desktop server.&nbsp;
+In each case, there exist methods for reading files, queuing print jobs, or launching
+programs.&nbsp; On a Windows 95 PC, a user might read a file by invoking the Notepad
+program from the Start Menu.&nbsp; An operator could use the PRINT command in VMS to view
+the current jobs queued for a line printer.&nbsp; A programmer might open a terminal
+window from the CDE control panel in order to begin compiling and linking a program.&nbsp;
+In each case, the interface gives the user some way to command the operating system. </font></small></p>
+
+<p><small><font face="Verdana">Another way to view a shell is to consider it in the
+context of a metaphor using its own name.&nbsp; Consider an egg shell.&nbsp; An egg shell
+is a hard, protective wrapper that encases a growing embryo.&nbsp; Needless to say, UNIX
+is hardly like a developing fetus, but the wrapper part fits.&nbsp; Figure 1.1-1 depicts
+the relationship.&nbsp; The UNIX shell can be treated as an operating system
+wrapper.&nbsp; It encapsulates the devices, applications, files, and communications that
+in turn access the kernel to perform all of the functions expected of computers.&nbsp;
+Once again, this is a simplistic explanation of how a user interoperates with a computing
+system, but it should help demystify the concept of a shell. </font></small></p>
+
+<p align="center">&nbsp;</p>
+
+<h2><small><font face="Verdana">1.2&nbsp;<a name="shell_types"></a>Shell Types</font></small></h2>
+
+<p><small><font face="Verdana">Naturally, this book deals with a very specific shell,
+namely, the UNIX Bourne shell.&nbsp; There are a number of similar shells that are worth
+mentioning, but first, it is important to note that each of these shells shares the
+following qualities: </font></small>
+
+<ul>
+  <li><small><font face="Verdana">Command line interface (CLI), </font></small></li>
+  <li><small><font face="Verdana">Rigid syntax, </font></small></li>
+  <li><small><font face="Verdana">High degree of flexibility, </font></small></li>
+  <li><small><font face="Verdana">Programmable. </font></small></li>
+</ul>
+
+<p><small><font face="Verdana">The traditional UNIX shells are command line driven.&nbsp;
+A user enters textual input consisting of operating system commands with options and
+switches.&nbsp; The computer in turn provides textual output according to the command
+given <br>
+followed by a prompt for the next command.&nbsp; The richness of an application's options
+combined with the built-in interpreted programming language of the shell allows a user to
+easily command the operating system to perform very specific functions.&nbsp; In a
+graphical environment, this same flexibility is lost in a program whenever a user is
+forced to use check boxes, radio buttons, or selection lists.&nbsp; It is much more
+expedient to include all the options on one command line then it is to point-and-click
+through a pop-up window.&nbsp; On the other hand, this same flexibility loses the ease of
+use that GUIs provide.&nbsp; A GUI can very easily force a user to review all necessary
+options before running a program.&nbsp; A command line driven system requires the user to
+research the command thoroughly before issuing it.&nbsp; Still, the syntax maybe
+restrictive, but the fact that these same commands can be easily stored in an executable
+file and replayed at a later date once again point to the shell's customizability.&nbsp;
+Moreover, the branching and looping facilities of the shell allow it to make programmed
+choices and to repeat commands as necessary.&nbsp; This is an invaluable quality lost in
+the point-and-click world of a windowing system. </font></small></p>
+
+<p><small><font face="Verdana">As mentioned previously, there are a number of shells to
+choose from, but it must be noted that there are only two basic types.&nbsp; The first is
+the Bourne shell.&nbsp; It has a unique syntax different enough from traditional
+programming languages to require concerted study by those willing to learn it, but it is
+does have some very familiar constructs that also keep it from being an entirely foreign
+language.&nbsp; The second type is based upon the C shell.&nbsp; It is named the C shell
+because its syntax derives from the C programming language.&nbsp; It is in fact similar
+enough syntactically to allow C programmers to quickly use the branching, looping, and
+assignment mechanisms.&nbsp; One might easily be able to write if statements and while
+loops, but the environment is different enough to cause problems if not treated
+carefully.&nbsp; A user might easily mistake a string for a variable dereference. </font></small></p>
+
+<p><small><font face="Verdana">From these two shell types came a number of
+highly-interactive shells.&nbsp; The Korn shell, ksh, and the Bourne Again shell, bash,
+use Bourne shell syntax.&nbsp; In general, any command useable by the Bourne shell may be
+used by these others.&nbsp; The C shell's cousin is the tcsh.&nbsp; These derivatives are
+more user-friendly compared to their parents.&nbsp; They usually provide hot-keys for
+utilities like file name completion, directory searching, in-line editing, and an extended
+environment.&nbsp; In some cases, such as the Korn shell, they also allow complex data
+structures such as arrays.&nbsp; These shells are definitely preferrable for daily
+use.&nbsp; It is much nicer to hit the tab key and have the shell complete a directory
+name than it is to have to type the whole thing, especially when the exact name is
+unclear.&nbsp; And the beautiful part is when something like a loop is needed to allow a
+command to be repeated, the facilities are right there.&nbsp; Plus, there is often a
+history buffer that caches recently issued commands so the user does not have to reenter
+or restructure it.&nbsp; But it is the basics that are explained herein. </font></small></p>
+
+<p><small><font face="Verdana">This book presents the syntax and use of the Bourne
+shell.&nbsp; It does so for a very good reason; namely, it is the most widely available of
+any shell.&nbsp; It is the first shell that came with UNIX.&nbsp; Consequently, it has
+survived and is distributed with every flavor of UNIX produced today.&nbsp; It can be
+found in every UNIX as <tt>/bin/sh</tt>.&nbsp; Because of its availability, any program
+written that uses it is nearly guaranteed to run on any other UNIX.&nbsp; Of course
+portability carries only as far as the actual operating system commands allow, but at
+least the basic programming tools and syntax of the Bourne shell are consistent.&nbsp;
+From this point forward, any mention of the shell refers to the Bourne shell unless
+explicitly stated otherwise. </font></small></p>
+
+<p><small><font face="Verdana">Before diving right into the usual programming bag o'tricks
+such as variables, functions, if statements, loops, and other fun stuff, this chapter will
+conclude with some very important syntatical features.&nbsp; Without a thorough
+understanding of them, it is extremely difficult to read and write shell scripts.&nbsp;
+For those unfamiliar with the shell or UNIX in general, return to this chapter
+occassionally and reconsider them in the context of commands given at the prompt or within
+other shell scripts encountered. </font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">1.3&nbsp;<a name="grouping_commands"></a>Grouping Commands</font></small></h2>
+
+<p><small><font face="Verdana">Commands passed to the shell may be grouped in five ways
+with a semicolon (<tt>;</tt>), parentheses (<tt>()</tt>), curly braces (<tt>{}</tt>),
+double ampersands (<tt>&amp;&amp;</tt>), or double vertical bars (<tt>||</tt>). The first
+three may be simply viewed as punctuation for combining multiple commands on a single
+line. Of course there are subtle differences between them that will be discussed shortly,
+but in general, they are to the shell as periods are to prose. The last two, the double
+ampersand and vertical bars, are conditional conjunctives. </font></small></p>
+
+<p><small><font face="Verdana"><a name="semicolon-definition"></a>The semicolon allows
+users to string commands together on a single line as if one command was being issued.
+Each command within the semicolon separated list is executed by the shell in succession.
+For example, the line below has two commands joined with a semicolon: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cd /var/yp; make</b></tt></font></small></pre>
+
+<p><small><font face="Verdana">When entered, the shell parses the command line up to the
+first semicolon. The words read to that point are executed. In the example, the current
+directory is changed to the <tt>/var/yp</tt> directory. The shell then continues parsing
+the command line until it reaches the end of the line. The rest of the command is then
+executed, and as every good UNIX administrator knows, the NIS maps are built as a result
+of the <tt>make</tt> that is issued. But this example is not a lesson in system
+administration. It is a demonstration of how the shell executes each semicolon separated
+command in the order it is listed after the prompt as if the user had typed the same set
+of commands on separate lines. </font></small></p>
+
+<p><small><font face="Verdana"><a name="parentheses-definition"></a>The parentheses, when
+grouped around a command, cause the command to be executed in a subshell. Any
+environmental changes occuring within the subshell do not persist beyond its execution; in
+other words, all changes to the working environment of the commands issued within the
+parentheses do not affect the working shell. Consider the following example: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cd; ls
+</b>bin etc include man tmp
+$ <b>cd bin; ls; ls
+</b>bash gunzip gzip zcat
+bash gunzip gzip zcat
+$ <b>cd
+</b>$ <b>(cd bin; ls); ls
+</b>bash gunzip gzip zcat
+bin etc include man tmp</tt></font></small></pre>
+
+<p><small><font face="Verdana">The first command ensures that the home directory is the
+current working directory and then lists its contents. This is followed by changing
+directories into <tt>bin</tt> and then listing its contents twice with the <tt>ls</tt>
+command. The next command then returns the shell to the home directory. The last command
+shows how parentheses behave. Two commands are issued within the scope of the working
+shell. The first is a compound command delimited by the parentheses. The compound command
+executes in a subshell. Within this subshell, the current directory is once again set to <tt>bin</tt>,
+and its contents are listed. As soon as the subshell terminates, the parent shell resumes
+control. It lists the contents of the working directory, and as is demonstrated by the
+resulting output, the shell's current working directory has not been modified by the
+subshell's directory change. </font></small></p>
+
+<p><small><font face="Verdana"><a name="curly-braces-definition"></a>Like parentheses,
+curly braces can be used to group a set of commands; however, the commands execute within
+the context of the current shell. Continuing with the previous example, suppose the last
+command is reissued with curly braces instead of parentheses. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>{ cd bin; ls; }; ls
+</b>bash gunzip gzip zcat
+bash gunzip gzip zcat</tt></font></small></pre>
+
+<p><small><font face="Verdana">Notice that this time the bin directory is listed twice.
+Obviously, the directory change persisted. The shell executed the compound command instead
+of deferring it to a subshell as it did when parentheses were used. Note also the
+construction of commands with culry braces. White space precedes and follows the enclosed
+commands, and a semicolon terminates the last command. The terminating semicolon is
+required. Certainly, the use of curly braces can be unwieldy: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>{ cd bin; ls }; ls
+</b>&gt; <b>^C
+</b>$ <b>{ cd bin; ls }; ls }
+</b>&gt; <b>^C
+</b>$ <b>{ cd bin; ls }; ls; }
+</b>}: No such file or directory
+bash gunzip gzip zcat</tt></font></small></pre>
+
+<p><small><font face="Verdana">The first command is entered the same way it would be
+issued if parentheses were used. When entered, the shell responds with the secondary
+prompt meaning that it expects more input. The job is killed with a control-c, and the
+command is reentered with a different format. Here, an extra closing brace is appended to
+the command. The user assumes that the shell was expecting a terminating brace at the end
+of the line. Unfortunately, the results are the same. After killing the second attempt,
+the user tries a third time and appends a semicolon to the final <tt>ls</tt> command. As
+can be seen, the command becomes syntactically correct, but the results are probably not
+what the user desires. Focusing on the semicolons reveals what happened. The shell changes
+directories to <tt>bin</tt>. Then it tries to list the <tt>}</tt> directory. The shell
+interprets the closing brace to be an argument to the <tt>ls</tt> command. Since no such
+file exists, it complains. It finishes by listing the current directory. </font></small></p>
+
+<p><small><font face="Verdana"><a name="braces-usage-guideline"></a>Hopefully, from this
+example, the point is clear. Curly braces are, frankly, difficult to use for grouping
+commands, and when also using culry braces for accessing variable values, code becomes
+very difficult to follow. It is generally good practice not to use curly braces for
+command grouping. Use culry braces for variables instead. </font></small></p>
+
+<p><small><font face="Verdana">The last two conjunctions,&nbsp;<a name="double-ampersand"></a><tt>&amp;&amp;</tt>
+and&nbsp;<a name="double-vertical-bars"></a><tt>||</tt>, combine commands conditionally.
+When the shell encounters either of these, it always executes the first half of the
+command. Then depending upon its results, the second half may be run. In the case of the
+double ampersand, the shell handles the second part if and only if the first part exited
+with a status of zero. This indicates that the first half executed with no errors. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cd /usr/bogus &amp;&amp; ls
+</b>/usr/bogus: does not exist
+$ <b>cd /var/spool &amp;&amp; ls
+</b>calendar cron locks lp mqueue pkg</tt></font></small></pre>
+
+<p><small><font face="Verdana">Since <tt>/usr/bogus</tt> is not a valid directory, the cd
+command informs the user and returns with a non-zero status. The shell reads the status
+and, seeing it is non-zero, does not execute a directory listing. On the other hand, <tt>/var/spool</tt>
+is a real directory. The cd command, in this case, performs the change and returns with a
+zero exit status. Again, the shell reads the status, and because it is zero, the shell
+proceeds with the following command, the <tt>ls</tt>. </font></small></p>
+
+<p><small><font face="Verdana">The double vertical bars function the same except that the
+second half executes if and only if the first half exits with a non-zero status. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>ls -l
+</b>total 4
+drwxr-xr-x 2 rsayle fvsw 512 Jul 15 14:51 bin
+drwxr-xr-x 2 rsayle fvsw 512 Jul 15 14:51 man
+-rw-r--r-- 1 rsayle fvsw&nbsp;&nbsp; 0 Jul 15 14:51 profile
+$ <b>(ls -l | grep &quot;root&quot;) || echo &quot;No files owned by root&quot;
+</b>No files owned by root</tt></font></small></pre>
+
+<p><small><font face="Verdana">The first listing above shows that all files in the current
+directory are owned by <tt>rsayle</tt>. Hence, the <tt>grep</tt> for <tt>root</tt> fails.
+A non-zero exit code is returned by the subshell that executed the <tt>ls</tt> and the <tt>grep</tt>.
+The parent shell, having encountered <tt>||</tt>, acknowledges the result and prints the
+informational message accordingly. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">1.4&nbsp;<a name="io"></a>I/O</font></small></h2>
+
+<p><small><font face="Verdana">The UNIX Bourne shell contains a couple methods for
+manipulating the input and output of commands. The first method employs pipes. It can be
+used to chain commands together so that each preceding command sends its output to the
+input of the following command. The second method is known as redirection, and it provides
+the ability to pull input from or place output into other sources besides the shell
+window. But before introducing these commands, a general understanding of the standard I/O
+facilities must be reached. </font></small></p>
+
+<p><small><font face="Verdana">The input and output displayed on the console comes from
+three buffers: stdin, stdout, and stderr (pronounced &quot;standard in,&quot;
+&quot;standard out,&quot; and &quot;standard error,&quot; respectively). These devices are
+collectively referred to as the standard I/O.&nbsp;<a name="stdin-definition"></a>Stdin is
+the terminal's default input<a name="stdin_definition"></a>. The shell reads commands and
+answers to prompts from stdin.&nbsp;<a name="stdout-definition"></a>The default output is
+stdout. The console prints anything it receives from stdout. In general, this includes
+print statements from the programs run at the command line and warning messages broadcast
+by system administrators. Like stdout,&nbsp;<a name="stderr-definition"></a>the shell also
+displays the error messages received from stderr on the console, but it is imperative to
+keep in mind that stderr is not the same as stdout. A good way to remember this is to
+think of stdin, stdout, and stderr as three different files. In fact, this is exactly what
+they are.&nbsp;<a name="stdio-file-descriptors"></a>Stdin is file descriptor zero; stdout,
+one; and stderr, two. As such, each may be referenced by its file descriptor number. </font></small></p>
+
+<p><small><font face="Verdana"><a name="pipe-definition"></a>A pipe, represented by a
+single vertical bar (|), connects the output of its left operand to the input of its right
+operand<a name="pipe_def"></a>. The operands of pipes may be any legal shell command. The
+goal of piping is to pass output through a series of commands that will massage the data
+into a more meaningful representation. Normally, the shell parses stdin and passes the
+input to the command given. The command operates on the input, and in turn, presents the
+output to stdout. The shell handles pipes as is shown in the figure below. Here, the shell
+begins as it always does. It parses stdin passing arguments to the command issued. The
+program runs and provides output. Seeing a pipe, the shell takes the resulting output and
+passes it as the input to the next command. The next command works on the new input and
+creates a new ouput which is passed on to the following command in the pipe chain. This
+continues until the shell reaches the final command. The last command receives the
+massaged data from the previous command, runs, and then places the result into stdout. The
+shell the displays stdout to the user. </font></small></p>
+
+<p><small><font face="Verdana"><a name="pipe-filtering"></a>The most common use of pipes
+is for filtering. Typically when filtering, a program prints text to stdout which is piped
+into a utility such as <tt>grep</tt>, <tt>sed</tt>, or <tt>awk</tt>. The utility selects
+data from the input according to a pattern specified as an argument. The result is usually
+posted to the screen for visual inspection, but it is possible to save the results in a
+file, store it as the value of a variable, or repipe it into another command. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$<a name="pipe-filtering-example"></a> ypcat passwd | grep &quot;^[a-zA-Z0-9]*::&quot; | cut -f1 -d:
+</tt>jbeadle
+build35
+cwoodrum
+dborwin
+jbell
+dfellbaum</font></small></pre>
+
+<p><small><font face="Verdana">The example above shows how <tt>grep</tt> and pipes can be
+used as a filter. The command is actually three programs separated by pipes. The first
+command, <tt>ypcat passwd</tt>, displays the network information services (NIS) map for
+the password database. The shell, as directed by the pipe, sends the map to <tt>grep</tt>.
+<tt>Grep</tt> takes the map and searches for all accounts that do not have a password;
+this is the filtering operation. Since the goal is to list the accounts, some further
+processing must be completed so the output is passed to <tt>cut</tt>. <tt>Cut</tt>
+collects the data and trims everything from each line except the account name. The final
+output is displayed as shown. The figure below depicts the example graphically. </font></small></p>
+
+<p><small><font face="Verdana"><a name="redirection"></a>Whereas piping permits the
+chaining of commands such that the output of one serves as the input of another,
+redirection can be used to take the input for a program from a file or to place the output
+of a program into a file. Not surprisingly, these two techniques are known as input
+redirection and output redirection.&nbsp;<a name="input-redirection-syntax"></a>Input
+redirection takes the form: command [input redirect symbol] input. It is equivalent to
+saying, &quot;Execute a command using the data that follows.&quot; Redirecting the output
+says, &quot;Execute a command and place the printed results into this file,&quot;
+and&nbsp;<a name="output-redirection-syntax"></a>it has the form: command [output redirect
+symbol] destination. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat &lt; /etc/defaultdomain
+</b>fvo.arinc.com
+$ <b>ypcat hosts &gt; hosts.bak
+</b>$ <b>cat hosts.bak
+</b>127.0.0.1 localhost
+144.243.92.13 blatz</tt></font></small></pre>
+
+<p><small><font face="Verdana">The previous commands demonstrate input and output
+redirection. The first <tt>cat</tt> command takes as its argument the file <tt>/etc/defaultdomain</tt>.
+The argument is given to <tt>cat</tt> via input redirection, the left brace. Output
+redirection is shown with <tt>ypcat</tt>. The <tt>ypcat</tt> command, when applied to the
+NIS hosts map, lists all the IP addresses and names of each node in the NIS domain. Here,
+the output is redirected into the file <tt>hosts.bak</tt>. </font></small></p>
+
+<p><small><font face="Verdana">Two types of input redirection exist. The first one
+uses&nbsp;<a name="single-left-brace"></a>one left brace<a name="single_left_brace"></a>.
+It redirects standard input to be taken from the file specified. For example, if an
+administrator wanted to know how many accounts were on a particular machine, input
+redirection of the <tt>/etc/passwd</tt> file into <tt>wc</tt> could be used. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>wc -l &lt; /etc/passwd
+</b></tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12</font></small></pre>
+
+<p><small><font face="Verdana">The second type employs a&nbsp;<a name="double-left-brace"></a>double
+left brace<a name="double_left_brace"></a>. Instead of taking the input from a file, the
+input is taken at the command line between two delimiters. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>wall &lt;&lt; WARNING
+</b></tt>&gt; <b>&quot;itchy will reboot at 6PM this evening&quot;
+</b>&gt; <b>WARNING
+</b>Broadcast Message from rsayle (pts/0) on itchy Wed Jul 24 14:06:57...
+&quot;itchy will reboot at 6PM this evening&quot;</font></small></pre>
+
+<p><small><font face="Verdana">The delimiters may be any word. In this case the word
+&quot;<tt>WARNING</tt>&quot; is used. The user here issues the warn all users command, <tt>wall</tt>.
+The user also instructs the shell to use as the text of the message the lines that fall
+between the two <tt>WARNING</tt> delimiters. </font></small></p>
+
+<p><small><font face="Verdana">Similarly, there are two types of output redirection. The
+symbols used are simply inverses of the input redirectors; right braces are used instead
+of left braces. And of course, the semantics are nearly opposite. In the case of the&nbsp;<a
+name="single-right-brace"></a>single right braces, stdout is redireced to a file. The file
+is created if it does not exist or it is overwritten if the file named already exists and
+globbing has been enabled (<tt>set glob</tt>). Below, the shell copies the file <tt>combo</tt>
+to the file<tt> combo.bak</tt> using output redirection. The output from the second <tt>cat</tt>
+command is redirected into the new file <tt>combo.bak</tt>. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat combo
+</b>10 23 5
+$ <b>cat combo &gt; combo.bak
+</b>$ <b>cat combo.bak
+</b>10 23 5</tt></font></small></pre>
+
+<p><small><font face="Verdana">Double right braces have the same effect as single braces
+except if the file already exists, the output is appended to the file instead of
+overwriting it. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat combo &gt;&gt; combo.bak
+</b>$ <b>cat combo.bak
+</b>10 23 5
+10 23 5</tt></font></small></pre>
+
+<p><small><font face="Verdana">Continuing with the previous example, if the user instructs
+the shell to once again display the contents of the file <tt>combo</tt> but uses double
+right braces, then <tt>combo.bak</tt> ends up with two lines, each being the single line
+from <tt>combo</tt>. </font></small></p>
+
+<p><small><font face="Verdana">As a final I/O basics topic, it is helpful to mention that
+there are a few generic devices available for redirection besides the standard I/O. Some
+flavors of UNIX provide devices for the terminal,&nbsp;<a name="dev-tty"></a><tt>/dev/tty</tt>,
+the console,&nbsp;<a name="dev-console"></a><tt>/dev/console</tt>, and the great bit
+bucket in the sky,&nbsp;<a name="dev-null"></a><tt>/dev/null</tt>. All output sent to <tt>/dev/null</tt>
+is simply discarded. It is useful in shell scripts when output should be hidden from the
+user but should not be stored. There is a subtle difference between the console and the
+terminal. In a windowed environment, a tty terminal is associated with each shell session;
+in other words, each command line window such as an <tt>xterm</tt> is a separate terminal.
+Redirection to<tt> /dev/tty</tt> sends output to the active window. The console, on the
+other hand, is the screen. It is the monitor in general. Most windowing programs provide a
+special switch to the shell windows that will link <tt>/dev/console</tt> to the window
+instead of writing output directly on the screen. In any event, output can be redirected
+to these devices quite easily. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat /etc/motd &gt;&gt;/dev/tty
+</b>Sun Microsystems Inc.&nbsp;&nbsp; SunOS 5.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Generic July 1994
+$ <b>cat /etc/motd &gt;&gt;/dev/null
+</b>$</tt></font></small></pre>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">1.5&nbsp;<a name="regular_expressions"></a>Regular
+Expressions</font></small></h2>
+
+<p><small><font face="Verdana">Regular expressions are one of the keys to UNIX. To master
+them is to open the door to a new universe of commands. A user who has a firm grasp of
+regular expressions can perform multiple tasks with one command, filter text for
+processing, and edit multiple files nearly instantaneously. And these are but a few
+examples of the power regular expressions provide. </font></small></p>
+
+<p><small><font face="Verdana"><a name="reg-exp-def"></a>A regular expression is a
+sequence of characters specifying a textual pattern. They instruct programs to process
+only those items that match the pattern. Most regular expressions use metacharacters to
+express repetition, existence, or ranges of character patterns. It can be very difficult
+at first to decipher a regular expression that uses metacharacters. Nevertheless, it is
+extremely important to practice creating and reading regular expressions. It is truly the
+difference between writing robust scripts and simply browsing around through UNIX. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>^$
+[a-z][0-1][a-z0-1]*
+^&lt;tab&gt;[A-Z][a-zA-Z0-9 ]*$
+10\{3,6\}</tt></font></small></pre>
+
+<p><small><font face="Verdana">At first glance, to the novice user, the examples above
+look like gibberish, but a patient and disciplined user can understand what each pattern
+means. In the first line, the carat represents the beginning of a line and the dollar sign
+the end of a line. Together, with nothing in between, they form a pattern describing an
+empty line. The second example shows how character classes can be used in regular
+expressions. The pattern represents a line that contains a word beginning with a lower
+case letter, followed by a zero or one and ending with any number of lower case letters,
+zero, or one. The square braces denote character classes, and the asterisk is a wildcard
+meaning any number including zero of the previous pattern. The third example is even more
+restrictive than the second. It matches patterns beginning with a tab (the tab normally is
+just typed; the <tt>&lt;tab&gt;</tt> is shown here for illustrative purposes), followed by
+an upper case letter, followed by any number of lower case, upper case, digit, or space
+character, and terminated by the end of the line. It is certainly a complex example, but
+it shows how by examining the pattern piece by piece, the meaning becomes clear. The last
+expression matches the number range 103 through 106, inclusive. It specifies a pattern
+beginning with ten followed by any number in the range three through six. </font></small></p>
+
+<p align="center"><small><font face="Verdana">A list of the metacharacters and their usage
+is given in the table below. The five metacharacters at the end are part of an extended
+set. They only have meaning in certain programs. <br>
+<a name="metachar-table"></a> </font></small></p>
+<div align="center"><center>
+
+<table border="1">
+  <caption valign="top"><small><font face="Verdana"><i>Table 1.5-1. Metacharacters</i>&nbsp;</font></small></caption>
+<TBODY>
+  <tr>
+    <th><small><font face="Verdana">Metacharacter&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Usage&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Used by&nbsp;</font></small></th>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>.</tt></font></small></td>
+    <td><small><font face="Verdana">Matches any single character except newline.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">All utilities&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>*</tt></font></small></td>
+    <td><small><font face="Verdana">Matches zero or more occurrences of the single character
+    that immediately pr ecedes it. The character may be specified by a regular
+    expression.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">All utilities&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>[]</tt></font></small></td>
+    <td><small><font face="Verdana">Matches any one of the class of characters enclosed
+    between the brackets. I f a caret (<tt>^</tt>) is the first character inside the brackets,
+    then the match is reversed. A hyphen is used to specify a range. In order to match a cl
+    ose bracket, it must be the first character in the list. Other metacharacters l ose their
+    special meaning when enclosed within brackets so that they may be matc hed
+    literally.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">All utilities&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>^</tt></font></small></td>
+    <td><small><font face="Verdana">As the first character of a regular expression, matches
+    the beginning of a l ine.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">All utilities&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$</tt></font></small></td>
+    <td><small><font face="Verdana">As the last character of a regular expression, matches the
+    end of a line.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">All utilities&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>\</tt></font></small></td>
+    <td><small><font face="Verdana">Escapes the metacharater which immediately follows.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">All utilities&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>/{m,n/}</tt></font></small></td>
+    <td><small><font face="Verdana">Matches a range of occurrences of the single character
+    that immediately prec edes the expression. If only <tt>m</tt> is given, then the pattern
+    matches exactly <tt>m</tt> repetitions. If <tt>m,</tt> is specified then at lea st <tt>m</tt>
+    occurrences are needed for a match. The use of <tt>m,n</COD> matches any number of repetitions
+    between m and n.&nbsp;</tt></font></small></td>
+    <td><small><font face="Verdana">sed, grep, egrep, awk&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>+</tt></font></small></td>
+    <td><small><font face="Verdana">Matches one or more of the preceding regular
+    expression.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">egrep, awk&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>?</tt></font></small></td>
+    <td><small><font face="Verdana">Matches zero or one instance of the preceding regular
+    expression.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">egrep, awk&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>|</tt></font></small></td>
+    <td><small><font face="Verdana">Matches either the preceding or following regular
+    expression.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">egrep, awk&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>()</tt></font></small></td>
+    <td><small><font face="Verdana">Groups regular expressions.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">egrep, awk&nbsp;</font></small></td>
+  </tr>
+</TBODY>
+</table>
+</center></div>
+
+<p><small><font face="Verdana"><a name="reg-exp-utils"></a></font></small></p>
+
+<p><small><font face="Verdana">There are a number of utilities available that use regular
+expressions. In particular, it is useful to study the one built into the Bourne shell,
+filename completion.&nbsp;<a name="filename-completion-def"></a>Filename completion
+assists in locating files or lists of files.&nbsp;<a name="filename-completion-chars"></a>It
+uses its own set of metacharacters: <tt>*</tt>, matches zero or more chracters; <tt>?</tt>,
+matches any single character; <tt>[]</tt>, matches any single character listed (a <tt>!</tt>
+reverses the match); and <tt>\</tt>, removes the meaning of any special character
+including and especially the end of a line. <tt>*</tt> is typically called the wildcard,
+and <tt>\</tt> is referred to as escape. Filename completion works by causing the shell to
+expand the pattern into all file names that match the expression. </font></small></p>
+
+<pre><small><font face="Verdana">$ <b>ls as*.*
+</b>ascendmax.alert&nbsp;&nbsp;&nbsp; ascendmax.emerg&nbsp;&nbsp;&nbsp; ascendmax.info&nbsp;&nbsp;&nbsp;&nbsp; ascendmax.warning
+ascendmax.crit&nbsp;&nbsp;&nbsp;&nbsp; ascendmax.err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ascendmax.notice
+$ <b>cd ..
+</b>$ <b>ls log/as*.*
+</b>log/ascendmax.alert&nbsp;&nbsp;&nbsp; log/ascendmax.err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; log/ascendmax.warning
+log/ascendmax.crit&nbsp;&nbsp;&nbsp;&nbsp; log/ascendmax.info
+log/ascendmax.emerg&nbsp;&nbsp;&nbsp; log/ascendmax.notice</font></small></pre>
+
+<p><small><font face="Verdana">As part of its parsing routine, the shell expands regular
+expressions before executing the command listed. The expansion acts as if the user had
+typed a list of files at the command line. In the preceding example, the shell expands the
+pattern <tt>as*.*</tt> into all files in the current directory beginning with <tt>as</tt>
+and having a period somewhere in the middle. The result is substitued for the pattern and
+the command is issued to list the files. The second part shows how the shell can be
+directed to traverse directory trees and perform expansion on subdirectories. </font></small></p>
+
+<p align="center"><small><font face="Verdana">Some of the other common programs that use
+regular expressions are given in the table below. <br>
+<a name="reg-exp-utils-table"></a> </font></small></p>
+<div align="center"><center>
+
+<table border="1">
+  <caption valign="top"><small><font face="Verdana"><i>Table 1.5-2. Programs that Use
+  Regular Expressions</i>&nbsp;</font></small></caption>
+<TBODY>
+  <tr>
+    <th><small><font face="Verdana">Utility&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Purpose&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Reference for Further Reading&nbsp;</font></small></th>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>grep</tt></font></small></td>
+    <td><small><font face="Verdana">Prints each line from its input that matches the pattern
+    specified.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">man&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>sed</tt></font></small></td>
+    <td><small><font face="Verdana">Permits line by line editing of its input according to the
+    script of regular expressions and commands given.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">man, <i>Sed &amp; Awk</i> (O'Reilly &amp;
+    Associates)&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>awk</tt></font></small></td>
+    <td><small><font face="Verdana">Programming language for extracting and formatting input
+    according to textua l patterns. Works best when the input already has a particular
+    structure.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">man, <i>Sed &amp; Awk</i> (O'Reilly &amp;
+    Associates)&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>cut</tt></font></small></td>
+    <td><small><font face="Verdana">Extracts text from the input given a list of field numbers
+    and their field s eparator.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">man&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>uniq</tt></font></small></td>
+    <td><small><font face="Verdana">Filters out repeated lines from its input so that only
+    unique lines remain i n the output.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">man&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>sort</tt></font></small></td>
+    <td><small><font face="Verdana">Sorts the lines of input given.&nbsp;</font></small></td>
+    <td><small><font face="Verdana">man&nbsp;</font></small></td>
+  </tr>
+</TBODY>
+</table>
+</center></div>
+
+<p><small><font face="Verdana">The most common forms of input to these utilities are files
+or pipes: </font></small></p>
+
+<pre><small><font face="Verdana">$ <b>grep &quot;defs.h&quot; *.cpp | cut -f1 -d: | uniq
+</b>bench.cpp
+bitvec.cpp
+bstream.cpp
+gimp.cpp
+idendict.cpp
+match.cpp
+regexp.cpp
+rwbag.cpp
+rwbagit.cpp
+rwfile.cpp
+rwtimeio.cpp
+strngcv.cpp
+toolmisc.cpp
+utility.cpp
+wcsutil.cpp
+wstring.cpp</font></small></pre>
+
+<p><small><font face="Verdana">This command uses files and pipes. The user wants to list
+all C++ source files that include the header file <tt>defs.h</tt>. The command begins by
+searching for the string <tt>defs.h</tt> in all files ending with the extension <tt>.cpp</tt>.
+The files found are passed to <tt>cut</tt>. Normally, <tt>grep</tt> prints the file name
+and every line in a file that contains the pattern. Here, <tt>cut</tt> is used to trim the
+lines down to the file name only. The result is in turn passed to <tt>uniq</tt> which
+filters out duplicated lines. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">1.6&nbsp;<a name="quoting"></a>Quoting</font></small></h2>
+
+<p><small><font face="Verdana">Just as regular expressions separate UNIX wizards from
+users, the use of quoting differentiates shell scripters from shell hackers. Quoting is
+simple in form and powerful in semantics. With quoting users can make metacharacters act
+like regular text or nest commands within others. A long command can be easily separated
+onto multiple lines by using quotes. But with this powerful tool comes a price. Proper
+usage of quoting is at best subtle. Often it is the source of program error and is
+difficult to debug. This should not deter scripters from quotes. Instead, users must
+simply realize that quoting takes practice. </font></small></p>
+
+<p><small><font face="Verdana"><a name="quoting-forms"></a>Bourne shell quotes come in
+four forms: </font></small>
+
+<dl>
+  <dt><small><font face="Verdana">1.&nbsp;<a name="dbl-quotes"></a>Double Quotes &quot;&quot; </font></small></dt>
+  <dd><small><font face="Verdana">Removes the special meaning of all enclosed characters
+    except for <tt>$</tt>, <tt>`</tt>, and <tt>\</tt>. </font></small></dd>
+  <dt><small><font face="Verdana">2.&nbsp;<a name="single-quotes"></a>Single Quotes '' </font></small></dt>
+  <dd><small><font face="Verdana">Removes the special meaning of all enclosed characters. </font></small></dd>
+  <dt><small><font face="Verdana">3.&nbsp;<a name="command-substitution"></a>Back Quotes `` </font></small></dt>
+  <dd><small><font face="Verdana">Command substitution; instructs the shell to execute the
+    command given between the quotes and substitute the resultant output. </font></small></dd>
+  <dt><small><font face="Verdana">4.&nbsp;<a name="escape"></a>Escape \ </font></small></dt>
+  <dd><small><font face="Verdana">Removes the special meaning of the character that follows.
+    Inside double quotes, <tt>\</tt> also escapes <tt>$</tt>, <tt>'</tt>, newline, and escape
+    itself. </font></small></dd>
+</dl>
+
+<p><small><font face="Verdana">The primary use of double and single quotes is to&nbsp;<a
+name="quotes-escaping-metachars"></a>escape the meaning of metacharacters within blocks of
+text: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>echo *
+</b>bin man profile
+$ <b>echo &quot;*&quot;
+</b>*
+$ <b>echo $USER
+</b>rsayle
+$ <b>echo &quot;$USER&quot;
+</b>rsayle
+$ <b>echo '$USER'
+</b>$USER</tt></font></small></pre>
+
+<p><small><font face="Verdana">The first two commands show the difference between using
+quotes. Special characters are interpreted by the shell when they are not quoted as in the
+case where the echo command displays the contents of the current directory: bin, man, and
+profile. The same can be said of the third command in which the value of the environment
+variable USER is echoed. Moreover, it is important to remember that there are a few
+special characters that are still interpreted when used with double quotes. Single quotes
+must be used to perform the escape as is shown by the last few commands. </font></small></p>
+
+<p><small><font face="Verdana">Double quotes and single quotes are especially useful
+for&nbsp;<a name="quotes-and-white-space"></a>patterns containing white space. Suppose,
+for example, an administrator knows a person's name but can't remember the user's account
+name. Filtering the passwd database through grep might be a good way to figure out the
+account name. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>ypcat passwd | grep Robert Sayle
+</b>grep: can't open Sayle</tt></font></small></pre>
+<tt>
+
+<p><small><font face="Verdana">Grep</tt> balked on the user's name! Well, not exactly. Due
+to its syntax, <tt>grep</tt> tried to find the string &quot;<tt>Robert</tt>&quot; in the
+file &quot;<tt>Sayle</tt>.&quot; The trick is to instruct the shell to ignore the white
+space between the first and last name. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>ypcat passwd | grep &quot;Robert Sayle&quot;
+</b>rsayle:hOWajBzikAWRo:328:208:Robert Sayle:/home/rsayle:/bin/tcsh</tt></font></small></pre>
+
+<p><small><font face="Verdana">The double quotes tell the shell interpreter to combine all
+the text contained into one argument, &quot;<tt>Robert Sayle</tt>.&quot; <tt>Grep</tt>
+receives the argument and uses it as the key during its search through the output of the <tt>ypcat</tt>.
+</font></small></p>
+
+<p><small><font face="Verdana">To search for quotes within text,&nbsp;<a
+name="quotes-escaping-quotes"></a>single quotes escape double quotes and vice-versa. The
+following examples illustrate this. The first and third show how one cannot simply use a
+quotation mark in pattern matching. The shell assumes that more text follows the input.
+The other examples show how to do it correctly. </font></small></p>
+
+<pre><small><font face="Verdana">$ <b>grep &quot; sloc
+</b>&gt; <b>^C
+</b>$ <b>grep '&quot;' sloc
+</b># a given set of files; finds each &quot;;&quot; which denotes an
+&nbsp;echo &quot;sloc: usage: sloc file1 [file2 ...]&quot;
+&nbsp;LINES=`grep &quot;;&quot; ${1} | wc -l`
+echo &quot;${RESULT} lines of code&quot;
+$ <b>grep ' tgzit
+</b>&gt; <b>^C
+</b>$ <b>grep &quot;'&quot; tgzit
+</b># tgzit -- tar's and gzip's the filenames passed</font></small></pre>
+
+<p><small><font face="Verdana">Although these are simple examples, not enough can be said
+about the difference between single and double quotes. Double quotes function perfectly in
+most cases, but there are times when a programmer should use one over another. The realm
+of possibilities will be explored in succeeding subsections as new topics are presented.
+For now, a good rule of thumb is to use double quotes in order to group words into a
+single argument, to allow variable substitution as in <tt>&quot;$USER&quot;</tt>, or to
+allow command substitution. Single quotes should be used when no substitution should
+occur. With that said, the discussion of quotes in general continues. </font></small></p>
+
+<p><small><font face="Verdana">Back quotes are arguably the most powerful form of quoting
+since they permit a level of&nbsp;<a name="command-substitution-nesting"></a>nesting
+called command substitution. In other words, they allow commands to be executed within
+other commands. When the shell scans a command line and finds an embedded command between
+back quotes, it runs the nested command. The output of the nested command is then
+substituted as part of the enclosing command which is subsequently executed. As an
+example, suppose a programming team places their source files in a common repository. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>ls -l *.h
+</b>-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5373 Aug&nbsp; 3&nbsp; 1995 adminlink.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5623 Aug&nbsp; 7&nbsp; 1995 agentadmin.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4930 Aug 10&nbsp; 1995 agentadminexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20264 Aug 14&nbsp; 1995 attribute.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3346 Aug 14&nbsp; 1995 attributeexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6819 Aug 14&nbsp; 1995 attributehelper.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3424 Aug 14&nbsp; 1995 attributehelperexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7446 Aug 14&nbsp; 1995 attributereference.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3394 Aug 14&nbsp; 1995 attributerefexception.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 35012 Aug 16&nbsp; 1995 attributevalue.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4959 Jul 25&nbsp; 1995 avdictionary.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4851 Aug 17&nbsp; 1995 avexception.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5024 Jul 25&nbsp; 1995 avtype.h
+-rw-r--r--&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9106 Jul 19&nbsp; 1995 computeropstatemsg.h
+-rw-r--r--&nbsp;&nbsp; 1 346&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8627 Jul 25&nbsp; 1995 elevation.h
+-rw-r--r--&nbsp;&nbsp; 1 346&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9454 Jul 25&nbsp; 1995 latitude.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5025 Aug&nbsp; 3&nbsp; 1995 linkagentadmin.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6260 Jun 19&nbsp; 1995 linkfactory.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4871 Jul 26&nbsp; 1995 linkmibloader.h
+-rw-r--r--&nbsp;&nbsp; 1 346&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9512 Jul 25&nbsp; 1995 longitude.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 17087 Aug 14&nbsp; 1995 managedobject.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14056 Aug 14&nbsp; 1995 mib.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3268 Aug 14&nbsp; 1995 mibexception.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5263 Aug&nbsp; 2&nbsp; 1995 mibloader.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4910 Aug 10&nbsp; 1995 mibloaderexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3255 Aug 14&nbsp; 1995 moexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8101 Aug 23&nbsp; 1995 mofactory.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3346 Aug 14&nbsp; 1995 mofactoryexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6134 Aug 14&nbsp; 1995 mofactoryhelper.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3424 Aug 14&nbsp; 1995 mofactoryhelperexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5008 Aug&nbsp; 7&nbsp; 1995 msgsvccbhandler.h
+-rw-r--r--&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3232 Aug&nbsp; 7&nbsp; 1995 msgsvccbhdlrexcep.h
+-rw-r--r--&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7365 Aug&nbsp; 7&nbsp; 1995 msgsvchandler.h
+-rw-r--r--&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3215 Aug&nbsp; 7&nbsp; 1995 msgsvchdlrexcep.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4823 Aug 10&nbsp; 1995 newavexception.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3815 Aug 10&nbsp; 1995 nmmsgids.h
+-rw-r--r--&nbsp;&nbsp; 1 346&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9342 Jul 25&nbsp; 1995 operationalstate.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10085 Aug&nbsp; 7&nbsp; 1995 opstatemsg.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4790 Aug 10&nbsp; 1995 ovsexception.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4174 Aug 14&nbsp; 1995 parserhelper.h
+-rw-rw-rw-&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3207 Aug 17&nbsp; 1995 regidexception.h
+-rw-rw-rw-&nbsp;&nbsp; 1 lchang&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9503 Aug 17&nbsp; 1995 regidserver.h
+-rw-r--r--&nbsp;&nbsp; 1 346&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10514 Jul 25&nbsp; 1995 rollablecounter.h
+-r--r--r--&nbsp;&nbsp; 1 tbass&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2423 Jul 12&nbsp; 1995 servicedefs.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2785 Jul 26&nbsp; 1995 startup.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5210 Aug&nbsp; 7&nbsp; 1995 svagentadmin.h
+-rw-r--r--&nbsp;&nbsp; 1 lshar&nbsp;&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7909 Aug 17&nbsp; 1995 svfactory.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5544 Aug&nbsp; 2&nbsp; 1995 svmibloader.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10938 Aug 24&nbsp; 1995 svovshandler.h</tt></font></small></pre>
+
+<p><small><font face="Verdana">The <tt>ls</tt> command output can be simply piped to <tt>grep</tt>
+with the account name, but in order to generalize the script, command substitution could
+be used. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>whoami</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rsayle
+$ <b>ls -l *.h | grep `whoami`
+</b>-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5373 Aug&nbsp; 3&nbsp; 1995 adminlink.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5623 Aug&nbsp; 7&nbsp; 1995 agentadmin.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4930 Aug 10&nbsp; 1995 agentadminexception.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 35012 Aug 16&nbsp; 1995 attributevalue.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4959 Jul 25&nbsp; 1995 avdictionary.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5024 Jul 25&nbsp; 1995 avtype.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5025 Aug&nbsp; 3&nbsp; 1995 linkagentadmin.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4871 Jul 26&nbsp; 1995 linkmibloader.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5263 Aug&nbsp; 2&nbsp; 1995 mibloader.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4910 Aug 10&nbsp; 1995 mibloaderexception.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4823 Aug 10&nbsp; 1995 newavexception.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3815 Aug 10&nbsp; 1995 nmmsgids.h
+-rw-r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10085 Aug&nbsp; 7&nbsp; 1995 opstatemsg.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4790 Aug 10&nbsp; 1995 ovsexception.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2785 Jul 26&nbsp; 1995 startup.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5210 Aug&nbsp; 7&nbsp; 1995 svagentadmin.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5544 Aug&nbsp; 2&nbsp; 1995 svmibloader.h
+-r--r--r--&nbsp;&nbsp; 1 rsayle&nbsp;&nbsp; fvsw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10938 Aug 24&nbsp; 1995 svovshandler.h</tt></font></small></pre>
+
+<p><small><font face="Verdana">The <tt>whoami</tt> command returns the current account
+name. When used in the script, the shell executes <tt>whoami</tt> and substitutes the
+result for the argument to <tt>grep</tt>. Hence, anyone using the script would get results
+specific to their account name. </font></small></p>
+
+<p><small><font face="Verdana">Finally, the last quoting mechanism is the escape
+represented by a backslash character, <tt>\</tt>. It removes the special meaning of the
+character immediately following. The most common use is for&nbsp;<a
+name="escape-line-continuation"></a>line continuation: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>/usr/bin/dump 0usbdf 6000 126 54000 /dev/nrst0 \
+</b>&gt; <b>/dev/sd0h &gt;&gt; backup.log 2&gt;&amp;1</b></tt></font></small></pre>
+
+<p><small><font face="Verdana">The long backup command above could not fit within one line
+so an escape was entered before the end of the line. It escaped the newline causing the
+shell to wait for more input before parsing the command. </font></small></p>
+
+<p><small><font face="Verdana">Actually,&nbsp;<a name="escape-metachars"></a>a backslash
+escapes the special meaning of any character immediately following it. Returning to the
+first example in which single and double quotes were used to escape metacharacters, a back
+slash can provide some similar and some not so familiar results. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>echo *; echo &quot;*&quot;; echo \*
+</b>bin man profile
+*
+*
+$ <b>echo $USER; echo &quot;$USER&quot;; echo '$USER'; echo \$USER; echo \$$USER
+</b>rsayle
+rsayle
+$USER
+$USER
+</tt>$rsayle
+<tt>$ <b>echo hello; echo &quot;hello&quot;; echo hell\o
+</b>hello
+hello
+hello</tt></font></small></pre>
+
+<p><small><font face="Verdana">As can be seen, the escape functions most like single
+quotes, but it is imperative to keep in mind that it does so for exactly one character
+following the back slash. The last two <tt>echo</tt> permutations of the <tt>USER</tt>
+variable demonstrate this fact. As an aside, the last command string shows how escapes can
+precede characters that have no hidden meaning to the shell. There is no effect. </font></small></p>
+
+<p><small><font face="Verdana">For the final example,&nbsp;<a name="dbl-quotes-and-escape"></a>double
+quotes and escapes are used to set a variable's value for which the directory list is too
+long to fit upon one line: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>DIRS2ARCHIVE=&quot; \
+</b>&gt; <b>$HOME/tmp/bin \
+</b>&gt; <b>$HOME/tmp/man \
+</b>&gt; <b>$HOME/tmp/profile \
+</b>&gt; <b>&quot;
+</b>$ <b>echo $DIRS2ARCHIVE
+</b>/home/rsayle/tmp/bin /home/rsayle/tmp/man /home/rsayle/tmp/profile</tt></font></small></pre>
+
+<p align="center">&nbsp;</p>
+
+<p align="center">&nbsp;</p>
+
+<h1 align="center"><small><font face="Verdana">Introduction to Scripting</font></small></h1>
+
+<ol>
+  <li><font face="Verdana"><font size="3"><a href="#customizing_unix_shell_scripts">Customizing
+    UNIX with Shell Scripts</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="3"><a href="#a_simple_example">A Simple Example</a></font><small>
+    </small></font></li>
+</ol>
+
+<hr noShade SIZE="3" width="89%">
+
+<h2><small><font face="Verdana">2.1 <a name="customizing_unix_shell_scripts">Customizing
+UNIX with Shell Scripts</a></font></small></h2>
+
+<p><small><font face="Verdana"><a name="script-argument">Why the heck would anyone want to
+write shell scripts?</a> After all, a script is just a bunch of commands that could be
+issued from the shell prompt anyway. Well, sure. But how many times does a user have to
+reenter the same command before his fingers become knotted and arthritic? Wouldn't it be
+easier to store those commands in a file that can be executed by the computer? Certainly
+the CPU can execute commands faster than a human can type. Besides, isn't it smarter to
+modularize tasks so they can be combined and reused in an efficient manner? The fact of
+the matter is that shell scripts can provide this and more.</font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">Shell scripts can help organize repeated commands. An
+administrator who often repeats a series of operations can record the command set into a
+file. The administrator can then instruct the shell to read the file and execute the
+commands within it. Thus, the task has been automated; one command now does the work of
+tens, hundreds, even thousands of others.</font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">Shell scripting helps users handle the operating system
+smarter. The techniques presented in this discussion can be applied at the command line
+prompt. They are, after all, commands themselves; albeit, they are built into the Bourne
+shell. Still, by developing a habit of scripting at the command line, users can save time
+and effort by applying a script to a task rather than executing it by brute force. A good
+example is processing a set of files with the same command. A user can type the same
+command with a different file name over and over, or the user may write a loop that
+iterates over the files and automatically generates the same command set.</font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">Furthermore, shell scripting is simpler than conventional
+programming. Unlike compiled languages such as C and C++, scripts are interpreted. There
+is no compiling statements into machine code and linking it with libraries to form an
+executable. The script is the executable. Commands entered into it are immediately ready
+to run. On the other hand, scripts run slower than compiled programs and are often harder
+to debug mainly because no debugging tools are available. Even so, shell scripts are
+easier to develop and modify.</font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">Hopefully, the point is clear. Scripting is powerful,
+simple, and fast. Anything that someone can think of entering at the command line can be
+automated by a shell script: </font></small>
+
+<ul>
+  <li><small><font face="Verdana">Reformat a file set so that the only white space in every
+    file are spaces. </font></small></li>
+  <li><small><font face="Verdana">Translate a file into another format for printing. </font></small></li>
+  <li><small><font face="Verdana">Startup and shutdown a system. </font></small></li>
+  <li><small><font face="Verdana">Extract and insert information from and into a database. </font></small></li>
+  <li><small><font face="Verdana">Clean up a UNIX account. </font></small></li>
+  <li><small><font face="Verdana">Collect and present system performance measurements. </font></small></li>
+  <li><small><font face="Verdana">Monitor a remote workstation or accounts. </font></small></li>
+  <li><small><font face="Verdana">Prepend a template prologue to source code for
+    documentation. </font></small></li>
+  <li><small><font face="Verdana">And all the other thinks you can think! </font></small></li>
+</ul>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">2.2 <a name="a_simple_example">A Simple Example</a></font></small></h2>
+
+<p><small><font face="Verdana">At the risk of sounding cliche, <a
+name="script-comparisson">a good shell script reads like a well written story</a>. All
+right, maybe not a story, but it does take a form similar to a classical essay. It has an
+introduction, a body, and a conclusion. The introduction prepares the script much like the
+reader of an essay is prepared for the paper's contents by its introduction. A script's
+body presents commands to the shell just as an author presents an argument through an
+essay's body. And, in both cases, the conclusion wraps up loose ends. The shell script
+listed below illustrates this point. It is read from top to bottom with each line
+encountered being executed in sequence. Normally, the text is stored within a file that
+has execute permissions set. A user simply enters the file's name at the command line
+prompt, and the program is run. For illustrative purposes, the script is shown.</font></small></p>
+
+<p>&nbsp;</p>
+
+<pre><small><font face="Verdana"><code>#!/bin/sh</code>
+# cleandir -- remove all the large, unused files from the current directory
+
+echo &quot;Removing all object files...&quot;
+rm *.o              # all object files have a .o extension
+echo &quot;done.&quot;
+echo &quot;Removing core dumps...&quot;
+rm core             # there's only ever one core
+echo &quot;done.&quot;
+exit 0
+</font></small></pre>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">Before analyzing the script, a quick note about comments is
+deserved. <a name="comments-def">Comments are text that is ignored by the interpreter</a>.
+Programmers provide comments to describe their code to readers. Comments begin with a hash
+mark (<code>#</code>). They may start anywhere within a line, and the comment always
+extends from the hash mark to the end of the line. A comment spans one line only; multiple
+line comments are not allowed. The script above shows the two types of commenting. The
+file prologue comment extends across a <a name="comments-line">whole line</a>:</font></small></p>
+
+<pre><small><font face="Verdana"># cleandir -- remove all the large, unused files from the current directory
+</font></small></pre>
+
+<p><small><font face="Verdana">On the other hand, the comments following the remove
+statements are <a name="comments-inline">inlined</a>. They share the same line with the
+command:</font></small></p>
+
+<pre><small><font face="Verdana">rm *.o              # all object files have a .o extension
+...
+rm core             # there's only ever one core
+</font></small></pre>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">The first line of the script is not a comment. Instead, <a
+name="script-declaring-shell">it specifies which shell shall be used to process the
+succeeding commands</a>. Considering the comparisson of a script to an essay, it can be
+said that the first line introduces the script's shell. It is the introduction. The basic
+syntax for declaring the shell has the form: <code>#![full path to shell program]</code>.
+The exclamation point following the hash mark signals the interpreter that the line is not
+a comment. It tells the interpreter that the text that follows is the path to a program in
+which to execute the script. In the example above, the Bourne shell is used, <code>/bin/sh</code>.</font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana">It is not mandatory for a script to specify what shell
+program to use. If no such specification is given, then by default, the script is executed
+in a subshell of the calling shell. In other words, the script uses the same shell as the
+invoking shell. This is potentially dangerous. Suppose a user operates from a different
+shell than the Bourne shell. The <code>tcsh</code> is a good example. It has a much more
+user-friendly command line interface than <code>sh</code>, and it uses the same syntax as
+the <code>csh</code>. This syntax looks like C source code. It is very different from <code>sh</code>
+syntax. Suppose also that the user writes a script with Bourne shell syntax but neglects
+to make <code>#!/bin/sh</code> the first line. When the user invokes the script from the <code>tcsh</code>
+prompt, the interpreter reads the script and determines what shell to use. Since no shell
+is specified, it invokes a subshell of the <code>tcsh</code>, and executes the script.
+Chances are the program fails miserably. </font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana"><a name="script-body">A shell script's body is the list of
+commands following the shell declaration</a>. It tells the program's story: what is it
+doing and how is it doing it. The shell processes the command body sequentially with
+branching, looping, and function constructs being exceptions to the rule. Any command that
+can be issued from a shell prompt may be included in a script's body. The example's body
+is the set of <code>echo</code> and <code>rm</code> statements:</font></small></p>
+
+<pre><small><font face="Verdana">echo &quot;Removing all object files...&quot;
+rm *.o              # all object files have a .o extension
+echo &quot;done.&quot;
+echo &quot;Removing core dumps...&quot;
+rm core             # there's only ever one core
+echo &quot;done.&quot;
+</font></small></pre>
+
+<p><small><font face="Verdana">This script tells the story of cleaning up a directory. It
+begins by informing the invoker with the <code>echo</code> that it will remove the object
+files. The next line actually performs this action with the <code>rm</code> on all files
+containing a <code>.o</code> extenstion in their name. This command in turn is followed by
+two more <code>echo</code> commands. The first indicates that the previous action
+completed. The second informs the user what it will do next. A second remove follows the
+two <code>echo</code> statements. It deletes any local core dumps. After completing,
+control passes onto the last <code>echo</code> which informs that user that the core dump
+removal finished.</font></small></p>
+
+<p>&nbsp;</p>
+
+<p><small><font face="Verdana"><a name="script-termination">By default, a script concludes
+as soon as it has reached the last statement in its body</a>. At this point, it returns
+control to its invoker. It also returns an exit status code. The exits code of a script is
+the return status of the last command run by the script. It is possible, however, to
+control this value by using the <a name="exit-def"><code>exit</code></a> command. It takes
+the form <code>exit <i>status</i></code> where <code><i>status</i></code> can be any
+non-negative integer. Zero usually indicates no errors were encountered by the script.
+Non-zero values indicate detection of various faults defined by the script. It is up to
+the programmer to determine what these faults are and to assign exit codes to them. The
+example terminates gracefully hen the body has been executed. It signals success by
+returning a zero status code:</font></small></p>
+
+<pre><small><font face="Verdana">...
+echo &quot;done.&quot;
+exit 0
+</font></small></pre>
+
+<p><small><font face="Verdana">It must also be noted that unlike an essay, <a
+name="exit-handling-errors">a script can provide a conclusion anywhere within its body</a>.
+To terminate the execution of a script prior to reaching its end, the <code>exit</code>
+command must be used. This is generally done when a program detects an unrecoverable error
+such as insufficient parameterization. Once again, scripters are responsible for
+determining errant conditions and deciding whether to terminate the program or not. </font></small></p>
+
+<hr width="91%" noShade SIZE="3">
+
+<p align="center">&nbsp;</p>
+
+<h1 align="center"><small><font face="Verdana">Variables</font></small></h1>
+
+<ol>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#shell_variables_defined">Shell
+    Variables Defined</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#declaring_variables">Declaring
+    Variables</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#properties_of_variables">Properties
+    of Variables</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#environment_variables">Environment
+    Variables</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#special_parameters">Special
+    Parameters</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#reading_data_into_variables">Reading
+    Data into Variables</a></font><small> </small></font></li>
+</ol>
+
+<hr noShade SIZE="3" width="88%">
+
+<h2><small><font face="Verdana">3.1&nbsp;<a name="shell_variables_defined"></a>Shell
+Variables Defined</font></small></h2>
+
+<p><small><font face="Verdana">Just like any other programming language, the shell
+supports variables. A variable is a logical name for a stored value. The value may be
+changed during program execution, hence, the term variable. In the Bourne shell, a
+variable's name may be any string of alphanumeric characters and underscores (<tt>_</tt>).
+Whitespace is not allowed. Examples of legal variable names include: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>COUNT
+HOME_DIRECTORY
+_file1</tt></font></small></pre>
+
+<p><small><font face="Verdana">Illegal variable names include: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>FILE*
+The Answer
+array(i)</tt></font></small></pre>
+
+<p><small><font face="Verdana">Some variables are predefined by the shell. They are known
+as <a href="script1.htm#environment_variables">environment variables</a> and <a
+href="script1.htm#special_parameters">special parameters</a>. All other variables are user
+defined. It is the scripter's responsibility to declare such variables and assign them
+values. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">3.2&nbsp;<a name="declaring_variables"></a>Declaring
+Variables</font></small></h2>
+
+<p><small><font face="Verdana"><a name="var-assignment"></a></font></small></p>
+
+<p><small><font face="Verdana">A script assigns a value to a variable by declaring the
+variable's name immediately followed by an equal sign (<tt>=</tt>) and the value. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>COUNT=1
+HOME_DIRECTORY=/export/home/bugsy
+_file1=table.dat</tt></font></small></pre>
+
+<p><small><font face="Verdana">No white space is permitted between the variable, the equal
+sign, and the value. If spaces exist in a variable assignment, the shell tries to execute
+either the variable name of the value as can be seen: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>COUNT =1
+</b>COUNT: not found
+$ <b>COUNT= 1
+</b>1: execute permission denied
+$ <b>COUNT=1
+</b>$</tt></font></small></pre>
+
+<p><small><font face="Verdana"><a name="var-dereference"></a></font></small></p>
+
+<p><small><font face="Verdana">To retrieve the value stored in a variable, the variable
+must be preceded by a dollar sign (<tt>$</tt>). Getting the value is called dereferencing.
+</font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>COUNT=1
+</b>$ <b>echo $COUNT
+</b>1</tt></font></small></pre>
+
+<p><small><font face="Verdana">Just as the name of a variable cannot contain white space,
+neither may the value. </font></small></p>
+
+<pre><small><font face="Verdana">$ <b><tt>NAME=John Doe
+</tt></b>Doe: not found</font></small></pre>
+
+<p><small><font face="Verdana"><a name="var-white-space"></a></font></small></p>
+
+<p><small><font face="Verdana">But with the help of the shell's quoting mechanisms, it is
+possible to create strings that do contain white space and then assign them to a
+variable's value. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>NAME=&quot;John Doe&quot;
+</b>$ <b>echo $NAME
+</b>John Doe
+$ <b>NAME='Jane Doe'
+</b>$ <b>echo $NAME
+</b>Jane Doe</tt></font></small></pre>
+
+<p><small><font face="Verdana"><a name="var-quotes"></a></font></small></p>
+
+<p><small><font face="Verdana">Moreover, the same quoting techinques can be used to place
+quotes in a variable's value. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>ERROR_MSG=&quot;You can't do that!&quot;
+</b>$ <b>echo $ERROR_MSG
+</b>You can't do that!
+$ <b>A_QUOTE='&quot;To be, or not to be&quot;'
+</b>$ <b>echo $A_QUOTE
+</b>&quot;To be, or not to be&quot;</tt></font></small></pre>
+
+<p><small><font face="Verdana"><a name="var-command-output"></a></font></small></p>
+
+<p><small><font face="Verdana">Using quotes, it is even possible to store the output of a
+command into a variable. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>XTERMINALS=`ypcat hosts | grep ncd[0-9][0-9] | \
+</b>&gt; <b>cut -f2 | cut -f2 -d&quot; &quot; | uniq`
+</b>$ <b>echo &quot;The NCD xterminals are $XTERMINALS&quot;
+</b>The NCD xterminals are ncd05
+ncd02
+ncd03
+ncd01
+ncd07
+ncd04
+ncd06</tt></font></small></pre>
+
+<p><small><font face="Verdana"><a name="var-filename-expansion"></a></font></small></p>
+
+<p><small><font face="Verdana">Filename expansion can be used to assign values to
+variables. . </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>XPROGS=/usr/bin/x*
+</b>$ <b>echo $XPROGS
+</b>/usr/bin/xargs /usr/bin/xgettext /usr/bin/xstr
+$ <b>IPROGS=/usr/bin/i[0-9]*
+</b>$ <b>echo $IPROGS
+</b>/usr/bin/i286 /usr/bin/i386 /usr/bin/i486 /usr/bin/i860 /usr/bin/i86pc</tt></font></small></pre>
+
+<p><small><font face="Verdana"><a name="var-braces"></a></font></small></p>
+
+<p><small><font face="Verdana">Braces can be used during variable dereferencing. It is
+highly recommended that programmers consistently delimit variables with braces. The
+technique has a few advantages. First, it makes variables standout within a script.
+Readers can easily see the variable being dereferenced within a block of code. Second, it
+has the advantage of permitting the generation of expanded strings from variable values.
+If a script declared a variable named <tt>FILE</tt>, it could then make a backup copy of
+the actual value stored in <tt>FILE</tt>: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>FILE=oracle.log
+</b>$ <b>cp ${FILE} ${FILE}.bak
+</b>$ <b>ls
+</b>oracle.log oracle.log.bak</tt></font></small></pre>
+
+<p><small><font face="Verdana">This technique would work without the braces, but notice
+the difference between using the braces and not using them. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cp $FILE $FILE.bak</b></tt></font></small></pre>
+
+<p><small><font face="Verdana">In this case, is it obvious to the reader that the second
+dereference is the value of <tt>FILE</tt> with <tt>.bak</tt> appended to it, or might the
+reader think that the variable being dereferenced is <tt>FILE.bak</tt>? By using braces to
+delimit the variable, the problem is solved. Certainly it is clear that the variable is <tt>FILE</tt>
+not <tt>FILE.bak</tt>. Moreover, there are times when appending text to the variable name
+may produce unexpected results. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cp $FILE $FILE2
+</b>cp: Insufficient arguments (1)
+Usage: cp [-i] [-p] f1 f2
+&nbsp;cp [-i] [-p] f1 ... fn d1
+&nbsp;cp [-i] [-p] [-r] d1 d2</tt></font></small></pre>
+
+<p><small><font face="Verdana">Here, the user attempts to create a copy of <tt>oracle.log</tt>
+into <tt>oracle.log2</tt>, but since digits can be part of a variable name, the shell
+tries to dereference the undefined variable <tt>FILE2</tt>. Third, braces allow parameter
+substitution. </font></small></p>
+
+<p align="center"><small><font face="Verdana"><a name="var-parameter-substitution"></a>Parameter
+substitution is a method of providing a default value for a variable in the event that it
+is currently null. The construct uses a combination of braces delimiting a variable and
+its default. The variable and default value are separated by a keyword. The keyword serves
+as a condition for when to assign the value to the variable. The list of keywords is shown
+in the following table. <br>
+&nbsp; </font></small></p>
+<div align="center"><center>
+
+<table border="1">
+  <caption valign="top"><small><font face="Verdana"><i>Table 3.2-1. Summary of Parameter
+  Substitution</i>&nbsp;</font></small></caption>
+<TBODY>
+  <tr>
+    <th><small><font face="Verdana">Construct&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Meaning&nbsp;</font></small></th>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$parameter</tt> <tt>${parameter}</tt></font></small></td>
+    <td><small><font face="Verdana">Substitue the value of <tt>parameter</tt>.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>${parameter:-value}</tt></font></small></td>
+    <td><small><font face="Verdana">Substitue the value of <tt>parameter</tt> if it is not
+    null; otherwise, use <tt>value</tt>.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>${parameter:=value}</tt></font></small></td>
+    <td><small><font face="Verdana">Substitue the value of <tt>parameter</tt> if it is not
+    null; otherwise, use <tt>value</tt> and also assign <tt>value</tt> to <tt>parameter</tt>.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>${parameter:?value}</tt></font></small></td>
+    <td><small><font face="Verdana">Substitue the value of <tt>parameter</tt> if it is not
+    null; otherwise, write <tt>value</tt> to standard error and exit. If <tt>value</tt> is
+    omitted, then write &quot;<tt>parameter: parameter null or not set</tt>&quot;
+    instead.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>${parameter:+value}</tt></font></small></td>
+    <td><small><font face="Verdana">Substitue <tt>value</tt> if <tt>parameter</tt> is not
+    null; otherwise, substitue nothing.&nbsp;</font></small></td>
+  </tr>
+</TBODY>
+</table>
+</center></div>
+
+<p><small><font face="Verdana">Supposing a script tries to dereference a null variable, a
+good programmer can avoid catastrophic errors by using parameter substitution: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>echo $NULL
+</b>&nbsp;
+$ <b>echo &quot;Is it null? : ${NULL} :&quot;</b>&nbsp;
+Is it null? : :
+$ <b>echo &quot;Is it null? : ${NULL:-Nope} :&quot;
+</b>Is it null? : Nope :
+$ <b>echo &quot;Actually it still is null : ${NULL:?} :&quot;
+</b>NULL: parameter null or not set
+$ <b>echo &quot;We'll take care of that : ${NULL:=Nope} :&quot;
+</b>We'll take care of that : Nope :
+$ <b>echo &quot;Is it null? : ${NULL} :&quot;
+</b>Is it null? : Nope :</tt></font></small></pre>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">3.3&nbsp;<a name="properties_of_variables"></a>Properties
+of Variables</font></small></h2>
+
+<p><small><font face="Verdana">First and foremost,&nbsp;<a name="var-data-type"></a>the
+shell has no concept of data types. Some programming languages such as C++ or Pascal are
+strongly typed. In these languages, variables are grouped into type classes such as
+integer, character, and real. Typed variables expect a specific format for their value,
+and generally, they only operate within their class. For example, a real valued variable
+does not add well with a character. For the Bourne shell, there is no such restriction
+because every variable is simply a string of characters. This is why the results of
+commands and filename expansions are as legal as typing in values by hand. For the shell,
+there is no concept of integers, reals, or characters. The shell does not understand that <tt>COUNT=1</tt>
+means that <tt>COUNT</tt> has an integral value. It only knows that the variable holds a
+single character string with the ASCII value for 1. </font></small></p>
+
+<p><small><font face="Verdana"><a name="var-permissions"></a>Variables are read-write by
+default. Their values may be dereferenced and reset at will. If the need arises, a
+variable can be declared to be&nbsp;<a name="var-read-only"></a>read-only by using
+the&nbsp;<a name="readonly"></a><tt>readonly</tt> command. The command takes a previously
+declared variable and applies write protection to it so that the value may not be
+modified. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>NOWRITE=&quot;Try to change me&quot;
+</b>$ <b>readonly NOWRITE
+</b>$ <b>echo ${NOWRITE}
+</b>Try to change me
+$ <b>NOWRITE=&quot;Ugh, you changed me&quot;
+</b>NOWRITE: is read only</tt></font></small></pre>
+
+<p><small><font face="Verdana">It is important to remember that once a variable is
+declared read-only, from that point on, it is immutable. Therefore, it is equally
+important to set the variable's value before applying write protection. </font></small></p>
+
+<p><small><font face="Verdana">The&nbsp;<a name="var-scope"></a>scope of variables within
+a script is important to consider as well. Variables defined by a shell script are not
+necessarily visible to subshells the program spawns. Given a variable <tt>x</tt> defined
+in a shell session and given a script <tt>local</tt> executed during the same session, the
+value of <tt>x</tt> is undefined for script <tt>local</tt>: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>x=World
+</b>$ <b>echo ${x}
+</b>World
+$ <b>cat local
+</b>#!/bin/sh
+echo &quot;Hello ${x}&quot;
+$ <b>local
+</b>Hello</tt></font></small></pre>
+
+<p><small><font face="Verdana">On the other hand, it is possible to instruct a shell
+session to publish its variables to all of its subshells. Called variable&nbsp;<a
+name="var-exporting"></a>exporting, the technique uses the&nbsp;<a name="export"></a><tt>export</tt>
+command. <tt>Export</tt> takes a list of variables as its arguments. Each variable listed
+gains global scope for the current session. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat local2
+</b>#!/bin/sh
+echo &quot;${y} ${z}&quot;
+$ <b>y=Hello
+</b>$ <b>z=World
+</b>$ <b>local2
+</b>&nbsp;
+$ <b>export y z
+</b>$ <b>local2
+</b>Hello World</tt></font></small></pre>
+
+<p><small><font face="Verdana">In the example above, variables <tt>y</tt> and <tt>z</tt>
+are invisible to <tt>local2</tt> as shown by the first invocation, but after applying <tt>export</tt>
+to both variables, <tt>local2</tt> gains access to them as if it had declared them itself.
+Now eventhough a shell can publish its variables to subshells, the converse does not hold.
+Subshells cannot promote local variables to global scope. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat local3
+</b>#!/bin/sh
+a=foo
+export foo
+$ <b>b=bar
+</b>$ <b>echo &quot;${a} ${b}&quot;
+</b>&nbsp;bar
+$ <b>local3
+</b>$ <b>echo &quot;${a} ${b}&quot;
+</b>&nbsp;bar</tt></font></small></pre>
+
+<p><small><font face="Verdana">Although <tt>local3</tt> attempts to export <tt>a</tt> to
+its parent shell, the active session, <tt>a</tt> does not gain visibility. Only the
+subshells of <tt>local3</tt> would be able to use <tt>a</tt>. Furthermore, subshells
+retain a copy of exported variables. They may reassign the value of a global variable, but
+the reassignment is not permanent. Its effects last only within the subshell. The global
+variable regains its original value as soon as control is returned to the parent shell. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat local4
+</b>#!/bin/sh
+echo &quot;var1 = ${var1}&quot;
+var1=100
+echo &quot;var1 = ${var1}&quot;
+$ <b>var1=50
+</b>$ <b>export var1
+</b>$ <b>local4
+</b>var1 = 50
+var1 = 100
+$ <b>echo ${var1}
+</b>50</tt></font></small></pre>
+
+<p><small><font face="Verdana">The listing of <tt>local4</tt> shows that it prints <tt>var1</tt>'s
+value and then assigns a value of <tt>100</tt> to it. <tt>Var1</tt> is first set to <tt>50</tt>
+and then exported by the active shell. <tt>Local4</tt> is then executed. The output shows
+that the variable is correctly exported and has its value changed to <tt>100</tt>. At this
+point, the script terminates, and control returns to the interactive session. A quick <tt>echo</tt>
+of <tt>var1</tt> shows that the global instance of the variable has not changed. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">3.4&nbsp;<a name="environment_variables"></a>Environment
+Variables</font></small></h2>
+
+<p align="center"><small><font face="Verdana">The Bourne shell predefines a set of global
+variables known as environment variables. They define default values for the current
+account's home directory, the strings to use as the primary and secondary prompts, a list
+of directories to search through when attempting to find an executable, the name of the
+account, and the current shell, to name a few. The values for these variables are
+generally set at login when the shell reads the <tt>.login</tt> script. This script
+resides within the account's home directory. Environment variables are by no means set in
+stone. They may be changed from session to session, but generally, they remain constant
+and keep a user's account configured for the system. A short listing of some common
+environment variables is shown in Table 3.4-1. <br>
+&nbsp; </font></small></p>
+<div align="center"><center>
+
+<table border="1">
+  <caption valign="top"><small><font face="Verdana"><i>Table 3.4-1. Common Environment
+  Variables</i>&nbsp;</font></small></caption>
+<TBODY>
+  <tr>
+    <th><small><font face="Verdana">Variable&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Meaning&nbsp;</font></small></th>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>HOME</tt></font></small></td>
+    <td><small><font face="Verdana">The absolute path to the user's home directory.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>IFS</tt></font></small></td>
+    <td><small><font face="Verdana">The internal field separator characters. Usually contains
+    space, tab, and newline.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>PATH</tt></font></small></td>
+    <td><small><font face="Verdana">A colon separated list of directories to search through
+    when trying to execute a command.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>PS1</tt> <tt>PS2</tt></font></small></td>
+    <td><small><font face="Verdana">The strings to use as the primary, <tt>PS1</tt> (<tt>$</tt>),
+    and secondary prompts, <tt>PS2</tt> (<tt>&gt;</tt>).&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>PWD</tt></font></small></td>
+    <td><small><font face="Verdana">The current working directory.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>SHELL</tt></font></small></td>
+    <td><small><font face="Verdana">The absolute path to the executable that is being run as
+    the current shell session.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>USER</tt></font></small></td>
+    <td><small><font face="Verdana">The name of the current account.&nbsp;</font></small></td>
+  </tr>
+</TBODY>
+</table>
+</center></div>
+
+<p><small><font face="Verdana">Changing an environment variable is as easy as assigning it
+a new value.&nbsp; As an example, the current directory could be appended to <tt>PATH</tt>'s
+value.&nbsp; Doing so would allows a user to execute programs in the current directory
+without specifying a fully qualified path to the executable. </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>echo ${PATH}</b></tt> <br>
+<tt>/bin:/usr/bin:/usr/ucb/bin</tt> <br>
+<tt>$ <b>PATH=${PATH}:${PWD}</b></tt> <br>
+<tt>$ <b>echo ${PATH}</b></tt> <br>
+<tt>/bin:/usr/bin:/usr/ucb/bin:/home/rsayle</tt> <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">3.5&nbsp;<a name="special_parameters"></a>Special
+Parameters</font></small></h2>
+
+<p><small><font face="Verdana">In addition to predefining environment variables, the shell
+accepts a set of built-in variables known as special parameters. There are two types. The
+first type provides a method for accessing a set of arguments. When a command is issued at
+the prompt or a function is called, it often takes a set of parameters that define what it
+operates on or how to perform its operations. The script or function retrieves this
+argument list by using the&nbsp;<a name="positional-parameters"></a>positional parameters.
+</font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat show-pos-params
+</b>#!/bin/sh
+echo ${1} ${2} ${3} ${4} ${5} ${6} ${7} ${8} ${9}
+$ <b>show-pos-params testing 1 2 3 ...
+</b>testing 1 2 3 ...
+$ <b>show-pos-params One, two, buckle your shoe, three four shut the door
+</b>One, two, buckle your shoe, three four shut the</tt></font></small></pre>
+
+<p><small><font face="Verdana">There are nine positional parameters available, and each is
+accessible by dereferencing the argument number. The script <tt>show-pos-params</tt>
+listed above demonstrates how to use the positional parameters. The example also shows
+that only nine arguments can be handled by a script, or a function, at any time. In the
+second invocation of <tt>show-pos-params</tt>, the tenth argument, <tt>door</tt>, does not
+get printed. It has not vanished and is still available to the script; it is just not
+readily available via the positional parameters. This could be remedied by shifting the
+positional parameters so that <tt>door</tt> moved from the tenth to the ninth position.
+Shifting is discussed in&nbsp;<a name="loop.html"></a><i>Section 6, Looping</i>. </font></small></p>
+
+<p><small><font face="Verdana">An astute reader might now ask about <tt>${0}</tt>. Zero is
+a special positional parameter. It always holds the name of the executing program.
+Usually, it also includes a path to the program. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat show-pos-param-0
+</b>#!/bin/sh
+echo &quot;This script's name is ${0}&quot;
+$ <b>show-pos-param-0
+</b>This script's name is ./show-pos-param-0</tt></font></small></pre>
+
+<p align="center"><small><font face="Verdana">The second set of special parameters look a
+little strange. They seem more like punctuation than variables because each special
+parameter is a symbol. They are, however, extremely useful for manipulating arguments,
+processes, and even the currently executing shell. <br>
+&nbsp; </font></small></p>
+<div align="center"><center>
+
+<table border="1">
+  <caption valign="top"><small><font face="Verdana"><i>Table 3.5-1. The Special Shell
+  Parameters</i>&nbsp;</font></small></caption>
+<TBODY>
+  <tr>
+    <th><small><font face="Verdana">Parameter&nbsp;</font></small></th>
+    <th><small><font face="Verdana">Usage&nbsp;</font></small></th>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$#</tt></font></small></td>
+    <td><small><font face="Verdana">The number of arguments passed to the shell or the number
+    of parameters set by executing the <tt>set</tt> command.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$*</tt></font></small></td>
+    <td><small><font face="Verdana">Returns the values of all the positional parameters as a
+    single value.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$@</tt></font></small></td>
+    <td><small><font face="Verdana">Same as <tt>$*</tt> except when double qouted it has the
+    effect of double quoting each parameter.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$$</tt></font></small></td>
+    <td><small><font face="Verdana">Returns the process id of the current shell session or
+    executing script.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$!</tt></font></small></td>
+    <td><small><font face="Verdana">Returns the process id of the last program sent to the
+    background.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$?</tt></font></small></td>
+    <td><small><font face="Verdana">Returns the exit status of the last command not executed
+    in the background.&nbsp;</font></small></td>
+  </tr>
+  <tr>
+    <td><p align="center"><small><font face="Verdana"><tt>$-</tt></font></small></td>
+    <td><small><font face="Verdana">Lists the current options in effect (same as executing <tt>set</tt>
+    with no arguments).&nbsp;</font></small></td>
+  </tr>
+</TBODY>
+</table>
+</center></div>
+
+<p><small><font face="Verdana">A quick example shows how these parameters behave. The
+succeeding chapters will demonstrate their use extensively. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat show-special-params
+</b>#!/bin/sh
+echo &quot;There are $# arguments: $*&quot;
+echo Or if we needed them quoted, they would be: &quot;$@&quot;
+echo &quot;If I wanted to backup this file, I might use ${0}.$$&quot;
+echo &quot;The last echo had exit status = $?&quot;
+$ <b>show-special-params with some arguments
+</b>There are 3 arguments: with some arguments
+Or if we needed them quoted, they would be: with some arguments
+If I wanted to backup this file, I might use ./show-special-params.2163
+The last echo had exit status = 0</tt></font></small></pre>
+
+<p><small><font face="Verdana">Notice that in the second <tt>echo</tt> command, with some
+arguments was not printed as <tt>&quot;with&quot; &quot;some&quot; &quot;arguments&quot;</tt>.&nbsp;
+This is a result of how <tt>echo</tt> treats quoted values; however, <tt>with some
+arguments</tt> is actually passed to <tt>echo</tt> as separately quoted values.&nbsp; This
+has the advantage of protecting the original parameter values.&nbsp; Without double
+quotes, the shell could interpret what was meant to be distinct values as one value. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">3.6&nbsp;<a name="reading_data_into_variables"></a>Reading
+Data into Variables</font></small></h2>
+
+<p><small><font face="Verdana">Data can be stored into user defined variables by
+assignment, as has already been shown, interactively, or from a file. To have a user
+provide a value or to get the value from a file, the&nbsp;<a name="read"></a><tt>read</tt>
+command must be used. <tt>Read</tt> takes a list of variables as its arguments. When being
+used interactively, it suspends program execution and awaits user input. After the user
+enters some text, <tt>read</tt> scans the line of input and seequentially assigns the
+words found to each of the variables in the list. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat readit
+</b>#!/bin/sh
+TIC_TAC=&quot;tic tac&quot;
+echo &quot;${TIC_TAC} ?&quot;
+read ANSWER
+echo &quot;${TIC_TAC} ${ANSWER}&quot;
+$ <b>readit
+</b>tic tac ?
+<b>toe
+</b>tic tac toe</tt></font></small></pre>
+
+<p><small><font face="Verdana">Above, <tt>readit</tt> pauses after printing <tt>tic tac ?</tt>
+On the next line, the user enters <tt>toe</tt>. <tt>Read</tt> receives the value from
+standard input and stores it in the new variable <tt>ANSWER</tt> which becomes immediately
+usable by the program. For <tt>read</tt>, words are delimited according to the characters
+defined by the internal field separator variable, <tt>IFS</tt>. It is usually set to be
+any white space. The example shows an interactive application; <tt>read</tt> may also be
+used to extract values from a file. To do this, however, requires advanced knowledge of
+how to combine looping constructs with I/O. </font></small></p>
+
+<p><small><font face="Verdana">Continuing with <tt>read</tt>'s behavior when used
+interactively, if there are not enough words listed in the line of input, the remaining
+variables are simply left null. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat not-enough-args
+</b>#!/bin/sh
+read a b c d e
+echo &quot;e = ${e}&quot;
+$ <b>not-enough-args
+</b>There aren't enough variables
+e =</tt></font></small></pre>
+
+<p><small><font face="Verdana">On the other hand, the last variable gets all the extra
+words if the list of variables is shorter than the available words. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat more-than-enough-args
+</b>#!/bin/sh
+read a b c
+echo &quot;c = ${c}&quot;
+$ <b>more-than-enough-args
+</b>There are more than enough variables
+c = more than enough variables</tt></font></small></pre>
+
+<p><small><font face="Verdana">The point here is that programmers should be aware that
+unexpected results can occur quite easily when using the read command. It is therefore
+important to provide rudimentary checks on a variable after reading its value. <br>
+</font></small></p>
+
+<hr width="91%" noShade SIZE="3">
+
+<p align="center">&nbsp;</p>
+
+<h1 align="center"><small><font face="Verdana">Functions</font></small></h1>
+
+<ol>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#declaring_functions">Declaring
+    Functions</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#invoking_functions">Invoking
+    Functions</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a href="script1.htm#properties_of_functions">Properties
+    of Functions</a></font><small> </small></font></li>
+  <li><font face="Verdana"><font size="2"><a
+    href="script1.htm#including_functions_in_multiple_scripts">Including Functions in Multiple
+    Scripts</a></font><small> </small></font></li>
+</ol>
+
+<hr noShade SIZE="3" width="89%">
+
+<h2><small><font face="Verdana">4.1&nbsp;<a name="declaring_functions"></a>Declaring
+Functions</font></small></h2>
+
+<p><small><font face="Verdana"><a name="function_definition"></a></font></small></p>
+
+<p><small><font face="Verdana">The Bourne shell allows the grouping of commands into a
+reusable instruction set called a function. Functions have two parts: a label and a
+body.&nbsp;<a name="function_label"></a>The label names the function and is used to invoke
+the function.&nbsp;<a name="function_body"></a>The body is the list of commands that the
+function executes. Here is an example function called <tt>setEnvironment</tt>. Its body is
+the three statements that set the values of the variables <tt>ROOT</tt>, <tt>LIB</tt>, and
+<tt>BIN</tt>. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>setEnvrionment () {
+ROOT=${PWD}
+LIB=${ROOT}/lib
+BIN=${ROOT}/bin
+}</tt></font></small></pre>
+
+<p><small><font face="Verdana"><a name="function_declaration_rules"></a></font></small></p>
+
+<p><small><font face="Verdana">There exists a few rules that must be followed in order to
+properly declare a function: </font></small>
+
+<ol>
+  <li><small><font face="Verdana">The function label must be unique; it cannot be the same as
+    any other variable or other function. </font></small></li>
+  <li><small><font face="Verdana">An empty set of parentheses must always follow the function
+    label. They instruct the shell that a function is being defined. </font></small></li>
+  <li><small><font face="Verdana"><a name="function_delimiter"></a>Braces, <tt>{}</tt>, must
+    be used to delimit the function's body. </font></small></li>
+  <li><small><font face="Verdana">A function must be defined before it can be used in a
+    script. </font></small></li>
+</ol>
+
+<p><small><font face="Verdana">The second, third, and fourth rules are mandatory. Frankly
+speaking, without following them, a script will not recognize a declaration as a function.
+The first one, however, is not as strict. A script can declare a variable and a function
+by the same name, but the results are not one what might expect: </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>FUNC=&quot;This is a variable&quot;
+</b>$ <b>FUNC () {
+</b>&gt; <b>echo &quot;This is a function&quot;
+</b>&gt; <b>}
+</b>$ <b>echo ${FUNC}
+</b>bad substitution
+$ <b>FUNC
+</b>This is a function</tt></font></small></pre>
+
+<p><small><font face="Verdana">The functional declaration of <tt>FUNC</tt> appears to be
+the active one, but is this always the case? If a function and a variable have the same
+name, will the function always be the active handle? </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>FUNC () {
+</b>&gt; <b>echo &quot;This is a function&quot;
+</b>&gt; <b>}
+</b>$ <b>FUNC=&quot;This is a variable&quot;
+</b>$ <b>echo ${FUNC}
+</b>This is a variable
+$ <b>FUNC
+</b>FUNC: not found</tt></font></small></pre>
+
+<p><small><font face="Verdana">Apparently, the answer is no. Closer inspection of the
+examples shows that in both cases the shell uses the last declaration. Hence, a corollary
+to rule one states that in the event that a variable and a function have the same name,
+the most recent declaration becomes active. For the sake of completeness, the same thing
+can be said about declaring two variables with the same name or two functions with the
+same label. The bottom line remains: a scripter should choose unique function and variable
+labels. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">4.2&nbsp;<a name="invoking_functions"></a>Invoking
+Functions</font></small></h2>
+
+<p><small><font face="Verdana">To use a function in a script or an interactive session, a
+user must define it and then call it as if it was another command invokable from the shell
+prompt. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat example-func
+</b>#!/bin/sh
+&nbsp;
+setEnvironment () {
+&nbsp;ROOT=${PWD}
+&nbsp;LIB=${ROOT}/lib
+&nbsp;BIN=${ROOT}/bin
+}
+&nbsp;
+echo &quot;Trying to print environment...&quot;
+echo ${ROOT} ${LIB} ${BIN}
+setEnvironment
+echo &quot;Trying to print environment again...&quot;
+echo ${ROOT} ${LIB} ${BIN}
+$ <b>example-func
+</b>Trying to print environment...
+&nbsp;
+Trying to print environment again...
+/home/rsayle /home/rsayle/lib /home/rsayle/bin</tt></font></small></pre>
+
+<p><small><font face="Verdana">The fact that the parentheses following the function label
+is empty is a bit misleading. Normally, in languages such as C and C++, the parentheses
+delimit an argument list, and an empty set of parentheses indicates that there are no
+arguments. But for the shell,&nbsp;<a name="parentheses_in_function_declaration"></a>the
+parentheses are just the method of declaration. In fact, all Bourne shell functions accept
+arguments.&nbsp;<a name="function_arguments"></a>These arguments are accessible using
+positional parameter syntax. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat func-args
+</b>#!/bin/sh
+&nbsp;
+setEnvironment () {
+&nbsp;ROOT=${1}
+&nbsp;LIB=${ROOT}/lib
+&nbsp;BIN=${ROOT}/bin
+}
+&nbsp;
+setEnvironment /tmp
+echo &quot;Trying to print environment...&quot;
+echo ${ROOT} ${LIB} ${BIN}
+$ <b>func-args
+</b>Trying to print environment...
+/tmp /tmp/lib /tmp/bin</tt></font></small></pre>
+
+<p><small><font face="Verdana">Comparing this to the previous example, this time <tt>setEnvironment</tt>
+does not hard code <tt>ROOT</tt>'s value. It uses the first argument passed to the
+function. The invocation shows the results. With <tt>/tmp</tt> acting as the parameter, <tt>setEnvironment</tt>
+assigns values as expected. </font></small></p>
+
+<p><small><font face="Verdana">On the surface, shell functions appear more like procedures
+or routines. After all, a function generally returns a value. Actually, every shell
+function does return a value; although, it may not be readily apparent what the value
+is.&nbsp;<a name="function_return_value"></a>Functions return the exit status of the last
+command executed much like when a script exits with no <tt>exit</tt> command; it uses the
+status of the last command issued. This similarity goes further. A script controls its
+exit status by issuing an <tt>exit</tt> with a non-negative value. On the other hand,
+functions do not use <tt>exit</tt> because it is designed to terminate the shell. Instead,
+functions use <tt>return</tt>. </font></small></p>
+
+<p><small><font face="Verdana"><a name="returning_from_a_function"></a>The return command
+stops execution of a function returning program control to the point in the script where
+the function was called. Script execution continues from where the function was invoked.
+The format of <tt>return</tt> follows&nbsp;<a name="return_syntax"></a><tt>return n</tt>
+where <tt>n</tt> is any non-negative integer. Providing a return value is optional just as
+providing a status code to <tt>exit</tt> is optional.&nbsp;<a name="return_default_value"></a>If
+no code is given, <tt>return</tt> defaults to the value returned by the last command
+executed. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>isADir () {
+</b>&gt; <b>if [ ! -d ${1} ]; then
+</b>&gt; <b>return 1
+</b>&gt; <b>fi
+</b>&gt; <b>}
+</b>$ <b>isADir ${HOME}
+</b>$ <b>echo $?
+</b>0
+$ <b>isADir notADir
+</b>$ <b>echo $?
+</b>1</tt></font></small></pre>
+
+<p><small><font face="Verdana">The exercise above declares the function <tt>isADir</tt>.
+The function checks an argument passed to it and determines if the argument's value
+represents a directory as shown by the function's first statement. If it is not a
+directory, the function returns an error value of one; otherwise, it should return zero as
+given by the execution of the <tt>if</tt> statement. The function is run twice. First with
+the home directory as its argument and, second, with a fictitious directory name. The
+special parameter <tt>$?</tt> is printed in order to show the return values of each trial.
+</font></small></p>
+
+<p><small><font face="Verdana">The short function just examined is a good one to
+demonstrate&nbsp;<a name="combining_functions_with_test"></a>how to combine functions with
+test conditions. Many programmers familiar with traditional languages understand that a
+function can be embedded within a test in order to provide branching. The technique has
+the advantage of allowing multiple commands within one line for the sake of compactness.
+In some cases, it can also improve program efficiency by storing the value temporarily
+instead of having to create a persistent variable to hold the results. The same technique
+can be employed by the shell, but it is important to realize that&nbsp;<a
+name="quoting_functions_in_test"></a>quotes must be used. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>if [ isADir ${HOME} ]; then
+</b>&gt; <b>echo yep
+</b>&gt; <b>fi
+</b>test: argument expected
+$ <b>if [ &quot;isADir ${HOME}&quot; ]; then
+</b>&gt; <b>echo yep
+</b>&gt; <b>fi
+</b>yep</tt></font></small></pre>
+
+<p><small><font face="Verdana">So it is perfectly legal to use functions as arguments
+themselves, but the syntax can become a bit unwieldy. Of course, the value can always be
+assigned to a variable and the variable checked, but there is a better alternative.
+Certainly,&nbsp;<a name="checking_function_return_value_with_$?"></a>the special parameter
+<tt>$?</tt> provides access to a function's return value. It is therefore probably best to
+simply execute the function as a stand alone action and then immediately check the result
+using <tt>$?</tt>. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">4.3&nbsp;<a name="properties_of_functions"></a>Properties
+of Functions</font></small></h2>
+
+<p><small><font face="Verdana">Aside from what has already been discussed about the
+behavior of functions, there are a few more considerations to keep in mind. First,&nbsp;<a
+name="function_scope"></a>functions are local to the currently executing shell. A function
+is never visible to a subshell or parent shell of the script in which it is defined; in
+other words, there is no <tt>export</tt> command for functions like there is for
+variables. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat parent
+</b></tt>#!/bin/sh
+
+parentFunc () {
+&nbsp; echo &quot;This is the parent's function&quot;
+}
+
+parentFunc
+
+echo &quot;Calling child...&quot;
+child
+
+echo &quot;Attempting to call childFunc from parent...&quot;
+childFunc
+$ <b>cat child
+</b>#!/bin/sh
+
+childFunc () {
+&nbsp; echo &quot;This is the child's function&quot;
+}
+
+childFunc
+
+echo &quot;Attempting to call parentFunc from child...&quot;
+parentFunc
+$ <b>parent
+</b>This is the parent's function
+Calling child...
+This is the child function
+Attempting to call parentFunc from child...
+./child: parentFunc: not found
+Attempting to call childFunc from parent
+./parent: childFunc: not found</font></small></pre>
+
+<p><small><font face="Verdana">The two scripts above demonstrate the fact that functions
+are local to the current shell context. Following the program's flow, the main shell, <tt>parent</tt>,
+declares a local function and calls it. The function displays a short message indicating
+that <tt>parentFunc</tt> executed. The program continues by calling the <tt>child</tt>
+subscript. <tt>Child</tt> begins execution imilarly. It also declares a local function, <tt>childFunc</tt>,
+which prints a message showing that the subshell's function ran. The subshell continues by
+trying to access <tt>parentFunc</tt>. <tt>Child</tt> prints the error message <tt>parentFunc:
+not found</tt> proving that a subshell cannot use functions declared by their parents. The
+subshell ends, and execution continues within <tt>parent</tt> at the <tt>echo</tt>. At
+this point, the supershell attempts to call <tt>childFunc</tt>. Again, the function is
+undefined for the current shell so it is also clear that supershells cannot use functions
+defined by their subshells. </font></small></p>
+
+<p><small><font face="Verdana">One might expect similar behavior to be true for changes to
+variables within functions. After all, in other programming languages, variables declared
+in functions are local to those functions, and generally speaking, variable values passed
+to functions are copied into temporary storage for local manipulation. But this is not the
+case. Changes made to variables persist beyond execution of the function. Moreover,&nbsp;<a
+name="scope_of_variable_declared_by_function"></a>variables declared in functions gain
+immediate global scope. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat changes
+</b>#!/bin/sh
+&nbsp;
+changeit () {
+&nbsp;AVAR=&quot;Changed Value&quot;
+&nbsp;NEWVAR=&quot;New Value&quot;
+}
+&nbsp;
+AVAR=&quot;Original Value&quot;
+&nbsp;
+echo &quot;AVAR = ${AVAR}&quot;
+echo &quot;NEWVAR = ${NEWVAR}&quot;
+changeit
+echo &quot;AVAR = ${AVAR}&quot;
+echo &quot;NEWVAR = ${NEWVAR}&quot;
+$ <b>changes
+</b>AVAR = Original Value
+NEWVAR =&nbsp;
+AVAR = Changed Value
+NEWVAR = New Value</tt></font></small></pre>
+
+<p><small><font face="Verdana">When this script first prints <tt>AVAR</tt> and <tt>NEWVAR</tt>,
+the variables have their initial values; namely <tt>AVAR</tt> equals <tt>Original Value</tt>
+and <tt>NEWVAR</tt> is null. The program then runs the <tt>changeit</tt> function which
+resets the variables to different values. The function ends and returns control to the
+main program. The same print commands are reissued, and a quick inspection of the output
+shows that <tt>AVAR</tt>'s value is <tt>Changed Value</tt> and <tt>NEWVALUE</tt> is
+suddenly defined. </font></small></p>
+
+<p><small><font face="Verdana">To carry the examination of functional behavior even
+further, a third example considers&nbsp;<a name="nested_functions"></a>nested functions.
+It is quite legal to declare functions within functions. Once again, a typical programmer
+might guess that&nbsp;<a name="scope_of_nested_functions"></a>a nested function is visible
+within the scope of its enclosing function. This guess is wrong. In the following example,
+the script <tt>nesting</tt> first declares <tt>afunc</tt>. Within <tt>afunc</tt>, the
+program defines the function <tt>nested</tt>. The script then calls <tt>nested</tt>, <tt>afunc</tt>,
+and <tt>nested</tt> yet again. A classical program would hide <tt>nested</tt> within <tt>afunc</tt>;
+it would be expected that the output from <tt>nested</tt> would never be seen. But the
+results show that as soon as <tt>afunc</tt> has run, <tt>nested</tt> has become visible to
+the script. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat nesting
+</b>#!/bin/sh
+&nbsp;
+afunc () {
+&nbsp;nested () {
+&nbsp;&nbsp; echo &quot;This is the nested function&quot;
+&nbsp;}
+&nbsp;echo &quot;This is afunc&quot;
+}
+&nbsp;
+nested
+afunc
+nested
+$ <b>nesting
+</b>./nesting: nested: not found
+This is afunc
+This is the nested function</tt></font></small></pre>
+
+<p><small><font face="Verdana">As the previous three examples demonstrate, shell function
+behavior is atypical. Yet as has been demonstrated, it is not unpredictable. An easy
+guideline to remember is that the usual scoping rules do not necessarily apply to shell
+functions. Aside from this simple rule, it takes practice and careful analysis of scripts
+to prevent errors caused by functions. </font></small></p>
+
+<p><small><font face="Verdana">With all this function bashing, one might wonder why
+functions should be used at all? First of all, the intention is not to discourage the use
+of fuctions. It is just a statement of the facts. On the contrary, functions are a very
+useful tool. The primary reason for using them is quite classical. Just as in every other
+programming language,&nbsp;<a name="modularity_of_functions"></a>functions allow scripters
+to organize actions into logical blocks. It is easier to think of a program a series of
+steps to perform and then to expand those steps into functions that perform the necessary
+actions. This is much better than trying to list every single command in order. The same
+commands instead can be grouped into functions, and then the program calls the functions.
+It is infintely easier to program this way and to follow the script's flow. </font></small></p>
+
+<p><small><font face="Verdana">In addition,&nbsp;<a
+name="improving_script_performance_with_functions"></a>functions can improve a script's
+performance.&nbsp;<a name="subscript_vs_function_performance"></a>Rather than employ
+functions, a novice might consider grouping logical blocks into subscripts which the main
+script uses. This technique will work just fine, but the program's execution time will
+take a hit. When a script calls a subscript, the shell must find the subscript on disk,
+open it, read it into memory, and then execute it. This process happens every time a
+subscript is called eventhough the subscript may have been used previously. Functions are
+read once into memory as soon as they are declared. They have the advantage of one time
+read for multiple execution. </font></small></p>
+
+<pre><small><font face="Verdana"><tt>$ <b>cat calls-subscript
+</b>#!/bin/sh
+&nbsp;
+doit once
+doit twice
+doit thrice
+$ <b>cat doit
+</b>#!/bin/sh
+&nbsp;
+echo &quot;${1}&quot;
+$ <b>cat calls-function
+</b>#!/bin/sh
+&nbsp;
+doitFunc () {
+&nbsp;echo &quot;${1}&quot;
+}
+&nbsp;
+doitFunc once
+doitFunc twice
+doitFunc thrice</tt></font></small></pre>
+
+<p><small><font face="Verdana">The example lists two scripts, <tt>calls-subscript</tt> and
+<tt>calls-function</tt>, that effectively do the same thing. Each prints the words <tt>once</tt>,
+<tt>twice</tt>, <tt>thrice</tt>, but the method they use to do the printing is different. <tt>Calls-subscript</tt>
+uses the script <tt>doit</tt> to print whereas <tt>calls-function</tt> uses the <tt>doitFunc</tt>
+function. The UNIX <tt>time</tt> program can be applied to the scripts in order to see how
+fast each performs. </font></small></p>
+
+<pre><small><font face="Verdana">$ <b>time calls-subscript
+</b>once
+twice
+thrice
+&nbsp;
+real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.2
+user&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0
+sys&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.1
+$ <b>time calls-function
+</b>once
+twice
+thrice
+&nbsp;
+real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0
+user&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0
+sys&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0</font></small></pre>
+
+<p><small><font face="Verdana">The script that uses a function is faster. It is not even
+measurable by the system. On the other hand, <tt>calls-subscript</tt> executes on the
+order of a couple tenths of a second. <br>
+</font></small></p>
+
+<hr width="80%">
+
+<h2><small><font face="Verdana">4.4&nbsp;<a name="including_functions_in_multiple_scripts"></a>Including
+Functions in Multiple Scripts</font></small></h2>
+
+<p><small><font face="Verdana">The Bourne shell supports a construct similar to the
+#include macro found in C/C++ or the import command of Pascal.&nbsp; Called the&nbsp;<a
+name="dot_command"></a>dot command, a period instructs the shell to read the file named
+and to execute it as if the commands contained had been entered at that point.&nbsp; In
+other words, the shell treats the included file as part of the currently executing
+program.&nbsp; In shell terminology,&nbsp;<a name="sourcing"></a>this construct is called
+sourcing.&nbsp; The named file is sourced so that its environment and commands become an
+inherent part of the running shell. </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>cat checkDir</b></tt> </font></small></p>
+
+<p><small><font face="Verdana">checkDirFunc () { <br>
+<tt>&nbsp; if [ ! -d ${1} ]; then</tt> <br>
+<tt>&nbsp;&nbsp;&nbsp; echo &quot;${1} is not a directory&quot;; exit 1</tt> <br>
+<tt>&nbsp; fi</tt> <br>
+} </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>cat checkHome</b></tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>#!/bin/sh</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>. checkDir</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>checkDirFunc</tt> <br>
+<tt>echo &quot;Of course it's a directory!&quot;</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>checkHome ${HOME}</b></tt> <br>
+<tt>Of course it's a directory!</tt> <br>
+<tt>$ <b>checkHome notAdir</b></tt> <br>
+<tt>notAdir is not a directory</tt> </font></small></p>
+
+<p><small><font face="Verdana">The example above uses two scripts: <tt>checkDir</tt> and <tt>checkHome</tt>.
+&nbsp; Notice that <tt>checkDir</tt> does not contain the <tt>#!/bin/sh</tt> directive.
+&nbsp; It is not meant to be run as a stand-alone program.&nbsp; (This does not prevent
+the file from being executed if called by a running shell.&nbsp; The script will simply be
+run within the shell.&nbsp; The only way to truly prevent it from being executed is to set
+the correct file permissions such that it is not an executable file.)&nbsp; On the other
+hand, <tt>checkHome</tt> is written to execute within its own shell.&nbsp; Moreover, <tt>checkHome</tt>
+sources <tt>checkDir</tt> as can be seen by the line <tt>. checkDir</tt>.&nbsp; By
+sourcing the <tt>checkDir</tt> file, <tt>checkHome</tt> then contains the <tt>checkDirFunc</tt>
+function which tests the first positional parameter to see if it is a directory.&nbsp; If
+it is not a directory, the if statement prints a message stating the fact and exits the
+program.&nbsp; If it is a directory, program execution continues past the function to the
+final <tt>echo</tt> statement letting the user know that the argument is a directory.
+&nbsp; The operation of the entire script is shown by the two examples of running the
+script against the user's home directory and then against the bogus string <tt>notAdir</tt>.
+</font></small></p>
+
+<p><small><font face="Verdana">There is one final comparison that can be made here.&nbsp;
+The previous subsection discusses the advantage of using functions versus calling
+subscripts.&nbsp; Naturally, one might ask&nbsp;<a
+name="sourcing_vs_functions_and_subscript_performance"></a>how sourcing functions compares
+to these.&nbsp; Consider three methods of counting to 1000.&nbsp; The first method
+declares a function called <tt>printCount</tt>: </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>cat calls-function</b></tt> <br>
+<tt>#!/bin/sh</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>COUNT=1</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>printCount () {</tt> <br>
+<tt>&nbsp; echo ${COUNT}</tt> <br>
+<tt>}</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>until [ ${COUNT} -gt 999 ];</tt> <br>
+<tt>do</tt> <br>
+<tt>&nbsp; printCount</tt> <br>
+<tt>&nbsp; COUNT=`expr ${COUNT} + 1`</tt> <br>
+<tt>done</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>echo &quot;`basename ${0}`: Done counting to 1000&quot;</tt>
+</font></small></p>
+
+<p><small><font face="Verdana">In the script <tt>calls-function</tt>, the <tt>printCount</tt>
+function simply displays the current value of <tt>COUNT</tt>.&nbsp; An <tt>until</tt> loop
+iincrements and monitors the value until it reaches a thousand by determining whether <tt>COUNT</tt>
+is greater than 999.&nbsp; At that point, the program terminates with a short message that
+it finished counting.&nbsp; Timing the script's execution yields the following results.
+&nbsp; (Note that the actual output has been trimmed to the results of <tt>time</tt> in
+the interest of saving space.) </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>time calls-function</b></tt> <br>
+<tt>calls-function: Done counting to 1000</tt> <br>
+<tt>4.86user 6.57system 0:11.68elapsed</tt> </font></small></p>
+
+<p><small><font face="Verdana">Now consider the second method of counting to 1000.&nbsp;
+Here, the script <tt>sources-function</tt> imports the same function, <tt>printCount</tt>,
+from the file <tt>function</tt>; it sources the code used to print the value of <tt>COUNT</tt>.
+</font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>cat sources-function</b></tt> <br>
+<tt>#!/bin/sh</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>COUNT=1</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>. function</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>until [ ${COUNT} -gt 999 ];</tt> <br>
+<tt>do</tt> <br>
+<tt>&nbsp; printCount</tt> <br>
+<tt>&nbsp; COUNT=`expr ${COUNT} + 1`</tt> <br>
+<tt>done</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>echo &quot;`basename ${0}`: Done counting to 1000&quot;</tt>
+<br>
+<tt>$ <b>cat function</b></tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>printCount () {</tt> <br>
+<tt>&nbsp; echo ${COUNT}</tt> <br>
+<tt>}</tt> </font></small></p>
+
+<p><small><font face="Verdana">Once again, an <tt>until</tt> loop watches and terminates
+once <tt>COUNT</tt> reaches 1000.&nbsp; Comparing the execution time to <tt>calls-function</tt>,
+it can be seen that there is a slight performance penalty for sourcing.&nbsp; This can be
+explained by the fact that the file <tt>function</tt>, when it is sourced, has to be
+opened and its contents committed to memory before the function can be used.&nbsp; On the
+other hand, in <tt>calls-function</tt> the shell reads <tt>printFunction</tt> during its
+initial pass over the contents of the script.&nbsp; It does not incur the penalty of
+having to do the extra file read that <tt>sources-function</tt> does. </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>time sources-function</b></tt> <br>
+<tt>sources-function: Done counting to 1000</tt> <br>
+<tt>4.96user 6.61system 0:11.80elapsed</tt> </font></small></p>
+
+<p><small><font face="Verdana">Finally, compare the first two methods to <tt>calls-subscript</tt>.&nbsp;
+This last script exports <tt>COUNT</tt> and then uses the program <tt>subscript</tt> to
+display <tt>COUNT</tt>'s value: </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>cat calls-subscript</b></tt> <br>
+<tt>#!/bin/sh</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>COUNT=1</tt> <br>
+<tt>export COUNT</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>until [ ${COUNT} -gt 999 ];</tt> <br>
+<tt>do</tt> <br>
+<tt>&nbsp; subscript</tt> <br>
+<tt>&nbsp; COUNT=`expr ${COUNT} + 1`</tt> <br>
+<tt>done</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>echo &quot;`basename ${0}`: Done counting to 1000&quot;</tt>
+<br>
+<tt>$ <b>cat subscript</b></tt> <br>
+<tt>#!/bin/sh</tt> </font></small></p>
+
+<p><small><font face="Verdana"><tt>echo ${COUNT}</tt> </font></small></p>
+
+<p><small><font face="Verdana">Running <tt>calls-subscript</tt> through the <tt>time</tt>
+program shows: </font></small></p>
+
+<p><small><font face="Verdana"><tt>$ <b>time calls-subscript</b></tt> <br>
+<tt>calls-subscript: Done counting to 1000</tt> <br>
+<tt>10.95user 13.37system 0:24.83elapsed</tt> </font></small></p>
+
+<p><small><font face="Verdana">In this last example, there is a significant increase in
+the program's performance. &nbsp; It takes roughly twice as long to complete as the first
+two.&nbsp; This can be attributed to the fact that each time <tt>calls-subscript</tt> uses
+<tt>subscript</tt>, the shell must open the file, spawn a subshell, execute the <tt>echo</tt>
+statement, and then return control back to the main program. </font></small></p>
+
+<p><small><font face="Verdana">From this exercise it is plain to see that including
+function code directly into scripts is the most optimal.&nbsp; It is definitely a bad idea
+to divide scripts into many subscripts because of the performace penalty.&nbsp; Try to use
+functions whenever it seems like a subscript fits.&nbsp; Now there is something to be said
+for sourcing commands from another file.&nbsp; Sourcing does not hinder program execution
+much and it does allow the organization of reusable code blocks into script
+libraries.&nbsp; Still, these same code blocks could simply be copied directly into a
+script's body in the name of speed. &nbsp; But that is a matter of choice.&nbsp; After
+all, the enhancement of speed could come at the cost of readability. </font></small><big><br>
+</big></p>
+
+
+</body>
+</html>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../footer.html" NAME="bol" WIDTH="100%" HEIGHT="97" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->

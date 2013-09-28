@@ -1,0 +1,127 @@
+<html>
+
+<head>
+<title>A stack implementation</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body bgcolor="#FFFFFF" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Verdana" size="2" color="#400040"><b>A stack implementation.&nbsp;<br>
+<br>
+</b>The features highlighted in the program are:&nbsp;<br>
+<br>
+1. Use of property Procedures&nbsp;<br>
+2. Exceptions.&nbsp;<br>
+<br>
+<br>
+<br>
+namespace Stack<br>
+{<br>
+using System;<br>
+<br>
+public class Stack<br>
+{<br>
+private Node first = null;<br>
+private int count = 0;<br>
+<br>
+/***********************************************************<br>
+Property Procedures do not accept any parameters.<br>
+Note the diff in the function definition (no parenthesis)<br>
+************************************************************/<br>
+<br>
+public bool Empty<br>
+{<br>
+/*******************************************<br>
+Property Get Procedure<br>
+********************************************/<br>
+get<br>
+{<br>
+return (first == null);<br>
+}<br>
+}<br>
+<br>
+public int Count<br>
+{<br>
+/*******************************************<br>
+Property Get Procedure<br>
+********************************************/<br>
+get<br>
+{<br>
+return count;<br>
+}<br>
+}<br>
+<br>
+public object Pop()<br>
+{<br>
+if (first == null)<br>
+{<br>
+throw new InvalidOperationException (&quot;Cant pop from an empty stack&quot;);<br>
+}<br>
+else<br>
+{<br>
+object temp = first.Value;<br>
+first = first.Next;<br>
+count--;<br>
+return temp;<br>
+}<br>
+}<br>
+<br>
+public void Push(object o)<br>
+{<br>
+first = new Node(o, first);<br>
+count++;<br>
+}<br>
+<br>
+class Node<br>
+{<br>
+public Node Next;<br>
+public object Value;<br>
+<br>
+public Node(object value) : this(value, null) {}<br>
+<br>
+public Node(object value, Node next)<br>
+{<br>
+Next = next;<br>
+Value = value;<br>
+}<br>
+}<br>
+}<br>
+<br>
+class StackTest<br>
+{<br>
+static void Main()<br>
+{<br>
+Stack s = new Stack();<br>
+<br>
+if (s.Empty)<br>
+Console.WriteLine(&quot;Stack is Empty&quot;);<br>
+else<br>
+Console.WriteLine(&quot;Stack is not Empty&quot;);<br>
+<br>
+for (int i = 0; i &lt; 5; i++)<br>
+s.Push(i);<br>
+<br>
+Console.WriteLine(&quot;Items in Stack {0}&quot;, s.Count);<br>
+for (int i = 0; i &lt; 5; i++)<br>
+Console.WriteLine(&quot;Popped Item is {0} and the count is {1}&quot;, s.Pop(), s.Count);<br>
+<br>
+s = null;<br>
+}<br>
+}<br>
+}<br>
+<br>
+<b>Output:&nbsp;<br>
+<br>
+</b>H:\Cs&gt;Stack&nbsp;<br>
+Stack is Empty&nbsp;<br>
+Items in Stack 5&nbsp;<br>
+Popped Item is 4 and the count is 4&nbsp;<br>
+Popped Item is 3 and the count is 3&nbsp;<br>
+Popped Item is 2 and the count is 2&nbsp;<br>
+Popped Item is 1 and the count is 1&nbsp;<br>
+Popped Item is 0 and the count is 0&nbsp;<br>
+</font></p>
+</body>
+</html>

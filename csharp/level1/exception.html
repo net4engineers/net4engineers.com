@@ -1,0 +1,40 @@
+<html>
+
+<head>
+<title>New Page 4</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p>// Program to illustrate the concept of exception handling<br>
+<br>
+using System;<br>
+<br>
+class CThrowException<br>
+{<br>
+public static void Main(string[] arg)<br>
+{<br>
+// see if any command line arguments have been <br>
+// specified or not...<br>
+try<br>
+{<br>
+if (arg.Length==0)<br>
+throw new System.Exception();<br>
+else<br>
+Console.WriteLine(&quot;Command Line Argument: {0}&quot;,arg[0]);<br>
+}<br>
+catch(System.Exception e)<br>
+{<br>
+Console.WriteLine(&quot;No command line argument specified. Please do so.&quot;);<br>
+}<br>
+finally<br>
+{<br>
+Console.WriteLine(&quot;Execution Over!&quot;);<br>
+}<br>
+<br>
+}<br>
+}</p>
+</body>
+</html>

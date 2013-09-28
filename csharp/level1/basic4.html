@@ -1,0 +1,133 @@
+<html>
+
+<head>
+<title>Regular Expressions in C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p class="MsoNormal"><span
+style="mso-bidi-font-size:10.0pt;font-family:Verdana;
+color:black"><b><br>
+</b></span><span style="mso-bidi-font-size:8.5pt;font-family:Verdana;color:black"></o:p></span><font
+face="Verdana">Regular Expressions in C#</font></p>
+
+<p><font class="smallblack" size="2" face="Verdana">The following example shows the usage
+of Regular Expressions in C#. The program basically has all the Validation Programs using
+Regular Expression.</font><font class="smallblack"> </p>
+
+<pre><font face="Verdana" size="2">/*
+<HOWTOCOMPILE>
+  csc /r:System.Text.RegularExpressions.dll,System.dll Validation.cs  
+</HOWTOCOMPLIE>
+
+*/
+
+using System.Text.RegularExpressions;
+using System;
+
+class Validation
+{
+  public static void Main()
+  {
+    string strToTest;
+    Validation objValidate=new Validation();
+
+    Console.Write(&quot;Enter a String to Test for Alphabets:&quot;);
+    strToTest=Console.ReadLine();
+    //Change here to whatever validation you want to perform
+    if(objValidate.IsAlpha(strToTest))
+    {
+      Console.WriteLine(&quot;{0} is Valid Alpha String&quot;,strToTest);
+    }
+    else
+    {
+      Console.WriteLine(&quot;{0} is not a Valid Alpha String&quot;,strToTest);
+    }
+  }
+  
+  // Function to test for Positive Integers.
+
+  public bool IsNaturalNumber(String strNumber)
+  {
+    Regex objNotNaturalPattern=new Regex(&quot;[^0-9]&quot;);
+    Regex objNaturalPattern=new Regex(&quot;0*[1-9][0-9]*&quot;);
+
+    return  !objNotNaturalPattern.IsMatch(strNumber) &amp;&amp;
+            objNaturalPattern.IsMatch(strNumber);
+  }
+
+  // Function to test for Positive Integers with zero inclusive
+
+    public bool IsWholeNumber(string strNumber)
+    {
+      Regex objNotWholePattern=new Regex(&quot;[^0-9]&quot;);
+
+      return !objNotWholePattern.IsMatch(strNumber);
+    }
+
+  // Function to Test for Integers both Positive &amp; Negative
+
+    public bool IsInteger(string strNumber)
+    {
+      Regex objNotIntPattern=new Regex(&quot;[^0-9-]&quot;);
+      Regex objIntPattern=new Regex(&quot;^-[0-9]+$|^[0-9]+$&quot;);
+
+      return  !objNotIntPattern.IsMatch(strNumber) &amp;&amp;
+              objIntPattern.IsMatch(strNumber);
+    }
+
+  // Function to Test for Positive Number both Integer &amp; Real
+
+  public bool IsPositiveNumber(string strNumber)
+  {
+    Regex objNotPositivePattern=new Regex(&quot;[^0-9.]&quot;);
+    Regex objPositivePattern=new Regex(&quot;^[.][0-9]+$|[0-9]*[.]*[0-9]+$&quot;);
+    Regex objTwoDotPattern=new Regex(&quot;[0-9]*[.][0-9]*[.][0-9]*&quot;);
+
+    return !objNotPositivePattern.IsMatch(strNumber) &amp;&amp;
+           objPositivePattern.IsMatch(strNumber)  &amp;&amp;
+           !objTwoDotPattern.IsMatch(strNumber);
+  }
+
+  // Function to test whether the string is valid number or not
+  public bool IsNumber(string strNumber)
+  {
+    Regex objNotNumberPattern=new Regex(&quot;[^0-9.-]&quot;);
+    Regex objTwoDotPattern=new Regex(&quot;[0-9]*[.][0-9]*[.][0-9]*&quot;);
+    Regex objTwoMinusPattern=new Regex(&quot;[0-9]*[-][0-9]*[-][0-9]*&quot;);
+    String strValidRealPattern=&quot;^([-]|[.]|[-.]|[0-9])[0-9]*[.]*[0-9]+$&quot;;
+    String strValidIntegerPattern=&quot;^([-]|[0-9])[0-9]*$&quot;;
+    Regex objNumberPattern =new Regex(&quot;(&quot; + strValidRealPattern +&quot;)|
+	(&quot; + strValidIntegerPattern + &quot;)&quot;);
+
+    return !objNotNumberPattern.IsMatch(strNumber) &amp;&amp;
+           !objTwoDotPattern.IsMatch(strNumber) &amp;&amp;
+           !objTwoMinusPattern.IsMatch(strNumber) &amp;&amp;
+           objNumberPattern.IsMatch(strNumber);
+  }
+
+  // Function To test for Alphabets.
+
+  public bool IsAlpha(string strToCheck)
+  {
+    Regex objAlphaPattern=new Regex(&quot;[^a-zA-Z]&quot;);
+
+    return !objAlphaPattern.IsMatch(strToCheck);
+  }
+
+  // Function to Check for AlphaNumeric.
+
+  public bool IsAlphaNumeric(string strToCheck)
+  {
+    Regex objAlphaNumericPattern=new Regex(&quot;[^a-zA-Z0-9]&quot;);
+
+    return !objAlphaNumericPattern.IsMatch(strToCheck);    
+  }
+
+}</font></pre>
+</font>
+</body>
+</html>

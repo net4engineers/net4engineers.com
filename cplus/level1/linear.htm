@@ -1,0 +1,89 @@
+<html>
+
+<head>
+<title></title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p align="left"><small><font face="Verdana">// linear.cpp -- Read an integer array and
+then do linear searches.<br>
+<br>
+#include &lt;iostream&gt;<br>
+#include &lt;iomanip&gt;<br>
+<br>
+void printIntArray(int a[], int n)<br>
+/* n is the number of elements in the array a.<br>
+* These values are printed out, five per line. */<br>
+{<br>
+for (int i = 0; i &lt; n; ){<br>
+cout &lt;&lt; setw(10) &lt;&lt; a[i++];<br>
+if (i%5==0)<br>
+cout &lt;&lt; endl;<br>
+}<br>
+cout &lt;&lt; endl;<br>
+}<br>
+<br>
+int getIntArray(int a[], int nmax, int sentinel)<br>
+/* It reads up to nmax integers and stores then in a; sentinel&nbsp;<br>
+* terminates input. */<br>
+{<br>
+int n = 0;<br>
+int temp;<br>
+<br>
+while (1) {<br>
+cout &lt;&lt; &quot;Enter integer [&quot; &lt;&lt; sentinel &lt;&lt; &quot; to terminate]
+: &quot;;<br>
+cin &gt;&gt; temp;<br>
+if (temp == sentinel) break;<br>
+if (n == nmax)<br>
+cout &lt;&lt; &quot;array is full\n&quot;;<br>
+else&nbsp;<br>
+a[n++] = temp;<br>
+}<br>
+return n;<br>
+}<br>
+<br>
+int linear(int a[], int n, int who)<br>
+/* Given the array a with n elements, searches for who.<br>
+* It returns its position if found, otherwise it returns<br>
+* -1.<br>
+*/<br>
+{<br>
+for (int lcv = 0; lcv &lt; n; lcv++)<br>
+if(who == a[lcv])return lcv;<br>
+return (-1);<br>
+}<br>
+<br>
+enum {NMAX = 10};<br>
+<br>
+void main(void) {<br>
+int x[NMAX];<br>
+int hmny;<br>
+int who;<br>
+int where;<br>
+<br>
+hmny = getIntArray(x, NMAX, 0);<br>
+cout &lt;&lt; &quot;The array was: &quot; &lt;&lt; endl;<br>
+printIntArray(x, hmny);<br>
+cout &lt;&lt; &quot;Now we do linear searches on this data&quot; &lt;&lt; endl;<br>
+while (1){<br>
+cout &lt;&lt; &quot;Enter integer to search for [0 to terminate] : &quot;;<br>
+cin &gt;&gt; who;<br>
+if (who == 0) break;<br>
+where = linear(x, hmny, who);<br>
+if (where &lt; 0){<br>
+cout &lt;&lt; &quot;Sorry, &quot; &lt;&lt; who &lt;&lt; &quot; is not in the array&quot;
+&lt;&lt; endl;<br>
+}else<br>
+cout &lt;&lt; who &lt;&lt; &quot; is at position &quot; &lt;&lt; where &lt;&lt; endl;<br>
+}<br>
+}<br>
+</font></small></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</body>
+</html>

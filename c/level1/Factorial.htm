@@ -1,0 +1,82 @@
+<html>
+
+<head>
+<title></title>
+<base target="_top">
+</head>
+
+<body bgcolor="#FFFFFF" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">/* factorial.c -- It computes repeatedly the factorial of an integer entered <O:P>
+<o:p> *<span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>by the user. It terminates when the integer entered is not<O:P>
+ *<span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>positive.<O:P>
+ */<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">#include <STDIO.H>&lt;stdio.h&gt;
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">int fact(int n);<O:P>
+int main(void) {<O:P>
+</span>i<span
+style="mso-bidi-font-family:&quot;Courier New&quot;">nt current;<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"> <span style="mso-spacerun: yes">&nbsp;</span>printf(&quot;Enter a positive integer [to terminate enter non-positive] &gt; &quot;);<O:P>
+<span
+style="mso-spacerun: yes"> </span>scanf(&quot;%d&quot;, &amp;current);<O:P>
+<span
+style="mso-spacerun: yes">&nbsp; </span>while (current &gt; 0) {<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp;&nbsp; </span>printf(&quot;The factorial of %d is %d\n&quot;, current, fact(current)); <O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;</span>printf(&quot;Enter a positive integer [to terminate enter non-positive] &gt; &quot;);<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>scanf(&quot;%d&quot;, &amp;current);<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp; </span>}<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">}<O:P>
+<o:p></span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">/* n is a positive integer. The function returns its factorial */<O:P>
+</span></font></small></pre>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">int fact(int n) {<O:P>
+<span
+style="mso-spacerun: yes"> </span>int lcv;<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>/* loop control variable */<O:P>
+<span
+style="mso-spacerun: yes"> </span>int p;<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>/* set to the product of the first lcv positive integers */<O:P>
+</span></font></small></pre>
+</O:P>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;"><span style="mso-spacerun: yes">&nbsp; </span>for(p=1, lcv=2; lcv &lt;= n; p=p*lcv, lcv++);<O:P>
+<span
+style="mso-spacerun: yes"> </span>return p;<O:P>
+</span></font></small></pre>
+</O:P>
+
+<pre><small><font face="Verdana"><span
+style="mso-bidi-font-family:&quot;Courier New&quot;">}<O:P>
+<o:p></span></font></small></pre>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<title>New Page 7</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Piano In C</b></font></big></p>
+
+<p><small><font face="Verdana">#include&lt;stdio.h&gt;<br>
+#include&lt;dos.h&gt;<br>
+#include&lt;stdlib.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+#include&lt;ctype.h&gt;<br>
+void play(char *str,int d);<br>
+void main()<br>
+{<br>
+int f,d=200;<br>
+char ch1[180],ch2;<br>
+clrscr();<br>
+printf(&quot;Enter delay value: &quot;);<br>
+scanf(&quot;%d&quot;,&amp;d);<br>
+while(1)<br>
+{<br>
+printf(&quot;\nEnter tune: &quot;);<br>
+scanf(&quot;%s&quot;,&amp;ch1);<br>
+play(ch1,d);<br>
+a:ch2=getch();<br>
+if(tolower(ch2)=='r')<br>
+{<br>
+play(ch1,d);<br>
+goto a;<br>
+}<br>
+if(tolower(ch2)=='e')<br>
+exit(0);<br>
+}<br>
+}<br>
+void play(char *str,int d)<br>
+{<br>
+int i=0;<br>
+while(str[i]!='\0')<br>
+{<br>
+switch(str[i])<br>
+{<br>
+case '1':<br>
+&nbsp;&nbsp;&nbsp; sound(446);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case '2':<br>
+&nbsp;&nbsp;&nbsp; sound(472);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case '3':<br>
+&nbsp;&nbsp;&nbsp; sound(500);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'A':<br>
+&nbsp;&nbsp;&nbsp; sound(530);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'B':<br>
+&nbsp;&nbsp;&nbsp; sound(561);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'C':<br>
+&nbsp;&nbsp;&nbsp; sound(595);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'D':<br>
+&nbsp;&nbsp;&nbsp; sound(630);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'E':<br>
+&nbsp;&nbsp;&nbsp; sound(668);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'F':<br>
+&nbsp;&nbsp;&nbsp; sound(707);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'G':<br>
+&nbsp;&nbsp;&nbsp; sound(749);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'H':<br>
+&nbsp;&nbsp;&nbsp; sound(794);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'I':<br>
+&nbsp;&nbsp;&nbsp; sound(841);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'J':<br>
+&nbsp;&nbsp;&nbsp; sound(891);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'K':<br>
+&nbsp;&nbsp;&nbsp; sound(944);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'L':<br>
+&nbsp;&nbsp;&nbsp; sound(1000);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'M':<br>
+&nbsp;&nbsp;&nbsp; sound(1062);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'N':<br>
+&nbsp;&nbsp;&nbsp; sound(1120);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'O':<br>
+&nbsp;&nbsp;&nbsp; sound(1190);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'P':<br>
+&nbsp;&nbsp;&nbsp; sound(1260);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'Q':<br>
+&nbsp;&nbsp;&nbsp; sound(1335);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'R':<br>
+&nbsp;&nbsp;&nbsp; sound(1414);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'S':<br>
+&nbsp;&nbsp;&nbsp; sound(1498);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'T':<br>
+&nbsp;&nbsp;&nbsp; sound(1588);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'U':<br>
+&nbsp;&nbsp;&nbsp; sound(1682);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'V':<br>
+&nbsp;&nbsp;&nbsp; sound(1782);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'W':<br>
+&nbsp;&nbsp;&nbsp; sound(1888);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'X':<br>
+&nbsp;&nbsp;&nbsp; sound(2002);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case 'Y':<br>
+&nbsp;&nbsp;&nbsp; sound(2122);<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+case '-':<br>
+&nbsp;&nbsp;&nbsp; nosound();<br>
+&nbsp;&nbsp;&nbsp; break;<br>
+}<br>
+delay(d);<br>
+i++;<br>
+}<br>
+nosound();<br>
+}</font></small></p>
+</body>
+</html>

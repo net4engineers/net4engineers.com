@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<title>Task </title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<b>
+
+<table border="0" width="100%" height="4" cellspacing="0" cellpadding="0">
+</table>
+
+<p>Task :- Read an integer array, print it, then sort it and print it. Using&nbsp; the
+bubble sort method.<br>
+</b><font face="Verdana" size="2"><br>
+#include &lt;iostream.h&gt;<br>
+#include &lt;iomanip.h&gt;<br>
+<br>
+void printIntArray(int a[], int n)<br>
+/* n is the number of elements in the array a.<br>
+* These values are printed out, five per line. */<br>
+{<br>
+for (int i = 0; i &lt; n; ){<br>
+cout &lt;&lt; setw(10) &lt;&lt; a[i++];<br>
+if (i%5==0)<br>
+cout &lt;&lt; endl;<br>
+}<br>
+cout &lt;&lt; endl;<br>
+}<br>
+<br>
+int getIntArray(int a[], int nmax, int sentinel)<br>
+/* It reads up to nmax integers and stores then in a; sentinel&nbsp;<br>
+* terminates input. */<br>
+{<br>
+int n = 0;<br>
+int temp;<br>
+<br>
+while (1) {<br>
+cout &lt;&lt; &quot;Enter integer [&quot; &lt;&lt; sentinel &lt;&lt; &quot; to terminate]
+: &quot;;<br>
+cin &gt;&gt; temp;<br>
+if (temp == sentinel) break;<br>
+if (n == nmax)<br>
+cout &lt;&lt; &quot;array is full\n&quot;;<br>
+else&nbsp;<br>
+a[n++] = temp;<br>
+}<br>
+return n;<br>
+}<br>
+<br>
+void bubbleSort(int a[], int n)<br>
+/* It sorts in non-decreasing order the first N positions of A. It uses<br>
+* the bubble sort method.<br>
+*/<br>
+{<br>
+int limit = n-1;<br>
+int lastChange;<br>
+<br>
+while (limit) {<br>
+lastChange = 0;<br>
+for (int temp, lcv = 0; lcv &lt; limit; lcv++)<br>
+/* Notice that the values in positions LIMIT+1 .. N are in<br>
+* their final position, i.e. they are sorted right */<br>
+if (a[lcv] &gt; a[lcv+1]) {<br>
+temp = a[lcv];<br>
+a[lcv] = a[lcv+1];<br>
+a[lcv+1] = temp;<br>
+lastChange = lcv;<br>
+}<br>
+limit = lastChange;<br>
+}<br>
+}<br>
+<br>
+enum {NMAX = 10};<br>
+<br>
+int main(void) {<br>
+int x[NMAX];<br>
+int hmny;<br>
+<br>
+hmny = getIntArray(x, NMAX, 0);<br>
+if (hmny == 0)<br>
+cout &lt;&lt; &quot;This is the empty array!&quot; &lt;&lt; endl;<br>
+else{<br>
+cout &lt;&lt; &quot;The array was: &quot; &lt;&lt; endl;<br>
+printIntArray(x,hmny);<br>
+bubbleSort(x,hmny);<br>
+cout &lt;&lt; &quot;The sorted array is: &quot; &lt;&lt; endl;<br>
+printIntArray(x,hmny);<br>
+}<br>
+}</font> </p>
+</body>
+</html>

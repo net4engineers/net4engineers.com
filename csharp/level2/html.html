@@ -1,0 +1,331 @@
+<html>
+
+<head>
+<title>Creating HTML file with CSHARP</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>HTML File With C#</b></font></big></p>
+
+<table>
+  <tr>
+    <td vAlign="top" width="183%"><font face="Verdana" size="2">This program will give you a
+    form with 2 textboxes and 5 buttons. In the textbox you have to enter your name and a html
+    file name, that you want to create. Upon clicking the 'Make HTML' button, it will check
+    that the html file is existing or not and you can make a HTML file, which you can open in
+    any browser. The HTML file will contain your name and a link to 'csharphelp.com'. There
+    are two buttons in the form, from where you can customize your form background color and
+    text color of the labels. Two more buttons are left now, those are used to clear the
+    screen and for exit from the application. The form has a status bar where you can get
+    runtime feedback.&nbsp;</font> </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="182%"><font face="Verdana" size="2"><br>
+    <br>
+    <b><u>Open Source:-</u></b><br>
+    <br>
+    namespace GenerateHtmlNamespace&nbsp;<br>
+    {<br>
+    using System;<br>
+    using System.Drawing;<br>
+    using System.ComponentModel;<br>
+    using System.WinForms;<br>
+    using System.IO;<br>
+    <br>
+    public class MakeHtml : Form&nbsp;<br>
+    {<br>
+    DialogResult s;<br>
+    private System.ComponentModel.Container components;<br>
+    private StatusBar statusBar1;<br>
+    <br>
+    private Label label1;<br>
+    private Label label2;<br>
+    <br>
+    private TextBox textBox1;<br>
+    private TextBox textBox2;<br>
+    <br>
+    private Button button1;<br>
+    private Button button2;<br>
+    private Button button3;<br>
+    private Button button4;&nbsp;<br>
+    private Button button5;&nbsp;<br>
+    private GroupBox groupBox1;<br>
+    private GroupBox groupBox2;<br>
+    <br>
+    private string nm = &quot;&quot;;<br>
+    private string filename = &quot;&quot;;<br>
+    private StreamWriter writer = null;<br>
+    <br>
+    public MakeHtml()&nbsp;<br>
+    {<br>
+    InitializeComponent();<br>
+    }<br>
+    <br>
+    public override void Dispose()&nbsp;<br>
+    {<br>
+    base.Dispose();<br>
+    components.Dispose();<br>
+    }<br>
+    <br>
+    public static void Main(string[] args)&nbsp;<br>
+    {<br>
+    Application.Run(new MakeHtml());<br>
+    }<br>
+    <br>
+    private void InitializeComponent()<br>
+    {<br>
+    this.components = new System.ComponentModel.Container();<br>
+    <br>
+    this.label1 = new Label();<br>
+    this.label2 = new Label();<br>
+    <br>
+    this.textBox1 = new TextBox();<br>
+    this.textBox2 = new TextBox();&nbsp;<br>
+    <br>
+    this.groupBox1 = new GroupBox();<br>
+    this.groupBox2 = new GroupBox();<br>
+    <br>
+    this.button1 = new Button();<br>
+    this.button2 = new Button();<br>
+    this.button3 = new Button();<br>
+    this.button4 = new Button();<br>
+    this.button5 = new Button();<br>
+    <br>
+    this.statusBar1 = new StatusBar();<br>
+    <br>
+    label1.Location = new System.Drawing.Point(88, 56);<br>
+    label1.Text = &quot;Enter Your Name&quot;;<br>
+    label1.Size = new System.Drawing.Size(192, 32);<br>
+    label1.BorderStyle = System.WinForms.BorderStyle.FixedSingle;<br>
+    label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;<br>
+    label1.Font = new System.Drawing.Font(&quot;Comic Sans MS&quot;, 12f);<br>
+    label1.BackColor = System.Drawing.Color.Bisque;<br>
+    label1.TextAlign = System.WinForms.HorizontalAlignment.Right;<br>
+    <br>
+    label2.Location = new System.Drawing.Point(88, 104);<br>
+    label2.Text = &quot;Enter HTML File Name &quot;;<br>
+    label2.Size = new System.Drawing.Size(192, 32);<br>
+    label2.BorderStyle = System.WinForms.BorderStyle.FixedSingle;<br>
+    label2.ForeColor = System.Drawing.SystemColors.ActiveCaption;<br>
+    label2.Font = new System.Drawing.Font(&quot;Comic Sans MS&quot;, 12f);<br>
+    label2.BackColor = System.Drawing.Color.Bisque;<br>
+    label2.TextAlign = System.WinForms.HorizontalAlignment.Right;<br>
+    <br>
+    textBox1.Location = new System.Drawing.Point(296, 56);<br>
+    textBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;<br>
+    textBox1.Font = new System.Drawing.Font(&quot;Lucida Sans Unicode&quot;, 12f);<br>
+    textBox1.Text = &quot;Subhagata&quot;;<br>
+    textBox1.Size = new System.Drawing.Size(208, 32);<br>
+    textBox1.BackColor = System.Drawing.Color.NavajoWhite;<br>
+    <br>
+    textBox2.Location = new System.Drawing.Point(296, 104);<br>
+    textBox2.ForeColor = System.Drawing.SystemColors.ActiveCaption;<br>
+    textBox2.Font = new System.Drawing.Font(&quot;Lucida Sans Unicode&quot;, 12f);<br>
+    textBox2.Text = &quot;myFile.html&quot;;<br>
+    textBox2.Size = new System.Drawing.Size(208, 32);<br>
+    textBox2.BackColor = System.Drawing.Color.NavajoWhite;<br>
+    <br>
+    button1.Location = new System.Drawing.Point(144, 280);<br>
+    button1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;<br>
+    button1.BackColor = System.Drawing.SystemColors.ControlLight;<br>
+    button1.Size = new System.Drawing.Size(112, 40);<br>
+    button1.Font = new System.Drawing.Font(&quot;Times New Roman&quot;, 12f);<br>
+    button1.Text = &quot;Make HTML&quot;;<br>
+    button1.Click += new System.EventHandler(button1_Click);<br>
+    <br>
+    button2.Location = new System.Drawing.Point(256, 280);<br>
+    button2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;<br>
+    button2.BackColor = System.Drawing.SystemColors.ControlLight;<br>
+    button2.Size = new System.Drawing.Size(112, 40);<br>
+    button2.Font = new System.Drawing.Font(&quot;Times New Roman&quot;, 12f);<br>
+    button2.Text = &quot;Clear&quot;;<br>
+    button2.Click += new System.EventHandler(button2_Click);<br>
+    <br>
+    button3.Location = new System.Drawing.Point(368, 280);<br>
+    button3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;<br>
+    button3.BackColor = System.Drawing.SystemColors.ControlLight;<br>
+    button3.Size = new System.Drawing.Size(104, 40);<br>
+    button3.Font = new System.Drawing.Font(&quot;Times New Roman&quot;, 12f);<br>
+    button3.Text = &quot;Exit&quot;;<br>
+    button3.Click += new System.EventHandler(button3_Click);<br>
+    <br>
+    button4.Location = new System.Drawing.Point(184, 184);<br>
+    button4.ForeColor = System.Drawing.Color.DarkSlateGray;<br>
+    button4.BackColor = System.Drawing.SystemColors.ControlLight;<br>
+    button4.Size = new System.Drawing.Size(120, 32);<br>
+    button4.Font = new System.Drawing.Font(&quot;Times New Roman&quot;, 8f);<br>
+    button4.Text = &quot;Change Window Color&quot;;<br>
+    button4.Click += new System.EventHandler(button4_Click);&nbsp;<br>
+    <br>
+    button5.Location = new System.Drawing.Point(304, 184);<br>
+    button5.ForeColor = System.Drawing.Color.DarkSlateGray;<br>
+    button5.BackColor = System.Drawing.SystemColors.ControlLight;<br>
+    button5.Size = new System.Drawing.Size(120, 32);<br>
+    button5.Font = new System.Drawing.Font(&quot;Times New Roman&quot;, 8f);<br>
+    button5.Text = &quot;Change Label Color&quot;;<br>
+    button5.Click += new System.EventHandler(button5_Click);&nbsp;<br>
+    <br>
+    groupBox1.Location = new Point(96, 256);<br>
+    groupBox1.Text = &quot;Action&quot;;<br>
+    groupBox1.Size = new Size(416, 88);<br>
+    <br>
+    groupBox2.Location = new Point(85, 168);<br>
+    groupBox2.Text = &quot;Customize Window Settings&quot;;<br>
+    groupBox2.Size = new Size(432, 64);<br>
+    <br>
+    statusBar1.Location = new Point(0, 200);<br>
+    statusBar1.Size = new Size(200, 16);<br>
+    statusBar1.Text = &quot;Enter Details&quot;;<br>
+    <br>
+    this.Text = &quot;MakeHtml&quot;;<br>
+    this.Cursor = Cursors.PanNW;<br>
+    this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);<br>
+    this.BackColor = System.Drawing.SystemColors.GrayText;<br>
+    this.ClientSize = new System.Drawing.Size(592, 485);<br>
+    this.StartPosition = FormStartPosition.CenterScreen;<br>
+    <br>
+    this.Controls.Add(label1);<br>
+    this.Controls.Add(label2);<br>
+    <br>
+    this.Controls.Add(textBox1);<br>
+    this.Controls.Add(textBox2);<br>
+    <br>
+    this.Controls.Add(button1);<br>
+    this.Controls.Add(button2);<br>
+    this.Controls.Add(button3);<br>
+    this.Controls.Add(button4);<br>
+    this.Controls.Add(button5);&nbsp;<br>
+    <br>
+    this.Controls.Add(groupBox1);<br>
+    this.Controls.Add(groupBox2);<br>
+    <br>
+    this.Controls.Add(statusBar1);<br>
+    }<br>
+    <br>
+    protected void button1_Click(object sender, System.EventArgs e)<br>
+    {<br>
+    nm = textBox1.Text.Trim();<br>
+    filename = textBox2.Text.Trim();<br>
+    <br>
+    if((textBox1.Text == &quot;&quot;) || (textBox2.Text == &quot;&quot;))<br>
+    {<br>
+    statusBar1.Text = &quot;Please enter the required details.&quot;;<br>
+    textBox1.Focus();<br>
+    }<br>
+    <br>
+    else<br>
+    {<br>
+    if(GenerateCode())<br>
+    {<br>
+    statusBar1.Text = &quot;Html code generated to file &quot;+filename;<br>
+    }<br>
+    else<br>
+    {<br>
+    statusBar1.Text = &quot;Error&quot;;<br>
+    }<br>
+    }<br>
+    }<br>
+    <br>
+    protected void button2_Click(object sender, System.EventArgs e)<br>
+    {<br>
+    textBox1.Text = &quot;&quot;;<br>
+    textBox2.Text = &quot;&quot;;<br>
+    statusBar1.Text = &quot;Cleared All&quot;;<br>
+    }&nbsp;<br>
+    <br>
+    protected void button3_Click(object sender, System.EventArgs e)<br>
+    {<br>
+    this.Close();<br>
+    }<br>
+    <br>
+    protected void button4_Click(object sender, System.EventArgs e)<br>
+    {<br>
+    ColorDialog colorDialog1 = new ColorDialog();<br>
+    colorDialog1.AllowFullOpen=false;<br>
+    <br>
+    colorDialog1.ShowDialog();<br>
+    Color objColor = colorDialog1.Color;<br>
+    this.BackColor=objColor;<br>
+    }<br>
+    <br>
+    protected void button5_Click(object sender, System.EventArgs e)<br>
+    {<br>
+    ColorDialog colorDialog1 = new ColorDialog();<br>
+    colorDialog1.AllowFullOpen=false;<br>
+    <br>
+    colorDialog1.ShowDialog();<br>
+    Color objColor = colorDialog1.Color;<br>
+    label1.ForeColor=objColor;<br>
+    label2.ForeColor=objColor;<br>
+    }<br>
+    <br>
+    private bool GenerateCode()<br>
+    {<br>
+    File f = new File(filename);<br>
+    if(f.Exists)<br>
+    {<br>
+    s=MessageBox.Show(&quot;This fils already exists. Do you want to delete it ???&quot; ,
+    &quot;Worning&quot; , MessageBox.YesNo | MessageBox.IconExclamation);<br>
+    if(String.Format(&quot;{0}&quot; , s) == &quot;Yes&quot;)<br>
+    {<br>
+    f.Delete();<br>
+    }<br>
+    else<br>
+    {<br>
+    s=MessageBox.Show(&quot;Enter a different file name.&quot; , &quot;Worning&quot;);<br>
+    textBox2.Focus();<br>
+    }&nbsp;<br>
+    <br>
+    }<br>
+    <br>
+    FileStream outputfile = null;<br>
+    try<br>
+    {<br>
+    outputfile = new FileStream(filename,FileMode.OpenOrCreate, FileAccess.Write);<br>
+    <br>
+    writer = new StreamWriter(outputfile);<br>
+    <br>
+    writer.BaseStream.Seek(0, SeekOrigin.End);<br>
+    <br>
+    DoWrite (&quot;&lt;HTML&gt;&quot;);<br>
+    DoWrite (&quot;&lt;HEAD&gt;&quot;);<br>
+    DoWrite (&quot;&lt;TITLE&gt;&quot;);<br>
+    DoWrite (&quot;This HTML file is create in C#&quot;);<br>
+    DoWrite (&quot;&lt;/TITLE&gt;&quot;);<br>
+    DoWrite (&quot;&lt;/HEAD&gt;&quot;);<br>
+    DoWrite (&quot;&lt;BODY BGCOLOR='Tan'&gt;&quot;);<br>
+    DoWrite (&quot;&lt;CENTER&gt;&quot;);<br>
+    DoWrite (&quot;&lt;BR&gt;&lt;BR&gt;&lt;H2&gt;Hello &quot; + nm + &quot;&lt;/H2&gt;&quot;);<br>
+    DoWrite (&quot;&lt;BR&gt;&lt;H4&gt;&lt;A
+    HREF='http://www.csharphelp.com'&gt;www.csharphelp.com&lt;/A&gt;&lt;/H4&gt;&quot;);<br>
+    DoWrite (&quot;&lt;/CENTER&gt;&quot;);&nbsp;<br>
+    DoWrite (&quot;&lt;/BODY&gt;&quot;);<br>
+    DoWrite (&quot;&lt;/HTML&gt;&quot;);<br>
+    writer.Close();<br>
+    }<br>
+    catch(Exception ex)<br>
+    {<br>
+    Console.WriteLine(&quot;Exception GenerateCode = &quot;+ex);<br>
+    statusBar1.Text = &quot;Error&quot;;<br>
+    outputfile = null;<br>
+    writer = null;<br>
+    return false;<br>
+    }<br>
+    return true;<br>
+    }<br>
+    <br>
+    private void DoWrite (String line)<br>
+    {<br>
+    writer.WriteLine(line);<br>
+    writer.Flush();<br>
+    }<br>
+    }<br>
+    }<br>
+    </font></td>
+  </tr>
+</table>
+</body>
+</html>

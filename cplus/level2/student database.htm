@@ -1,0 +1,201 @@
+<html>
+
+<head>
+<title>New Page 27</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Bookman Old Style" size="2"><big><b>Student Database In C++</b></big></font></p>
+
+<p>// Purpose:<br>
+// A class takes 4 tests during a semester. This program<br>
+// calculates and prints each student's test average, and<br>
+// the class average for each test. The test grades are in a<br>
+// data file - each line has the 4 test grades for 1 student<br>
+// (maximum of 25 students).<br>
+//<br>
+//***************************************************************<br>
+<br>
+#include &lt;iostream.h&gt;<br>
+#include &lt;fstream.h&gt;<br>
+#include &lt;iomanip.h&gt;<br>
+<br>
+const int MAX_STUDENTS = 25; // The maximum class size<br>
+const int NUM_TESTS = 4; // Number of tests in a semester<br>
+<br>
+// Prototypes<br>
+void GetGrades( ifstream&amp;, int[][4], int&amp;);<br>
+void CalcClassAvg( const int grade[][4],&nbsp;<br>
+int numStudents,<br>
+float classAvg[]);<br>
+void CalcStudentAvg( const int grade[],<br>
+float&amp; studentAvg);<br>
+void PrintTests( const int grade[][4],<br>
+float studentAvg[],&nbsp;<br>
+int numStudents,&nbsp;<br>
+float classAvg[]);<br>
+<br>
+int main()<br>
+{<br>
+ifstream gradeFile; // Input file of grades<br>
+<br>
+int grade[MAX_STUDENTS][NUM_TESTS]; // Semester test grades<br>
+float studentAvg[MAX_STUDENTS]; // Students test average<br>
+float classAvg[NUM_TESTS]; // Class avg for each test<br>
+int numStudents; // Number of students<br>
+int studNo; //index for a student<br>
+<br>
+// Open the grades file<br>
+gradeFile.open( &quot;a:\\grades.txt&quot;);<br>
+if (!gradeFile)<br>
+{<br>
+cout &lt;&lt; &quot;Could not open \&quot;grades.txt\&quot;&quot;;<br>
+return 1;<br>
+}<br>
+<br>
+// Get the semester test grades from the file<br>
+GetGrades( gradeFile, grade, numStudents);<br>
+<br>
+// Calculate the average grade for each test<br>
+CalcClassAvg( grade, numStudents, classAvg);<br>
+<br>
+// Calculate the test average for each student<br>
+for (studNo = 0; studNo &lt; numStudents; studNo++)<br>
+CalcStudentAvg( grade[studNo], studentAvg[studNo]);<br>
+<br>
+// Print test report<br>
+PrintTests( grade, studentAvg, numStudents, classAvg);<br>
+<br>
+return 0;<br>
+}<br>
+<br>
+//***************************************************************<br>
+// Function: GetGrades<br>
+//<br>
+// Purpose: Read test grades from a data file<br>
+//***************************************************************<br>
+<br>
+void GetGrades( ifstream&amp; gradeFile, // in/out - input grade file<br>
+int grade[][4], // out - table of grades<br>
+int&amp; numStudents) // out - number of students<br>
+{&nbsp;<br>
+int test1, // Student's grade for test 1<br>
+test2, // Student's grade for test 2<br>
+test3, // Student's grade for test 3<br>
+test4; // Student's grade for test 4<br>
+<br>
+numStudents = 0;<br>
+gradeFile &gt;&gt; test1 &gt;&gt; test2 &gt;&gt; test3 &gt;&gt; test4;<br>
+while (gradeFile &amp;&amp; numStudents &lt; MAX_STUDENTS)<br>
+{<br>
+grade[numStudents][0] = test1;<br>
+grade[numStudents][1] = test2;<br>
+grade[numStudents][2] = test3;<br>
+grade[numStudents][3] = test4;<br>
+numStudents++;<br>
+gradeFile &gt;&gt; test1 &gt;&gt; test2 &gt;&gt; test3 &gt;&gt; test4;<br>
+}<br>
+}<br>
+<br>
+//***************************************************************<br>
+// Function: CalcClassAvg<br>
+//<br>
+// Purpose: Calculate the class average for each test<br>
+//***************************************************************<br>
+<br>
+void CalcClassAvg( const int grade[][4], // in - table of grades<br>
+int numStudents, // in - number of students<br>
+float classAvg[]) // out - class avg on tests<br>
+{<br>
+int studNo; // Student index<br>
+int testNo; // Test index<br>
+int sum; // Sum of grades for a test<br>
+<br>
+for (testNo = 0; testNo &lt; NUM_TESTS; testNo++)<br>
+{<br>
+sum = 0;<br>
+for (studNo = 0; studNo &lt; numStudents; studNo++)<br>
+{<br>
+sum += grade[studNo][testNo];<br>
+}<br>
+classAvg[testNo] = float (sum) / float(numStudents);<br>
+}<br>
+}<br>
+<br>
+//***************************************************************<br>
+// Function: CalcStudentAvg<br>
+//<br>
+// Purpose: Calculate the test average for one student<br>
+//***************************************************************<br>
+<br>
+void CalcStudentAvg( const int grade[], // in - test grades for one student<br>
+float&amp; studentAvg) // out - student's test average<br>
+{<br>
+int testNo; // Test index<br>
+int sum = 0; // Sum of test grades for a student<br>
+<br>
+for (testNo = 0; testNo &lt; NUM_TESTS; testNo++)<br>
+sum+= grade[testNo];<br>
+studentAvg = float (sum) / float (NUM_TESTS);<br>
+}<br>
+<br>
+//***************************************************************<br>
+// Function: PrintTests<br>
+//<br>
+// Purpose: Print Test Report that includes all student test<br>
+// grades, each student's test average, and the<br>
+// class average for each test.&nbsp;<br>
+//***************************************************************<br>
+<br>
+void PrintTests( const int grade[][4], // in - table of grades<br>
+float studentAvg[], // in - students test averages<br>
+int numStudents, // in - number of students<br>
+float classAvg[]) // in - class avg for each test<br>
+{<br>
+const int LINE_LENGTH = 60;<br>
+<br>
+int studNo; // Student index<br>
+int testNo; // Test index<br>
+int linePos; // Position on a line<br>
+<br>
+// Set up floating point formatting<br>
+cout.setf( ios::fixed, ios::floatfield);<br>
+cout.setf( ios::showpoint);<br>
+cout &lt;&lt; setprecision(1);<br>
+<br>
+// Print report header<br>
+cout &lt;&lt; setw(10) &lt;&lt; &quot;Student No&quot;<br>
+&lt;&lt; setw(10) &lt;&lt; &quot;Test 1&quot;<br>
+&lt;&lt; setw(10) &lt;&lt; &quot;Test 2&quot;<br>
+&lt;&lt; setw(10) &lt;&lt; &quot;Test 3&quot;<br>
+&lt;&lt; setw(10) &lt;&lt; &quot;Test 4&quot;<br>
+&lt;&lt; setw(10) &lt;&lt; &quot;Test Avg&quot;<br>
+&lt;&lt; endl;<br>
+for (linePos = 0; linePos &lt; LINE_LENGTH; linePos++)<br>
+cout &lt;&lt; '=';<br>
+cout &lt;&lt; endl;<br>
+<br>
+// Print grades for each student<br>
+for (studNo = 0; studNo &lt; numStudents; studNo++)<br>
+{<br>
+cout &lt;&lt; setw(10) &lt;&lt; studNo;<br>
+for (testNo = 0; testNo &lt; NUM_TESTS; testNo++)<br>
+cout &lt;&lt; setw(10) &lt;&lt; grade[studNo][testNo];<br>
+cout &lt;&lt; setw(10) &lt;&lt; studentAvg[studNo]<br>
+&lt;&lt; endl;<br>
+}<br>
+<br>
+// Print class averages<br>
+for (linePos = 0; linePos &lt; LINE_LENGTH; linePos++)<br>
+cout &lt;&lt; '=';<br>
+cout &lt;&lt; endl;<br>
+cout &lt;&lt; setw(10) &lt;&lt; &quot;Class Avg &quot;;<br>
+for (testNo = 0; testNo &lt; NUM_TESTS; testNo++)<br>
+cout &lt;&lt; setw(10) &lt;&lt; classAvg[testNo];<br>
+cout &lt;&lt; endl;<br>
+} </p>
+</body>
+</html>

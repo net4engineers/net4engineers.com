@@ -1,0 +1,173 @@
+<html>
+
+<head>
+<title>New Page 13</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Online Admission </b></font></big></p>
+
+<p>#include&lt;stdio.h&gt;<br>
+#include&lt;iostream.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+#include&lt;process.h&gt;<br>
+class user<br>
+{<br>
+private:<br>
+int courseid;<br>
+FILE *hs,*rt,*kr,*pn,*fp;<br>
+int prefer[4],seats,adc;<br>
+public:<br>
+user();<br>
+void centreinitial();<br>
+void admission();<br>
+~user();<br>
+};<br>
+user::user()<br>
+{<br>
+clrscr();<br>
+cout&lt;&lt;&quot;Enter couseid\n\t\t1.For MBA\n\t\t2.For MCA\n\t\t3.For
+BCA&quot;&lt;&lt;endl;<br>
+cout&lt;&lt;&quot;\t\t\t:&quot;;<br>
+cin&gt;&gt;courseid;<br>
+cout&lt;&lt;&quot;Enter your preference order for centre for study (in terms of&quot;;<br>
+cout&lt;&lt;&quot; area code)\n\t\tArea code for HISAR is 1.\n\t\tArea code for&quot;;<br>
+cout&lt;&lt;&quot;PANIPAT is 2.\n\t\tArea code for KARNAL is 3.\n\t\tArea code for&quot;;<br>
+cout&lt;&lt;&quot;ROHTAK is 4.&quot;;<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Enter 1st preference:&quot;;<br>
+cin&gt;&gt;prefer[0];<br>
+cout&lt;&lt;&quot;Enter 2nd preference:&quot;;<br>
+cin&gt;&gt;prefer[1];<br>
+cout&lt;&lt;&quot;Enter 3rd preference:&quot;;<br>
+cin&gt;&gt;prefer[2];<br>
+cout&lt;&lt;&quot;Enter 4th preference:&quot;;<br>
+cin&gt;&gt;prefer[3];<br>
+}<br>
+void user::centreinitial()<br>
+{<br>
+hs=fopen(&quot;hisar.dat&quot;,&quot;rb+&quot;);<br>
+rt=fopen(&quot;rohtak.dat&quot;,&quot;rb+&quot;);<br>
+pn=fopen(&quot;panipat.dat&quot;,&quot;rb+&quot;);<br>
+kr=fopen(&quot;karnal.dat&quot;,&quot;rb+&quot;);<br>
+if(hs==NULL||rt==NULL||pn==NULL||kr==NULL)<br>
+{<br>
+hs=fopen(&quot;hisar.dat&quot;,&quot;wb+&quot;);<br>
+rt=fopen(&quot;rohtak.dat&quot;,&quot;wb+&quot;);<br>
+pn=fopen(&quot;panipat.dat&quot;,&quot;wb+&quot;);<br>
+kr=fopen(&quot;karnal.dat&quot;,&quot;wb+&quot;);<br>
+if(hs==NULL||rt==NULL||pn==NULL||kr==NULL)<br>
+{<br>
+cout&lt;&lt;&quot;File opening error&quot;;<br>
+exit(0);<br>
+}<br>
+char i='5';<br>
+/*int i=5;<br>
+fwrite(&amp;i,sizeof(i),3,hs);<br>
+rewind(hs);<br>
+fwrite(&amp;i,sizeof(i),3,rt);<br>
+rewind(rt);<br>
+fwrite(&amp;i,sizeof(i),3,pn);<br>
+rewind(pn);<br>
+fwrite(&amp;i,sizeof(i),3,kr);<br>
+rewind(kr);*/<br>
+fputc(i,hs);<br>
+fputc(i,hs);<br>
+fputc(i,hs);<br>
+fputc(i,rt);<br>
+fputc(i,rt);<br>
+fputc(i,rt);<br>
+fputc(i,pn);<br>
+fputc(i,pn);<br>
+fputc(i,pn);<br>
+fputc(i,kr);<br>
+fputc(i,kr);<br>
+fputc(i,kr);<br>
+rewind(hs);<br>
+rewind(pn);<br>
+rewind(rt);<br>
+rewind(kr);<br>
+<br>
+}<br>
+}<br>
+void user::admission()<br>
+{<br>
+int flag=0,i=0,j;<br>
+adc=0;<br>
+while(flag==0&amp;&amp;i&lt;4)<br>
+{<br>
+switch(prefer[i])<br>
+{<br>
+case 1:<br>
+fp=hs;<br>
+break;<br>
+case 2:<br>
+fp=rt;<br>
+break;<br>
+case 3:<br>
+fp=pn;<br>
+break;<br>
+case4:<br>
+fp=kr;<br>
+break;<br>
+}<br>
+for(j=1;j&lt;=courseid;j++)<br>
+seats=fgetc(fp)-48;<br>
+//fread(&amp;seats,sizeof(seats),1,fp);<br>
+cout&lt;&lt;&quot;no of seats remaining in &quot;&lt;&lt;i+1&lt;&lt;&quot;preference
+is&quot;&lt;&lt;seats;<br>
+if(seats&gt;0)<br>
+{<br>
+fseek(fp,-1,SEEK_CUR);<br>
+seats--;<br>
+fputc(seats+48,fp);<br>
+//fwrite(&amp;seats,sizeof(seats),1,fp);<br>
+fseek(fp,-1,SEEK_CUR);<br>
+seats=fgetc(fp)-48;<br>
+//fread(&amp;seats,sizeof(seats),1,fp);<br>
+cout&lt;&lt;&quot;no of seats remaining in &quot;&lt;&lt;i+1&lt;&lt;&quot;preference
+is&quot;&lt;&lt;seats;<br>
+flag=1;<br>
+adc=prefer[i];<br>
+}<br>
+i++;<br>
+}<br>
+switch(adc)<br>
+{<br>
+case 0:<br>
+cout&lt;&lt;&quot;Admission can`t be given as all seats in all centres are full&quot;;<br>
+break;<br>
+case 1:<br>
+cout&lt;&lt;&quot;Admission given in HISAR centre&quot;;<br>
+break;<br>
+case 2:<br>
+cout&lt;&lt;&quot;Admission given in ROHTAK centre&quot;;<br>
+break;<br>
+case 3:<br>
+cout&lt;&lt;&quot;Admission given in PANIPAT centre&quot;;<br>
+break;<br>
+case 4:<br>
+cout&lt;&lt;&quot;Admission given in KARNAL centre&quot;;<br>
+break;<br>
+}<br>
+}<br>
+user::~user()<br>
+{<br>
+fclose(hs);<br>
+fclose(rt);<br>
+fclose(pn);<br>
+fclose(kr);<br>
+fclose(fp);<br>
+}<br>
+void main()<br>
+{<br>
+user obj;<br>
+obj.centreinitial();<br>
+obj.admission();<br>
+getch();<br>
+}<br>
+</p>
+</body>
+</html>

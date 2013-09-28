@@ -1,0 +1,75 @@
+<html>
+
+<head>
+<title>This is the swap sort function of five numbers</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Verdana" size="2"><b><a name="top">This</a> is the swap sort function of
+five numbers</b></font><br>
+<br>
+<font face="Verdana" size="2">#include &lt;iostream.h&gt;<br>
+<br>
+void sort();<br>
+<br>
+void main()<br>
+{<br>
+&nbsp;&nbsp;&nbsp; char answer;<br>
+&nbsp;&nbsp;&nbsp; cout &lt;&lt; &quot;This is the swap sort function&quot; &lt;&lt; endl;<br>
+&nbsp;&nbsp;&nbsp; for(int i=10; i&gt;5; i++)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sort();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i--;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; &quot;\nDo you like to sort
+another numbers? &quot;;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cin &gt;&gt; answer;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(answer=='n') //quit the program<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i=0;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+}<br>
+<br>
+void sort()<br>
+{<br>
+&nbsp;&nbsp;&nbsp; int array[5];<br>
+&nbsp;&nbsp;&nbsp; int i;<br>
+&nbsp;&nbsp;&nbsp; int temp=0;<br>
+<br>
+&nbsp;&nbsp;&nbsp; for(i=0; i&lt;5; i++) //input numbers<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; &quot;Enter a NUM: &quot;;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cin &gt;&gt; array[i]; //input numbers to
+arrays<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; for(int k=5; k&gt;0; k--) //swap the numbers in the small to larger
+order<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(i=0; i&lt;5; i++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if(array[i]&gt;array[i+1])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+temp=array[i];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+array[i]=array[i+1];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+array[i+1]=temp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+i++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; for(i=0; i&lt;5; i++) //print out the arrays<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; array[i] &lt;&lt; endl;<br>
+<br>
+}<br>
+</font></p>
+</body>
+</html>

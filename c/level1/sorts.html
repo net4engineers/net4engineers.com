@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<title>New Page 5</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><small><font face="Verdana">//TO SORT A SET OF 25 NOs. BY USING SELECTION SORT<br>
+#include&lt;stdio.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+#define MAX 5<br>
+void main()<br>
+{<br>
+int nu[MAX],i,j,a;<br>
+clrscr();<br>
+printf(&quot;ENTER %d NOs.: &quot;,MAX);<br>
+for(i=0;i&lt;MAX;i++)<br>
+scanf(&quot;%d&quot;,&amp;nu[i]);<br>
+for(i=0;i&lt;MAX;i++)<br>
+{<br>
+for(j=0;j&lt;MAX;j++)<br>
+{<br>
+if(j&gt;i)<br>
+{<br>
+if(nu[j]&lt;nu[i])<br>
+{<br>
+a=nu[j];<br>
+nu[j]=nu[i];<br>
+nu[i]=a;<br>
+}<br>
+}<br>
+}<br>
+}<br>
+printf(&quot;AFTER SELECTION SORTING:\n&quot;);<br>
+for(i=0;i&lt;MAX;i++)<br>
+printf(&quot;\t\t\t%d\n&quot;,nu[i]);<br>
+getch();<br>
+}<br>
+<br>
+</font></small></p>
+</body>
+</html>

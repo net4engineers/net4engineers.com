@@ -1,0 +1,385 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<title>Tricks@Net4Engineers.com</title>
+<base target="_top">
+</head>
+
+<body lang="EN-US" link="#0000FF" vlink="#0000FF" style="tab-interval:.5in"
+alink="#0000FF">
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../header.html" NAME="head"  WIDTH="100%" HEIGHT="175" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->
+<div class="Section1">
+
+<p><font size="3" color="#000000" face="Bookman Old Style"><b>Windows Tips &amp; Tricks</b></font></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;"><b>Exiting
+Windows the Cool and Quick Way<o:p></o:p></b></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Normally
+it takes a hell lot of time just Shutting down Windows, you have to move your mouse to the
+Start Button, click on it, move it again over Shut Down, click, then move it over the
+necessary option and click, then move the cursor over the OK button and once again (you
+guessed it) click.This whole process can be shortened by creating shortcuts on the Desktop
+which will shut down Windows at the click of a button. Start by creating a new shortcut(
+right click and select New&gt; Shortcut). Then in the command line box, type (without the
+quotes.)<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">'C:\windows\rundll.exe
+user.exe,exitwindowsexec'<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">This
+Shortcut on clicking will restart Windows immediately without any Warning. To create a
+Shortcut to Restarting Windows, type the following in the Command Line box:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">'c:\windows\rundll.exe
+user.exe,exitwindows'<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">This
+Shortcut on clicking will shut down Windows immediately without any Warning. <o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Ban
+Shutdowns : A trick to Play on Lamers<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">This
+is a neat trick you can play on that lamer that has a huge ego, in this section I teach
+you, how to disable the Shut Down option in the Shut Down Dialog Box. This trick involves
+editing the registry, so please make backups. Launch regedit.exe and go to :<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">In
+the right pane look for the NoClose Key. If it is not already there then create it by
+right clicking in the right pane and selecting New &gt; String Value.(Name it NoCloseKey )
+Now once you see the NoCloseKey in the right pane, right click on it and select Modify.
+Then Type 1 in the Value Data Box.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Doing
+the above on a Win98 system disables the Shut Down option in the Shut Down Dialog Box. But
+on a Win95 machine if the value of NoCloseKey is set to 1 then click on the Start &gt;
+Shut Down button displays the following error message:<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">This
+operation has been cancelled due to restrictions in effect on this computer. Please
+contact your system administrator</span></b><span style="font-size:10.0pt;"
+mso-bidi-font-size:12.0pt;font-family:"times new roman"'>.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">You
+can enable the shut down option by changing the value of NoCloseKey to 0 or simply
+deleting the particular entry i.e. deleting NoCloseKey.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Instead
+of performing the above difficult to remember process, simply save the following with an
+extension of .reg and add it's contents to the registry by double clicking on it.<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">REGEDIT4<o:p></o:p></span></b></p>
+
+<p><b><style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]&lt;o:p&gt;&lt;/o:p&gt;&lt;/span&gt;&lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;b&gt;&lt;span style=" font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">&quot;NoClose&quot;=&quot;1&quot;<o:p></o:p></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Disabling
+Display of Drives in My Computer<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">This
+is yet another trick you can play on your geek friend. To disable the display of local or
+networked drives when you click My Computer go to :<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Now
+in the right pane create a new DWORD item and name it NoDrives. Now modify it's value and
+set it to 3FFFFFF (Hexadecimal) Now press F5 to refresh. When you click on My Computer, no
+drives will be shown. To enable display of drives in My Computer, simply delete this DWORD
+item. It's .reg file is as follows:<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">REGEDIT4<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">&quot;NoDrives&quot;=dword:03ffffff<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Take
+Over the Screen Saver<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">To
+activate and deactivate the screen saver whenever you want, goto the following registry
+key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ScreenSavers<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Now
+add a new string value and name it Mouse Corners. Edit this new value to -Y-N. Press F5 to
+refresh the registry. Voila! Now you can activate your screensaver by simply placing the
+mouse cursor at the top right corner of the screen and if you take the mouse to the bottom
+left corner of the screen, the screensaver will deactivate. <o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Pop
+a banner each time Windows Boots<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">To
+pop a banner which can contain any message you want to display just before a user is going
+to log on, go to the key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WinLogon<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Now
+create a new string Value in the right pane named LegalNoticeCaption and enter the value
+that you want to see in the Menu Bar. Now create yet another new string value and name it:
+LegalNoticeText. Modify it and insert the message you want to display each time Windows
+boots. This can be effectively used to display the company's private policy each time the
+user logs on to his NT box. It's .reg file would be:<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">REGEDIT4<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Winlogon]<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">&quot;LegalNoticeCaption&quot;=&quot;Caption
+here.&quot;<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Delete
+the Tips of the Day to save 5KB<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Windows
+95 had these tips of the day which appeared on a system running a newly installed Windows
+OS. These tips of the day are stored in the Windows Registry and consume 5K of space. For
+those of you who are really concerned about how much free space your hard disk has, I have
+the perfect trick.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">To
+save 5K go to the following key in Regedit:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Tips<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Now
+simply delete these tricks by selecting and pressing the DEL key.<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Change
+the Default Locations<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">To
+change the default drive or path where Windows will look for it's installation files, go
+to the key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Setup\SourcePath<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Now
+you can edit as you wish.<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Secure
+your Desktop Icons and Settings<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">You
+can save your desktop settings and secure it from your nerdy friend by playing with the
+registry. Simply launch the Registry Editor go to:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">In
+the right pane create a new DWORD Value named NoSaveSettings and modify it's value to 1.
+Refresh and restart for the settings to get saved.<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">CLSID
+Folders Explained<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Don't
+you just hate those stubborn stupid icons that refuse to leave the desktop, like the
+Network Neighborhood icon. I am sure you want to know how you can delete them. You may
+say, that is really simple, simply right click on the concerned icon and select Delete.
+Well not exactly, you see when you right click on these special folders( see entire list
+below)neither the rename nor the delete option does not appear. To delete these folders,
+there are two methods, the first one is using the System Policy Editor(Poledit in the
+Windows installation CD)and the second is using the Registry.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Before
+we go on, you need to understand what CLSID values are. These folders, like the Control
+Panel, Inbox, The Microsoft Network, Dial Up Networking etc are system folders. Each
+system folder has a unique CLSID key or the Class ID which is a 16-byte value which
+identifies an individual object that points to a corresponding key in the registry.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">To
+delete these system Folders from the desktop simply go to the following registry key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\Namespace{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">To
+delete an icon simply delete the 16 byte CLSID value within &quot;NameSpace&quot;. The
+following are the CLSID values of the most commonly used icons:<o:p></o:p></span></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">My
+Briefcase:{85BBD920-42AO-1069-A2E4-08002B30309D}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Desktop:
+{00021400-0000-0000-C000-0000000000046}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Control
+Panel:{21EC2020-3AEA-1069-A2DD-08002B30309D}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Dial-Up-Networking:{992CFFA0-F557-101A-88EC-00DD01CCC48}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Fonts:
+{BD84B380-8CA2-1069-AB1D-08000948534}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Inbox
+:{00020D76-0000-0000-C000-000000000046}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">My
+Computer :{20D04FE0-3AEA-1069-A2D8-08002B30309D}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Network
+Neighborhood:{208D2C60-3AEA-1069-A2D7-O8002B30309D}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Printers
+:{2227A280-3AEA-1069-A2DE-O8002B30309D}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Recycle
+Bin :{645FF040-5081-101B-9F08-00AA002F954E}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">The
+Microsoft Network:{00028B00-0000-0000-C000-000000000046}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">History:
+{FF393560-C2A7-11CF-BFF4-444553540000}<o:p></o:p></span></b></p>
+
+<p><b><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Winzip
+:{E0D79300-84BE-11CE-9641-444553540000}<o:p></o:p></span></b></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">For
+example, to delete the Recycle Bin, first note down it's CLSID value, which is:
+645FF040-5081-101B-9F08-00AA002F954E. Now go to the Namespace key in the registry and
+delete the corresponding key.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\explorer\Desktop\NameSpace\<br>
+{645FF040-5081-101B<br>
+-9F08-00AA002F954E}<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Similarly
+to delete the History folder, delete the following key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\explorer\Desktop\NameSpace\<br>
+{FBF23B42-E3F0-101B<br>
+-8488-00AA003E56F8}<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Sometimes,
+you may need to play a trick on your brother or friend, well this one teaches you how to
+hide all icons from the Desktop. Go to the following registry key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">In
+the right pane create a new DWORD value by the name: NoDesktop and set its value to: 1.
+Reboot and you will find no icons on the desktop.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Till
+now you simply learnt how to delete the special system folders by deleting a registry key,
+but the hack would have been better if there was a way of adding the DELETE and RENAME
+option to the right click context menus of these special folders. You can actually change
+the right click context menu of any system folder and add any of the following options:
+RENAME, DELETE, CUT, COPY, PASTE and lots more.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">This
+hack too requires you to know the CLSID value of the system folder whose menu you want to
+customize. In this section, I have taken up Recycle Bin as the folder whose context menu I
+am going to edit.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">Firstly
+launch the registry editor and open the following registry key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CLASSES_ROOT\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">In
+Case you want to edit some other folder like say the FONTS folder, then you will open the
+following key:<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">HKEY_CLASSES_ROOT\CLSID\{CLSID
+VALUE HERE}\ShellFolder.<o:p></o:p></span></p>
+
+<p><span
+style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;">In
+the right </p>
+</div></span>
+</body>
+</html>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../footer.html" NAME="bol" WIDTH="100%" HEIGHT="97" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->

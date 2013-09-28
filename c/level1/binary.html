@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<title>New Page 1</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body vlink="#0000FF" alink="#0000FF">
+
+<p>//conversion of decimal to binary<br>
+#include&lt;stdio.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+void main()<br>
+{<br>
+int q,p,rem,i=0,arr[100],j;<br>
+clrscr();<br>
+printf(&quot;Enter a number &quot;);<br>
+scanf(&quot;%d&quot;,&amp;p);<br>
+while(p!=0)<br>
+{<br>
+rem=p%2;<br>
+arr[i]=rem;<br>
+p=p/2;<br>
+i++;<br>
+}<br>
+for(j=i-1;j&gt;=0;j--)<br>
+printf(&quot;%d&quot;,arr[j]);<br>
+getch();<br>
+}</p>
+</body>
+</html>

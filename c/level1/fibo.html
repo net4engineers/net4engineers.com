@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<title>New Page 1</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#FF0000">
+
+<p><small><font face="Verdana">/*TO OBTAIN MEMBERS OF FIBONACCI SEQUENCE*/<br>
+#include&lt;stdio.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+void main()<br>
+{<br>
+int n;<br>
+clrscr();<br>
+printf(&quot;HOW MANY TERMS OF FIBONACCI SERIES YOU WANT:&quot;);<br>
+scanf(&quot;%d&quot;,&amp;n);<br>
+printf(&quot;1&quot;);<br>
+rec(n);<br>
+getch();<br>
+}<br>
+rec(int d)<br>
+{<br>
+static long int c,a,b=1;<br>
+c=a+b;<br>
+if(d==0)<br>
+printf(&quot;\nseries ended&quot;);<br>
+else<br>
+{<br>
+printf(&quot;\n%ld&quot;,c);<br>
+a=b;<br>
+b=c;<br>
+rec(d-1);<br>
+}<br>
+return(0);<br>
+}<br>
+</font></small></p>
+</body>
+</html>

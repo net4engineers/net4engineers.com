@@ -1,0 +1,627 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<Volume 1>
+<title>Hack FAQ by Wang</title>
+</head>
+
+<body bgcolor="#FFFFFF" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../header.html" NAME="head"  WIDTH="100%" HEIGHT="175" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->
+<p><b><font size="3" color="#000000" face="Bookman Old Style">Hacking FAQ-</font><font
+size="2" face="Courier New">Frequently asked questions about hacking</font></b></p>
+
+<p><font size="2" face="Arial">Well, I finally got so bored that I decided to write
+this...no, I&#146;m only joking...I wrote this because I know how frustrating it is to
+want information badly. Everyone knows about hacking, and whether people agree, or
+disagree with it...they all know deep down that if they ever got access to a comp that
+they weren't meant to - it would feel great.</font></p>
+
+<p><font size="2" face="Arial">I know this is difficult to understand, but there are
+reasons why elite hackers don't just write endless text files on how to hack every single
+electronic thing that beeps. The main reason being that they know people like us are going
+to read them and go &quot;Oh, so that&#146;s what I do!&quot;. Then they go out and do it
+along with the 1000,000,000 people that read the text file, and eventually that exploit
+dries up because everyone in the world knows about it. And lets be honest, its only fun
+when it feels like your the only one who has been successful at hacking the specific comp.</font></p>
+
+<p><font size="2" face="Arial">I would like to get this out of the way, I am not a
+computer expert, I am not 'elite', I am not a Haxor - I just love learning about
+computers. I literally bow down to those people that really are the elite of the computer
+world. I am writing this file because I want to share the small knowledge of things that I
+do know about with you. If you want to become a hacker just to impress your friends then
+don't bother. If you want to impress your friends, just get a shell account somewhere and
+tap in a few info finding commands such as finger, whois, who etc. Trust me, they wont
+even want to understand what your doing - they just think &quot;hmm, he must be
+good!&quot;. More on shells later though.</font></p>
+
+<p><font size="2" face="Arial">The amount of wannabe hackers has literally trebled since
+the Internet became popular. Now wannabes all round the world can go to some search engine
+and type in &quot;Hacking&quot; and get more information than they can take in. This has a
+plus side though, it means those who are truly elite will be worshiped even more, and it
+means that companies will have to start thinking harder about security (which can't be
+bad...can it?).</font></p>
+
+<p><font size="2" face="Arial">IAnyway, enough intro - lets get to the good stuff!</font></p>
+
+<hr>
+
+<p align="center"><font face="Arial"><b>Topics covered</b></font></p>
+
+<ul>
+  <li><a href="#begin"><font size="2" face="Arial">What do I need to begin?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#goodsites"><font size="2" face="Arial">What are some good Websites?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#language"><font size="2" face="Arial">What programming languages should I
+    learn?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#telnet"><font size="2" face="Arial">What is Telnet?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#ip"><font size="2" face="Arial">What is an IP address?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#findip"><font size="2" face="Arial">How do I find out my IP address?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#ipspoof"><font size="2" face="Arial">What is IP spoofing?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#whatistrojan"><font size="2" face="Arial">What is a trojan/worm/virus/logic
+    bomb?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#pgp"><font size="2" face="Arial">What is PGP?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#unix"><font size="2" face="Arial">What is Unix?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#telnetunix"><font size="2" face="Arial">How do I know if I telnet to a Unix
+    system?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#shell"><font size="2" face="Arial">What is a shell account?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#whereshell"><font size="2" face="Arial">Where can I get a shell account?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#crackpasswd"><font size="2" face="Arial">How can I crack Unix account
+    passwords?</font></a></li>
+</ul>
+
+<ul>
+  <li><a href="#shadowed"><font size="2" face="Arial">What is a shadowed password?</font></a></li>
+</ul>
+
+<hr>
+
+<p><a name="begin"></a><font color="#000080" size="2" face="Arial"><b>What do I need to
+begin?</b></font></p>
+
+<p><font size="2" face="Arial">Well, most text files would probably disagree with this,
+but I think Windows 9x is as good as any other OS for getting started. Most people will
+tell you to go away and not come back until you have Unix or Linux, but that&#146;s really
+flinging you in at the deep end. In this file I will focus mostly on Windows 95 but I will
+mention Unix a bit later on.</font></p>
+
+<p><font size="2" face="Arial">Here&#146;s what you will probably need:</font> 
+
+<ul>
+  <li><font size="2" face="Arial">An OS (Operating system, could be DOS (?), Windows, Unix,
+    Linux, BeOS etc.)</font></li>
+  <li><font size="2" face="Arial">A lot of text files (This is a good start)</font></li>
+  <li><font size="2" face="Arial">A selection of good web sites</font></li>
+  <li><font size="2" face="Arial">A web browser (I use Netscape, but IE is as good as any)</font></li>
+  <li><font size="2" face="Arial">An IRC client (IRC = Internet relay chat...well, this isn't
+    really essential - but its a laugh!)</font></li>
+  <li><font size="2" face="Arial">Telnet (or similar)</font></li>
+  <li><font size="2" face="Arial">Small knowledge of programming in some language</font></li>
+</ul>
+
+<hr>
+
+<p><a name="goodsites"></a><font color="#000080" size="2" face="Arial"><b>What are some
+good websites?</b></font></p>
+
+<p><font size="2" face="Arial">Here are a few that have helped me out in the past: -</font></p>
+
+<p><font size="2" face="Arial"><i><a href="http://www.happyhacker.org">www.happyhacker.org</a>
+</i>- This is great! If you really want to learn to be a hacker then you have to visit
+this website. They teach you how to hack without breaking the law (Yes, it is possible).
+Check out the &quot;Guides To Mostly Harmless Hacking&quot; which focus on every aspect of
+hacking you could imagine.</font></p>
+
+<p><font size="2" face="Arial"><i><a href="http://www.theargon.com">www.theargon.com</a> </i>-
+A site about security and hacking, it features lots of good sections of different aspects.</font></p>
+
+<p><font size="2" face="Arial"><i><a href="http://www.Cyberarmy.com">www.Cyberarmy.com</a>
+</i>- A nice site with a list of proxies, wingates etc. and A great selection of
+information tools.</font></p>
+
+<p><font size="2" face="Arial"><i><a href="http://www.securify.com/packetstorm">www.securify.com/packetstorm</a>
+</i>- PacketStorm is a huge security archive which is updated every day - it rocks.</font></p>
+
+<p><font size="2" face="Arial"><i><a href="http://www.Antionline.com">www.Antionline.com</a>
+</i>- Cool site for learning about exploits etc. and you can perform a security analysis
+of yourself.</font></p>
+
+<p><font size="2" face="Arial"><em><a href="http://www.phrozencrew.org.uk">www.phrozencrew.org.uk</a>
+</em>- A UK phreaking group providing information on BT payphones and Nokia's.</font></p>
+
+<p><font size="2" face="Arial"><a href="http://www.planet-hack.co.uk"><i>www.planet-hack.co.uk</i></a>
+- Another UK based site, but provides information on all areas</font></p>
+
+<p><font size="2" face="Arial"><a href="http://www.swateam.org"><em>www.swateam.org</em></a>
+- Home of the Swat team E-zine - a great mix of hacking/phreaking/anarchy.</font></p>
+
+<hr>
+
+<p><a name="language"></a><font color="#000080" size="2" face="Arial"><b>What programming
+languages should I learn?</b></font></p>
+
+<p><font size="2" face="Arial">Some good languages to look at are:</font></p>
+
+<p><font size="2" face="Arial">C (or C++)</font></p>
+
+<p><font size="2" face="Arial">Perl</font></p>
+
+<p><font size="2" face="Arial">Pascal</font></p>
+
+<p><font size="2" face="Arial">Delphi</font></p>
+
+<p><font size="2" face="Arial">Visual Basic</font></p>
+
+<p><font size="2" face="Arial">Personally, I started off just having a peak at QBasic,
+then I moved on to VB and Pascal, then Delphi, and finally Perl and C. That&#146;s
+probably not the best order to learn them in, but its really what suits you.</font></p>
+
+<p><font size="2" face="Arial">I use:</font></p>
+
+<p><font size="2" face="Arial">Borland C++ Builder 5<br>
+Borland Delphi 3 Professional<br>
+Microsoft Visual Basic 5 Professional<br>
+Turbo Pascal 7<br>
+Active Perl for windows<br>
+Perl 5 for Linux</font></p>
+
+<hr>
+
+<p><a name="telnet"></a><font color="#000080" size="2" face="Arial"><b>What is Telnet?</b></font></p>
+
+<p><font size="2" face="Arial">Telnet is a program that allows you to connect to other
+computers using ports. Every computer/server has ports, the most common ones you would see
+when using telnet are:</font></p>
+
+<p><font size="2" face="Arial">Port 21: FTP</font></p>
+
+<p><font size="2" face="Arial">Port 23: Telnet</font></p>
+
+<p><font size="2" face="Arial">Port 25: SMTP (Mail)</font></p>
+
+<p><font size="2" face="Arial">Port 37: Time</font></p>
+
+<p><font size="2" face="Arial">Port 43: Whois</font></p>
+
+<p><font size="2" face="Arial">So, for example you could tell Telnet to connect to
+mail.virgin.net on port 25. This would connect you to Virgins mail server.</font></p>
+
+<p><font size="2" face="Arial">Telnet really is essential, and its a great information
+tool as well.</font></p>
+
+<hr>
+
+<p><a name="ip"></a><font color="#000080" size="2" face="Arial"><b>What is an IP address?</b></font></p>
+
+<p><font size="2" face="Arial">An IP address is a unique number which is given to you when
+you use your modem to connect to the internet. No two people can have the same IP address
+at one time, and your IP address changes every time you connect. An IP address looks like
+this: 198.164.32.123 Usually, the first 6 numbers will be the same every time you connect
+because they tell us what Internet service provider you are using (For example, 198.164 is
+the standard beginning for a Virgin.net IP address). The last 5 numbers are unique to you.
+Believe it or not, people can find out absolutely tons of stuff about you just from seeing
+your IP address. You also probably don't realise that your IP address is logged
+practically every time you do anything on the net. This happens so that if you do
+something you shouldn't be (being an evil Haxor for instance!) the people who logged your
+IP can contact your Internet service provider and get you thrown off the net. The other
+bad thing about IP addresses, is the misuse that people can do with them. If someone on
+IRC gets hold off your IP address (that&#146;s easy by the way, there is a command /dns
+which gives them anyones IP) they can type it into a nuke program and crash your
+connection or even your computer. Recently, IP addresses have also been used in a lot of
+trojan programs such as Back Oriface and Netbus. </font></p>
+
+<hr>
+
+<p><a name="findip"></a><font color="#000080" size="2" face="Arial"><b>How do I find out
+my IP address?</b></font></p>
+
+<p><font size="2" face="Arial">In windows, go to the start menu and choose run, then type
+in &quot;Winipcfg&quot;.</font></p>
+
+<p><font size="2" face="Arial">In mIRC, connect to a server then type /dns &lt;your
+nick&gt; (that should work unless they have an IP cloacking device)</font></p>
+
+<p><font size="2" face="Arial">In Unix, if you use unix then you should already know how
+to get your own IP!</font></p>
+
+<hr>
+
+<p><a name="ipspoof"></a><font color="#000080" size="2" face="Arial"><b>What is IP
+Spoofing?</b></font></p>
+
+<p><font size="2" face="Arial">This is the art of hiding your real IP address, and making
+it look like you have a different one. Please see &quot;What are Wingates?&quot; for a few
+examples.</font></p>
+
+<hr>
+
+<p><a name="whatistrojan"></a><font color="#000080" size="2" face="Arial"><b>What is a
+trojan/worm/virus/logic bomb?</b></font></p>
+
+<p><font size="2" face="Arial">This is excerpted from: Computer Security Basics by Deborah
+Russell and G.T. Gengemi Sr.</font></p>
+
+<p><font size="2" face="Arial"><i>Trojan</i>: An independent program that appears to
+perform a useful function but that hides another unauthorized program inside it. When an
+authorized user performs the apparrent function, the trojan horse performs the
+unauthorized function as well (often usurping the priveleges of the user).</font></p>
+
+<p><font size="2" face="Arial"><i>Virus</i>: A code fragment (not an independent program)
+that reproduces by attaching to another program. It may damage data directly, or it may
+degrade system performance by taking over system resources which are then not available to
+authorized users.</font></p>
+
+<p><font size="2" face="Arial"><i>Worm</i>: An independent program that reproduces by
+copying itself from one system to another, usually over a network. Like a virus, a worm
+may damage data directly, or it may degrade system performace by tying up system resources
+and even shutting down a network.</font></p>
+
+<p><font size="2" face="Arial"><i>Logic Bomb</i>: A method for releasing a system attack
+of some kind. It is triggered when a particular condition (e.g., a certain date or system
+operation) occurs.</font></p>
+
+<hr>
+
+<p><a name="pgp"></a><font color="#000080" size="2" face="Arial"><b>What is PGP?</b></font></p>
+
+<p><font size="2" face="Arial">This is excerpted from: PGP(tm) User's Guide Volume I:
+Essential Topics by Philip Zimmermann</font></p>
+
+<p><font size="2" face="Arial">PGP(tm) uses public-key encryption to protect E-mail and
+data files. Communicate securely with people you've never met, with no secure channels
+needed for prior exchange of keys. PGP is well featured and fast, with sophisticated key
+management, digital signatures, data compression, and good ergonomic design.</font></p>
+
+<p><font size="2" face="Arial">Pretty Good(tm) Privacy (PGP), from Phil's Pretty Good
+Software, is a high security cryptographic software application for MSDOS, Unix, VAX/VMS,
+and other computers. PGP allows people to exchange files or messages with privacy,
+authentication, and convenience. Privacy means that only those intended to receive a
+message can read it. Authentication means that messages that appear to be from a
+particular person can only have originated from that person. Convenience means that
+privacy and authentication are provided without the hassles of managing keys associated
+with conventional cryptographic software. No secure channels are needed to exchange keys
+between users, which makes PGP much easier to use. This is because PGP is based on a
+powerful new technology called &quot;public key&quot; cryptography.</font></p>
+
+<p><font size="2" face="Arial">PGP combines the convenience of the Rivest-Shamir-Adleman
+(RSA) public key cryptosystem with the speed of conventional cryptography, message digests
+for digital signatures, data compression before encryption, good ergonomic design, and
+sophisticated key management. And PGP performs the public-key functions faster than most
+other software implementations. PGP is public key cryptography for the masses.</font></p>
+
+<hr>
+
+<p><a name="unix"></a><font color="#000080" size="2" face="Arial"><b>What is Unix?</b></font></p>
+
+<p><font size="2" face="Arial">Unix is an Operating system (just like Windows is an
+operating system), it is the most powerful, hacker-friendly operating system available.
+UNIX happens to be a multi-user-multi-tasking system, thus bringing a need for security
+not found on MSDOS, Windows etc. It uses the programing language C.</font></p>
+
+<hr>
+
+<p><a name="telnetunix"></a><font color="#000080" size="2" face="Arial"><b>How do I know
+if I telnet to a Unix system?</b></font></p>
+
+<p><font size="2" face="Arial">Ok, let me tell you how a unix system might greet you if
+you connected to it. First, when you call up a UNIX, or connect to one however you do, you
+will usually get this prompt:</font></p>
+
+<p><font size="2" face="Arial">login:</font></p>
+
+<p><font size="2" face="Arial">*Note: If you get the prompt &quot;Logon:&quot; it probably
+ISN'T Unix.</font></p>
+
+<p><font size="2" face="Arial">That means that this is PROBABLY a Unix system, Some Unix
+systems will tell you what they are or give you a message before a</font></p>
+
+<p><font size="2" face="Arial">login: prompt, as such:</font></p>
+
+<p><font size="2" face="Arial">Welcome to SHUnix. Please log in.</font></p>
+
+<p><font size="2" face="Arial">login:</font></p>
+
+<p><font size="2" face="Arial">Or something like that. Ok, we are at the login prompt, now
+you need to enter in a valid account. An Account usually consists of 8 characters</font></p>
+
+<p><font size="2" face="Arial">or less. After you enter in an account, you will probably
+get a password prompt of some sort. The prompts may vary, as the source code to the login
+program is usually supplied with UNIX, or is readily available for free.</font></p>
+
+<p><font size="2" face="Arial">Well, The easiest thing I can say to do to login is
+basically this:</font></p>
+
+<p><font size="2" face="Arial">Get an account, or try the defaults. The defaults are ones
+that came with the operating system, in standard form. The list of some of the Defaults
+are as follows:</font></p>
+
+<table border="1" cellpadding="0" cellspacing="0" width="100%" bordercolor="#000000">
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial"><strong>Account</strong></font></td>
+    <td align="center" width="50%"><font size="1" face="Arial"><strong>Default Password</strong></font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Root</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Root</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Sys</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Sys / System / Bin</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Bin</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Sys / Bin</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Mountfsys</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Mountfsys</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Admin</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Adm / Admin</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Uucp</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Uucp</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Nuucp</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Anon</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Anon</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Anon</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">User</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">User</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Games</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Games</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Install</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Install</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Demo</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Demo</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Guest</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Guest</font></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><font size="1" face="Arial">Daemon</font></td>
+    <td align="center" width="50%"><font size="1" face="Arial">Daemon</font></td>
+  </tr>
+</table>
+
+<p><font size="2" face="Arial">The accounts root, mountfsys, umountfsys, install, and
+sometimes sync are root level accounts, meaning they have total power. Other logins are
+just &quot;user level&quot; logins meaning they only have power over what files/processes
+they own.</font></p>
+
+<hr>
+
+<p><a name="shell"></a><font color="#000080" size="2" face="Arial"><b>What is a shell
+account?</b></font></p>
+
+<p><font size="2" face="Arial">Taken from Happy Hackers GTMHH beginners series #1</font></p>
+
+<p><font size="2" face="Arial">A shell account allows you to use your home computer as a
+terminal on which you can give commands to a computer running Unix. The &quot;shell&quot;
+is the program that translates your keystrokes into Unix commands. With the right shell
+account you can enjoy the use of a far more powerful workstation than you could ever dream
+of affording to own yourself. It also is a great stepping stone to the day when you will
+be running some form of Unix on your home computer.</font></p>
+
+<hr>
+
+<p><a name="whereshell"></a><font color="#000080" size="2" face="Arial"><b>Where can I get
+a shell account?</b></font></p>
+
+<p><font size="2" face="Arial">Well, you can buy them from places (try doing a search on
+the internet) or you may even be able to get one free! Try <a
+href="http://www.freeshell.com">www.freeshell.com</a> or doing a search for 'Free Shell'.
+In my experience, its best to pay for a shell - that way you wont have any restrictions
+etc. All of the free shells I have seen disable the 'Telnet' command until you start
+paying for the shell.</font></p>
+
+<hr>
+
+<p><a name="crackpasswd"></a><font color="#000080" size="2" face="Arial"><b>How can I
+crack Unix account passwords?</b></font></p>
+
+<p><font size="2" face="Arial">Well, the best bet is to try to get an account on the
+system (like your free shell account!) or try to log in as a visitor or a guest. You can
+then get the password file, which is stored in standard Unix systems as:</font></p>
+
+<p><font size="2" face="Arial">/etc/passwd.</font></p>
+
+<p><font size="2" face="Arial">Each line in a passwd file is a different account, here is
+what a line will mean:</font></p>
+
+<p><font size="2" face="Arial">userid:password:userid#:groupid#:GECOS field:home dir:shell</font></p>
+
+<p><font size="2" face="Arial">Each section of the line is seperated by a &quot;:&quot;,
+here are the sections:</font></p>
+
+<p><font size="2" face="Arial">userid = the userid name, entered at login and can be a
+name or a number.</font></p>
+
+<p><font size="2" face="Arial">password = the password is written here in encrypted form.
+The encryption is one way only. When a login occurs the password entered is run thru the
+encryption algorithm (along with a salt) and then contrasted to the version in the passwd
+file that exists for the login name entered. If they match, then the login is allowed. If
+not, the password is declared invalid.</font></p>
+
+<p><font size="2" face="Arial">userid# = a unique number assigned to each user, used for
+permissions</font></p>
+
+<p><font size="2" face="Arial">groupid# = similar to userid#, but controls the group the
+user belongs to. To see the names of various groups check /etc/group</font></p>
+
+<p><font size="2" face="Arial">GECOS FIELD = this field is where information about the
+user is stored. Usually in the format full name, office number, phone number, home phone.
+Also a good source of info to try and crack a password.</font></p>
+
+<p><font size="2" face="Arial">home dir = is the directory where the user goes into the
+system at (and usually should be brought to when a cd is done)</font></p>
+
+<p><font size="2" face="Arial">shell = this is the name of the shell which is
+automatically started for the login</font></p>
+
+<p><font size="2" face="Arial">So, seems quite straight foward, get the passwd file, get
+the encrypted text in the password field, and then run it through a cracker (by the way,
+get a program called &quot;CrackerJack&quot; for this - or &quot;John the Ripper&quot;)</font></p>
+
+<p><font size="2" face="Arial">Seems a little simple doesn't it? Wrong! Very rarely will
+you ever find a password file with the password field like that. Onto the next section:</font></p>
+
+<hr>
+
+<p><a name="shadowed"></a><font color="#000080" size="2" face="Arial"><b>What is a
+shadowed password?</b></font></p>
+
+<p><font size="2" face="Arial">A shadowed password is when, in a unix passwd file, instead
+of the encrypted password being shown in the password field, a single character will be
+shown (usually an X or a *). This tells the comp that the password file is actually stored
+somewhere else, probably where normal users cant go. You may be able to find the
+Unshadowed backup file though:</font></p>
+
+<p><font size="2" face="Arial">[The following list of likely places to find the unshadowed
+backup is available from the &quot;Hack FAQ&quot; written by Voyager.]</font></p>
+
+<p><font size="2" face="Arial">Unix Path needed Token</font></p>
+
+<p><font size="2" face="Arial">----------------------------------------------------------------------</font></p>
+
+<p><font size="2" face="Arial">AIX 3 /etc/security/passwd !</font></p>
+
+<p><font size="2" face="Arial">or /tcb/auth/files/&lt;first letter #</font></p>
+
+<p><font size="2" face="Arial">of username&gt;/&lt;username&gt;</font></p>
+
+<p><font size="2" face="Arial">A/UX 3.0s /tcb/files/auth/?/ *</font></p>
+
+<p><font size="2" face="Arial">BSD4.3-Reno /etc/master.passwd *</font></p>
+
+<p><font size="2" face="Arial">ConvexOS 10 /etc/shadpw *</font></p>
+
+<p><font size="2" face="Arial">ConvexOS 11 /etc/shadow *</font></p>
+
+<p><font size="2" face="Arial">DG/UX /etc/tcb/aa/user/ *</font></p>
+
+<p><font size="2" face="Arial">EP/IX /etc/shadow x</font></p>
+
+<p><font size="2" face="Arial">HP-UX /.secure/etc/passwd *</font></p>
+
+<p><font size="2" face="Arial">IRIX 5 /etc/shadow x</font></p>
+
+<p><font size="2" face="Arial">Linux 1.1 /etc/shadow *</font></p>
+
+<p><font size="2" face="Arial">OSF/1 /etc/passwd[.dir|.pag] *</font></p>
+
+<p><font size="2" face="Arial">SCO Unix #.2.x /tcb/auth/files/&lt;first letter *</font></p>
+
+<p><font size="2" face="Arial">of username&gt;/&lt;username&gt;</font></p>
+
+<p><font size="2" face="Arial">SunOS4.1+c2 /etc/security/passwd.adjunct =</font></p>
+
+<p><font size="2" face="Arial">##username</font></p>
+
+<p><font size="2" face="Arial">SunOS 5.0 /etc/shadow</font></p>
+
+<p><font size="2" face="Arial">&lt;optional NIS+ private secure</font></p>
+
+<p><font size="2" face="Arial">maps/tables/whatever&gt;</font></p>
+
+<p><font size="2" face="Arial">System V Release 4.0 /etc/shadow x</font></p>
+
+<p><font size="2" face="Arial">System V Release 4.2 /etc/security/* database</font></p>
+
+<p><font size="2" face="Arial">Ultrix 4 /etc/auth[.dir|.pag] *</font></p>
+
+<p><font size="2" face="Arial">UNICOS /etc/udb =20</font></p>
+
+<p>&nbsp;</p>
+
+<p><font size="2" face="Arial">Here is what a shadowed password file will look like:</font></p>
+
+<p><font size="2" face="Arial"><em>arif:x:1569:1000:Mohd Arif Khan:/udd/arif:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>arigo:x:1570:1000:Ryan Randolph:/udd/arigo:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>aristo:x:1573:1000:M. Aristo
+Setiawan:/udd/aristo:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>armando:x:1577:1000:Armando Huis:/udd/armando:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>arn:x:1582:1000:Arn mett:/udd/arn:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>arne:x:1583:1000:arne banan:/udd/arne:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>aroon:x:1585:1000:Aroon Thakral:/udd/aroon:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial"><em>arozine:x:1586:1000:Igor Berg
+Mogielnicki:/udd/arozine:/bin/bash</em></font></p>
+
+<p><font size="2" face="Arial"><em>arranw:x:1588:1000:Arran Whitaker:/udd/arranw:/bin/ksh</em></font></p>
+
+<p><font size="2" face="Arial">(and endless more)</font></p>
+
+<p><font size="2" face="Arial">Notice those X's? That tells you the password is shadowed.
+So, find out what Unix system it is, find the shadowed password file, and if you can get
+to it save it and crack it.</font></p>
+
+<hr>
+</body>
+</html>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../footer.html" NAME="bol" WIDTH="100%" HEIGHT="97" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->

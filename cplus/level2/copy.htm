@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<title>New Page 36</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>File Copy In C++</b></font></big></p>
+
+<p>/* DCOPY.CPP -- Example from Getting Started */<br>
+<br>
+/* DCOPY source-file destination-file *<br>
+* copies existing source-file to destination-file *<br>
+* If latter exists, it is overwritten; if it does not *<br>
+* exist, DCOPY will create it if possible *<br>
+*/<br>
+<br>
+#include &lt;iostream.h&gt;<br>
+#include &lt;process.h&gt; // for exit()<br>
+#include &lt;fstream.h&gt; // for ifstream, ofstream<br>
+<br>
+main(int argc, char* argv[]) // access command-line arguments<br>
+{<br>
+char ch;<br>
+if (argc != 3) // test number of arguments<br>
+{<br>
+cerr &lt;&lt; &quot;USAGE: dcopy file1 file2\n&quot;;<br>
+exit(-1);<br>
+}<br>
+<br>
+ifstream source; // declare input and output streams<br>
+ofstream dest;<br>
+<br>
+source.open(argv[1],ios::nocreate); // source file must be there<br>
+if (!source)<br>
+{<br>
+cerr &lt;&lt; &quot;Cannot open source file &quot; &lt;&lt; argv[1] &lt;&lt;<br>
+&quot; for input\n&quot;;<br>
+exit(-1);<br>
+}<br>
+dest.open(argv[2]); // dest file will be created if not found<br>
+// or cleared/overwritten if found<br>
+if (!dest)<br>
+{<br>
+cerr &lt;&lt; &quot;Cannot open destination file &quot; &lt;&lt; argv[2] &lt;&lt;<br>
+&quot; for output\n&quot;;<br>
+exit(-1);<br>
+}<br>
+<br>
+while (dest &amp;&amp; source.get(ch)) dest.put(ch);<br>
+<br>
+cout &lt;&lt; &quot;DCOPY completed\n&quot;;<br>
+<br>
+source.close(); // close both streams<br>
+dest.close();<br>
+}<br>
+</p>
+</body>
+</html>

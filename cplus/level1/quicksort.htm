@@ -1,0 +1,109 @@
+<html>
+
+<head>
+<title></title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p>/<small><font face="Verdana">* quicksort.cpp -- Read an integer array, print it, then
+sort it and<br>
+* print it. Use the quick sort method.<br>
+*/<br>
+<br>
+#include &lt;iostream&gt;<br>
+#include &lt;iomanip&gt;<br>
+<br>
+enum {NMAX = 10};<br>
+<br>
+void printIntArray(int a[], int n)<br>
+/* n is the number of elements in the array a.<br>
+* These values are printed out, five per line. */<br>
+{<br>
+for (int i = 0; i &lt; n; ){<br>
+cout &lt;&lt; setw(10) &lt;&lt; a[i++];<br>
+if (i%5==0)<br>
+cout &lt;&lt; endl;<br>
+}<br>
+cout &lt;&lt; endl;<br>
+}<br>
+<br>
+int getIntArray(int a[], int nmax, int sentinel)<br>
+/* It reads up to nmax integers and stores then in a; sentinel&nbsp;<br>
+* terminates input. */<br>
+{<br>
+int n = 0;<br>
+int temp;<br>
+<br>
+while (1) {<br>
+cout &lt;&lt; &quot;Enter integer [&quot; &lt;&lt; sentinel &lt;&lt; &quot; to terminate]
+: &quot;;<br>
+cin &gt;&gt; temp;<br>
+if (temp==sentinel) break;<br>
+if (n==nmax)<br>
+cout &lt;&lt; &quot;array is full\n&quot;;<br>
+else&nbsp;<br>
+a[n++] = temp;<br>
+}<br>
+return n;<br>
+}<br>
+// Let v = a[low].<br>
+// It returns a position p between low and high such that the elements up<br>
+// to p are less or equal to v and all the elements after p are<br>
+// greater or equal to v. The values stored in a do not change, though<br>
+// their order may change. Initially low &lt; high.<br>
+int partition(int a[], int low, int high)<br>
+{<br>
+int v = a[low];<br>
+int h = low-1;<br>
+int k = high+1;<br>
+for ( ; ; ) {<br>
+// all elements a[low] .. a[h] are &lt;= v &lt;&lt; all elements a[k] .. a[high]&nbsp;<br>
+while (a[--k] &gt; v); // Why will this loop terminate?<br>
+while (a[++h] &lt; v); // Why will this loop terminate?<br>
+if (h &gt;= k) return k;<br>
+int temp = a[h];<br>
+a[h] = a[k];<br>
+a[k] = temp;<br>
+}<br>
+}<br>
+<br>
+// Sort the elements a[low], a[low+1], .., a[high]&nbsp;<br>
+void quick(int a[], int low, int high)<br>
+{<br>
+if (low &lt; high)<br>
+{<br>
+int p = partition(a, low, high);<br>
+quick(a, low, p);<br>
+quick(a, p+1, high);<br>
+}<br>
+}<br>
+<br>
+void quickSort(int a[], int n)<br>
+/* It sorts in non-decreasing order the first N positions of A. It uses&nbsp;<br>
+* the quick sort method.<br>
+*/<br>
+{<br>
+quick(a, 0, n-1);<br>
+}<br>
+<br>
+int main(void) {<br>
+int x[NMAX];<br>
+int hmny;<br>
+int who;<br>
+int where;<br>
+<br>
+hmny = getIntArray(x, NMAX, 0);<br>
+if (hmny==0)<br>
+cout &lt;&lt; &quot;This is the empty array!\n&quot;;<br>
+else{<br>
+cout &lt;&lt; &quot;The array was: \n&quot;;<br>
+printIntArray(x, hmny);<br>
+quickSort(x, hmny);<br>
+cout &lt;&lt; &quot;The sorted array is: &quot; &lt;&lt; endl;<br>
+printIntArray(x, hmny);<br>
+}<br>
+}</font></small></p>
+</body>
+</html>

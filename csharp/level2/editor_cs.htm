@@ -1,0 +1,133 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta content="Microsoft FrontPage 3.0" name="GENERATOR">
+<title></title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Text Editor In C#</b></font></big></p>
+
+<p><small><font face="Verdana">namespace Simple { using System; using System.Drawing;
+using System.Collections; using System.ComponentModel; using System.WinForms; using
+System.Data; /// <summary> /// Summary description for Form1. /// </summary> public class Form1 :
+System.WinForms.Form { /// <summary> /// Required designer variable. /// </summary> private
+System.ComponentModel.Container components; private System.WinForms.ColorDialog clrd;
+private System.WinForms.MenuItem mt4; private System.WinForms.FontDialog fd; private
+System.WinForms.SaveFileDialog sava; private System.WinForms.OpenFileDialog opnfd; private
+System.WinForms.MenuItem mh2; private System.WinForms.MenuItem mh1; private
+System.WinForms.MenuItem mt3; private System.WinForms.MenuItem mt2; private
+System.WinForms.MenuItem mt1; private System.WinForms.MenuItem me12; private
+System.WinForms.MenuItem me11; private System.WinForms.MenuItem menuItem10; private
+System.WinForms.MenuItem me9; private System.WinForms.MenuItem me7; private
+System.WinForms.MenuItem me6; private System.WinForms.MenuItem menuItem4; private
+System.WinForms.MenuItem me3; private System.WinForms.MenuItem me2; private
+System.WinForms.MenuItem me1; private System.WinForms.MenuItem mf9; private
+System.WinForms.MenuItem menuItem8; private System.WinForms.MenuItem mf7; private
+System.WinForms.MenuItem mf6; private System.WinForms.MenuItem menuItem5; private
+System.WinForms.MenuItem mf4; private System.WinForms.MenuItem mf3; private
+System.WinForms.MenuItem mf1; private System.WinForms.MenuItem mf; private
+System.WinForms.MainMenu mm; private System.WinForms.RichTextBox rtb; string filename;
+public Form1() { // // Required for Windows Form Designer support //
+InitializeComponent(); // // TODO: Add any constructor code after InitializeComponent call
+// } /// <summary> /// Clean up any resources being used. /// </summary> public override void Dispose() {
+base.Dispose(); components.Dispose(); } /// <summary> /// Required method for Designer support - do
+not modify /// the contents of this method with the code editor. /// </summary> private void
+InitializeComponent() { System.Resources.ResourceManager resources = new
+System.Resources.ResourceManager (typeof(Form1)); this.components = new
+System.ComponentModel.Container (); this.fd = new System.WinForms.FontDialog (); this.mf9
+= new System.WinForms.MenuItem (); this.mh2 = new System.WinForms.MenuItem (); this.mt3 =
+new System.WinForms.MenuItem (); this.mf4 = new System.WinForms.MenuItem (); this.me11 =
+new System.WinForms.MenuItem (); this.me12 = new System.WinForms.MenuItem (); this.mf3 =
+new System.WinForms.MenuItem (); this.me7 = new System.WinForms.MenuItem (); this.mf7 =
+new System.WinForms.MenuItem (); this.me9 = new System.WinForms.MenuItem (); this.me3 =
+new System.WinForms.MenuItem (); this.me2 = new System.WinForms.MenuItem (); this.me6 =
+new System.WinForms.MenuItem (); this.me1 = new System.WinForms.MenuItem (); this.rtb =
+new System.WinForms.RichTextBox (); this.opnfd = new System.WinForms.OpenFileDialog ();
+this.mt1 = new System.WinForms.MenuItem (); this.mh1 = new System.WinForms.MenuItem ();
+this.mf = new System.WinForms.MenuItem (); this.mf6 = new System.WinForms.MenuItem ();
+this.mm = new System.WinForms.MainMenu (); this.menuItem10 = new System.WinForms.MenuItem
+(); this.menuItem4 = new System.WinForms.MenuItem (); this.mf1 = new
+System.WinForms.MenuItem (); this.clrd = new System.WinForms.ColorDialog ();
+this.menuItem5 = new System.WinForms.MenuItem (); this.menuItem8 = new
+System.WinForms.MenuItem (); this.sava = new System.WinForms.SaveFileDialog (); this.mt2 =
+new System.WinForms.MenuItem (); this.mt4 = new System.WinForms.MenuItem ();
+//@this.TrayHeight = 90; //@this.TrayLargeIcon = false; //@this.TrayAutoArrange = true;
+//@fd.SetLocation (new System.Drawing.Point (196, 7)); mf9.Text = &quot;Exit&quot;;
+mf9.Index = 7; mh2.Text = &quot;About&quot;; mh2.Index = 0; mh2.Click += new
+System.EventHandler (this.msgshow); mt3.Text = &quot;WordWarp&quot;; mt3.Index = 1;
+mt3.Click += new System.EventHandler (this.ww); mf4.Text = &quot;Close&quot;; mf4.Index =
+2; mf4.Click += new System.EventHandler (this.clo); me11.Text = &quot;Select All&quot;;
+me11.Index = 7; me11.Click += new System.EventHandler (this.sa); me12.Text = &quot;Time
+Date&quot;; me12.Index = 8; me12.Click += new System.EventHandler (this.td); mf3.Text =
+&quot;Open&quot;; mf3.Index = 1; mf3.Click += new System.EventHandler (this.opn); me7.Text
+= &quot;Copy&quot;; me7.Index = 4; me7.Click += new System.EventHandler (this.cp);
+mf7.Text = &quot;Save As&quot;; mf7.Index = 5; mf7.Click += new System.EventHandler
+(this.savas); me9.Text = &quot;Paste&quot;; me9.Index = 5; me9.Click += new
+System.EventHandler (this.pas); me3.Text = &quot;Redo&quot;; me3.Index = 1; me3.Click +=
+new System.EventHandler (this.red); me2.Text = &quot;Undo&quot;; me2.Index = 0; me2.Click
++= new System.EventHandler (this.un); me6.Text = &quot;Cut&quot;; me6.Index = 3; me6.Click
++= new System.EventHandler (this.cu); me1.Text = &quot;&amp;Edit&quot;; me1.Index = 1;
+me1.MenuItems.All = new System.WinForms.MenuItem[9] {this.me2, this.me3, this.menuItem4,
+this.me6, this.me7, this.me9, this.menuItem10, this.me11, this.me12};
+rtb.AutoWordSelection = true; rtb.Size = new System.Drawing.Size (336, 312); rtb.TabIndex
+= 1; rtb.ScrollBars = System.WinForms.RichTextBoxScrollBars.ForcedBoth; rtb.Font = new
+System.Drawing.Font (&quot;Arial&quot;, 12, System.Drawing.FontStyle.Bold);
+//@opnfd.SetLocation (new System.Drawing.Point (66, 7)); opnfd.Filter = &quot;txt&quot;;
+opnfd.ReadOnlyChecked = true; opnfd.DefaultExt = &quot;txt&quot;; opnfd.Multiselect =
+true; mt1.Text = &quot;Forma&amp;t&quot;; mt1.Index = 2; mt1.MenuItems.All = new
+System.WinForms.MenuItem[3] {this.mt2, this.mt3, this.mt4}; mh1.Text = &quot;Help&quot;;
+mh1.Index = 3; mh1.MenuItems.All = new System.WinForms.MenuItem[1] {this.mh2}; mf.Text =
+&quot;&amp;File&quot;; mf.Index = 0; mf.MenuItems.All = new System.WinForms.MenuItem[8]
+{this.mf1, this.mf3, this.mf4, this.menuItem5, this.mf6, this.mf7, this.menuItem8,
+this.mf9}; mf6.Text = &quot;Save&quot;; mf6.Index = 4; mf6.Click += new
+System.EventHandler (this.savee); //@mm.SetLocation (new System.Drawing.Point (7, 7));
+mm.MenuItems.All = new System.WinForms.MenuItem[4] {this.mf, this.me1, this.mt1,
+this.mh1}; menuItem10.Text = &quot;-&quot;; menuItem10.Index = 6; menuItem4.Text =
+&quot;-&quot;; menuItem4.Index = 2; mf1.Text = &quot;New&quot;; mf1.Index = 0; mf1.Click
++= new System.EventHandler (this.ne); //@clrd.SetLocation (new System.Drawing.Point (246,
+7)); menuItem5.Text = &quot;-&quot;; menuItem5.Index = 3; menuItem8.Text = &quot;-&quot;;
+menuItem8.Index = 6; //@sava.SetLocation (new System.Drawing.Point (134, 7)); sava.Filter
+= &quot;txt&quot;; sava.InitialDirectory = &quot;C:\\\\My Documents\\\\&quot;;
+sava.DefaultExt = &quot;txt&quot;; sava.FileName = &quot;Untitled&quot;;
+sava.CheckFileExists = true; mt2.Text = &quot;Font&quot;; mt2.Index = 0; mt2.Click += new
+System.EventHandler (this.mt2_Click); mt4.Text = &quot;Color&quot;; mt4.Index = 2;
+mt4.Click += new System.EventHandler (this.cd); this.Text = &quot;G Editor&quot;;
+this.AutoScaleBaseSize = new System.Drawing.Size (5, 13); this.Icon =
+(System.Drawing.Icon) resources.GetObject (&quot;$this.Icon&quot;); this.Menu = this.mm;
+this.ClientSize = new System.Drawing.Size (344, 317); this.Resize += new
+System.EventHandler (this.rs); this.Controls.Add (this.rtb); } protected void msgshow
+(object sender, System.EventArgs e) { MessageBox.Show (&quot;G Editor Version 1.0
+&quot;,&quot;About G Editor&quot;,MessageBox.IconInformation |MessageBox.OK ); } protected
+void ww (object sender, System.EventArgs e) { mt3.Checked =!mt3.Checked ; rtb.WordWrap
+=mt3.Checked ; } protected void cd (object sender, System.EventArgs e) {
+this.fd.ShowDialog (); rtb.SelectionColor =clrd.Color; } protected void mt2_Click (object
+sender, System.EventArgs e) { this.fd.ShowDialog (); rtb.SelectionFont =fd.Font; }
+protected void td (object sender, System.EventArgs e) { rtb.SelectedText =System.DateTime
+.Now.ToString (); } protected void sa (object sender, System.EventArgs e) {
+rtb.SelectAll(); } protected void pas (object sender, System.EventArgs e) { DataObject
+Data =(DataObject)Clipboard.GetDataObject (); rtb.SelectedText
+=(string)Data.GetData(DataFormats.Text ); } protected void cp (object sender,
+System.EventArgs e) { if(rtb.SelectedText.Equals (&quot;&quot;))return;
+Clipboard.SetDataObject (rtb.SelectedText ,true); } protected void cu (object sender,
+System.EventArgs e) { if(rtb.SelectedText .Equals (&quot;&quot;))return;
+Clipboard.SetDataObject (rtb.SelectedText ,true); rtb.SelectedText=&quot;&quot;; }
+protected void red (object sender, System.EventArgs e) { rtb.Redo(); } protected void un
+(object sender, System.EventArgs e) { rtb.Undo (); } protected void savee (object sender,
+System.EventArgs e) { this.sava.ShowDialog (); if(!sava.FileName .Equals (&quot;&quot;)) {
+filename=sava.FileName ; rtb.SaveFile (filename,RichTextBoxStreamType.PlainText );
+this.Text=filename; } } protected void savas (object sender, System.EventArgs e) {
+this.sava.ShowDialog(); if(!sava.FileName .Equals (&quot;&quot;)) { filename=sava.FileName
+; rtb.SaveFile (filename,RichTextBoxStreamType.PlainText ); this.Text=filename; } }
+protected void clo (object sender, System.EventArgs e) { rtb.Clear(); } protected void ne
+(object sender, System.EventArgs e) { rtb.Clear (); } protected void opn(object sender,
+System.EventArgs e) { this.opnfd .ShowDialog (); filename=opnfd.FileName ;
+if(!filename.Equals (&quot;&quot;)) { rtb.LoadFile
+(filename,RichTextBoxStreamType.PlainText); this.Text=filename; } } protected void rs
+(object sender, System.EventArgs e) { rtb.Size= this.Size; } public static void
+Main(string[] args) { Application.Run(new Form1()); } } }</XMP></font></small></p>
+</body>
+</html>

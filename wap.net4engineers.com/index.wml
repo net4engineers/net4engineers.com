@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+   <template>
+      <do type="options" name="prev" label="Back">
+         <prev/>
+      </do>
+   </template>
+   <card title="Net4Engineers.com" id="first">
+      <p align="center">Welcome to Net4Engineers.com <br/>
+         <a href="http://wap.net4engineers.com">Net4Engineers.com </a>
+      </p>
+   </card>
+</wml>

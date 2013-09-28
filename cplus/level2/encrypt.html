@@ -1,0 +1,100 @@
+<html>
+
+<head>
+<title>New Page 12</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Encryption In C++</b></font></big></p>
+
+<p>#include&lt;string.h&gt;<br>
+#include&lt;stdio.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+#include&lt;iostream.h&gt;<br>
+#include&lt;process.h&gt;<br>
+void main(int argc,char *argv[])<br>
+{<br>
+FILE *nor,*enc;<br>
+clrscr();<br>
+if(argc!=2)<br>
+{<br>
+cout&lt;&lt;&quot;Insufficient arguments!!&quot;;<br>
+getch();<br>
+exit(0);<br>
+}<br>
+nor=fopen(argv[1],&quot;rb&quot;);<br>
+if(nor==NULL)<br>
+{<br>
+cout&lt;&lt;endl&lt;&lt;&quot;File opening error!!&quot;;<br>
+getch();<br>
+exit(0);<br>
+}<br>
+fseek(nor,-6,SEEK_END);<br>
+char my[7]=&quot;pankaj&quot;;<br>
+char urs[7],ch='a';<br>
+for(int j=0;j&lt;6;j++)<br>
+urs[j]=fgetc(nor)-100;<br>
+urs[6]='\0';<br>
+if(!strcmp(my,urs))<br>
+{<br>
+cout&lt;&lt;&quot;file already encrypted&quot;;<br>
+getch();<br>
+exit(0);<br>
+}<br>
+rewind(nor);<br>
+enc=fopen(&quot;temp.enc&quot;,&quot;wb&quot;);<br>
+cout&lt;&lt;&quot;Enter password to encrypt file (Maximum 10 characters): &quot;;<br>
+char passwd[11];<br>
+int i=0;<br>
+while(ch!='\r'&amp;&amp;i&lt;10)<br>
+{<br>
+ch=getch();<br>
+if(ch!='\r')<br>
+{<br>
+passwd[i]=ch;<br>
+i++;<br>
+printf(&quot;*&quot;);<br>
+}<br>
+if(ch=='\r'&amp;&amp;i==0)<br>
+{<br>
+cout&lt;&lt;endl&lt;&lt;&quot;Please enter password: &quot;;<br>
+ch='a';<br>
+}<br>
+}<br>
+passwd[i]='\0';<br>
+i=0;<br>
+int len=strlen(passwd);<br>
+fputc(len+48,enc);<br>
+while((ch=passwd[i])!='\0')<br>
+{<br>
+ch=ch+100;<br>
+fputc(ch,enc);<br>
+i++;<br>
+}<br>
+i=0;<br>
+while((ch=fgetc(nor))!=EOF)<br>
+{<br>
+if(i==len-1)<br>
+i=0;<br>
+ch=ch+passwd[i];<br>
+fputc(ch,enc);<br>
+i++;<br>
+}<br>
+for(i=0;i&lt;6;i++)<br>
+{<br>
+my[i]=my[i]+100;<br>
+ch=my[i];<br>
+fputc(ch,enc);<br>
+}<br>
+fclose(nor);<br>
+fclose(enc);<br>
+remove(argv[1]);<br>
+rename(&quot;temp.enc&quot;,argv[1]);<br>
+cout&lt;&lt;endl&lt;&lt;&quot;File sucessfully encrypted.&quot;;<br>
+getch();<br>
+}</p>
+</body>
+</html>

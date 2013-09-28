@@ -1,0 +1,285 @@
+<html>
+
+<head>
+<title>New Page 8</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Clock In C</b></font></big></p>
+
+<p><small><font face="Verdana">#include&lt;stdio.h&gt;<br>
+#include&lt;stdlib.h&gt;<br>
+#include&lt;math.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+#include&lt;dos.h&gt;<br>
+#include&lt;graphics.h&gt;<br>
+#define PI 3.141<br>
+<br>
+int midx,midy,xposition,yposition;<br>
+void initialise(void);<br>
+void tick(void);<br>
+void about(void);<br>
+void main()<br>
+{<br>
+struct time t;<br>
+int gd=DETECT,gm;<br>
+initgraph(&amp;gd,&amp;gm,&quot;&quot;);<br>
+int hour_x2,minute_x2,hour_y2,minute_y2,second_x2,second_y2;<br>
+int old_hr_x2,old_mn_x2,old_hr_y2,old_mn_y2,old_sec_x2,old_sec_y2;<br>
+float true_hour;<br>
+<br>
+initialise(); //for clock &amp; dial<br>
+old_hr_x2= old_mn_x2= old_sec_x2= midx;<br>
+old_hr_y2= old_mn_y2= old_sec_y2= midy;<br>
+while(!kbhit())<br>
+{<br>
+setcolor(9);<br>
+xposition = 90*cos(PI/180*(270)) + midx;<br>
+yposition = 90*sin(PI/180*(270)) + midy;<br>
+settextstyle(8,HORIZ_DIR,4);<br>
+outtextxy(xposition,yposition,&quot;BT CLOCK&quot;);<br>
+<br>
+gettime(&amp;t);<br>
+<br>
+true_hour = t.ti_hour +(float)t.ti_min/60;<br>
+hour_x2 = 70*cos(PI/180*(30*true_hour - 90)) + midx;<br>
+hour_y2 = 70*sin(PI/180*(30*true_hour - 90)) + midy;<br>
+minute_x2 = 160*cos(PI/180*(6*t.ti_min - 90)) + midx;<br>
+minute_y2 = 160*sin(PI/180*(6*t.ti_min - 90)) + midy;<br>
+second_x2 = 170*cos(PI/180*(6*t.ti_sec - 90)) + midx;<br>
+second_y2 = 170*sin(PI/180*(6*t.ti_sec - 90)) + midy;<br>
+<br>
+//-------------//erasing<br>
+setcolor(0);<br>
+if(old_hr_x2 != hour_x2 || old_hr_y2 != hour_y2)<br>
+{<br>
+setlinestyle(SOLID_LINE,1,3);<br>
+line(midx,midy,old_hr_x2,old_hr_y2); // erase hour hand<br>
+}<br>
+if(old_mn_x2 != minute_x2 || old_mn_y2 != minute_y2)<br>
+{<br>
+setlinestyle(SOLID_LINE,1,3);<br>
+line(midx,midy,old_mn_x2,old_mn_y2); //min hand<br>
+}<br>
+if(old_sec_x2 != second_x2 || old_sec_y2 != second_y2)<br>
+{<br>
+setlinestyle(SOLID_LINE,1,6);<br>
+line(midx,midy,old_sec_x2,old_sec_y2); //sec hand<br>
+<br>
+tick();<br>
+}<br>
+old_hr_x2=hour_x2;<br>
+old_hr_y2=hour_y2;<br>
+old_mn_x2=minute_x2;<br>
+old_mn_y2=minute_y2;<br>
+old_sec_x2=second_x2;<br>
+old_sec_y2=second_y2;<br>
+<br>
+setcolor(14);<br>
+setlinestyle(SOLID_LINE,1,3);<br>
+line(midx,midy,hour_x2,hour_y2);<br>
+setlinestyle(SOLID_LINE,1,3);<br>
+line(midx,midy,minute_x2,minute_y2);<br>
+setcolor(12);<br>
+setlinestyle(SOLID_LINE,1,2);<br>
+line(midx,midy,second_x2,second_y2);<br>
+}<br>
+about();<br>
+closegraph();<br>
+return;<br>
+}<br>
+void initialise(void)<br>
+{<br>
+int i;<br>
+midx = getmaxx()/2;<br>
+midy=getmaxy()/2;<br>
+setcolor(13);<br>
+for(i=220;i&lt;=230;i++)<br>
+circle(midx,midy,i);<br>
+<br>
+//--------line starting from VII<br>
+xposition= 160*cos(PI/180*(120)) + midx;<br>
+yposition= 160*sin(PI/180*(120)) + midy;<br>
+// line(xposition,yposition,xposition,getmaxx());<br>
+//----line strating from V<br>
+xposition= 160*cos(PI/180*(60)) + midx;<br>
+yposition= 160*sin(PI/180*(60)) + midy;<br>
+//line(xposition,yposition,xposition,getmaxy());<br>
+//--------line starting form I<br>
+xposition= 160*cos(PI/180*(-60)) + midx;<br>
+yposition= 160*sin(PI/180*(-60)) + midy;<br>
+//line(xposition,yposition,xposition,0);<br>
+//---------line startin from XI<br>
+xposition= 160*cos(PI/180*(-120)) + midx;<br>
+yposition= 160*sin(PI/180*(-120)) + midy;<br>
+//line(xposition,yposition,xposition,0);<br>
+<br>
+setcolor(10);<br>
+<br>
+settextjustify(CENTER_TEXT,CENTER_TEXT);<br>
+settextstyle(2,HORIZ_DIR,8);<br>
+xposition= 180*cos(PI/180*(270)) + midx;<br>
+yposition= 180*sin(PI/180*(270)) + midy;<br>
+outtextxy(xposition,yposition,&quot;XII&quot;);<br>
+<br>
+xposition= 180*cos(PI/180*(240)) + midx;<br>
+yposition= 180*sin(PI/180*(240)) + midy;<br>
+outtextxy(xposition,yposition,&quot;XI&quot;);<br>
+xposition= 180*cos(PI/180*(210)) + midx;<br>
+yposition= 180*sin(PI/180*(210)) + midy;<br>
+outtextxy(xposition,yposition,&quot;X&quot;);<br>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp; xposition= 180*cos(PI/180*(270)) + midx;<br>
+yposition= 180*sin(PI/180*(270)) + midy;<br>
+outtextxy(xposition,yposition,&quot;XII&quot;);<br>
+xposition= 180*cos(PI/180*(270)) + midx;<br>
+yposition= 180*sin(PI/180*(270)) + midy;<br>
+outtextxy(xposition,yposition,&quot;XII&quot;);<br>
+<br>
+xposition= 180*cos(PI/180*(270)) + midx;<br>
+yposition= 180*sin(PI/180*(270)) + midy;<br>
+outtextxy(xposition,yposition,&quot;XII&quot;);<br>
+xposition= 180*cos(PI/180*(150)) + midx;<br>
+yposition= 180*sin(PI/180*(150)) + midy;<br>
+outtextxy(xposition,yposition,&quot;VIII&quot;);<br>
+xposition= 180*cos(PI/180*(120)) + midx;<br>
+yposition= 180*sin(PI/180*(120)) + midy;<br>
+outtextxy(xposition,yposition,&quot;VII&quot;);<br>
+xposition= 180*cos(PI/180*(90)) + midx;<br>
+yposition= 180*sin(PI/180*(90)) + midy;<br>
+outtextxy(xposition,yposition,&quot;VI&quot;);<br>
+xposition= 180*cos(PI/180*(60)) + midx;<br>
+yposition= 180*sin(PI/180*(60)) + midy;<br>
+outtextxy(xposition,yposition,&quot;V&quot;);<br>
+xposition= 180*cos(PI/180*(30)) + midx;<br>
+yposition= 180*sin(PI/180*(30)) + midy;<br>
+outtextxy(xposition,yposition,&quot;IV&quot;);<br>
+xposition= 180*cos(PI/180*(0)) + midx;<br>
+yposition= 180*sin(PI/180*(0)) + midy;<br>
+outtextxy(xposition,yposition,&quot;III&quot;);<br>
+xposition= 180*cos(PI/180*(300)) + midx;<br>
+yposition= 180*sin(PI/180*(300)) + midy;<br>
+outtextxy(xposition,yposition,&quot;I&quot;);<br>
+xposition= 180*cos(PI/180*(330)) + midx;<br>
+yposition= 180*sin(PI/180*(330)) + midy;<br>
+outtextxy(xposition,yposition,&quot;II&quot;);<br>
+<br>
+settextstyle(2,VERT_DIR,8);<br>
+xposition= 180*cos(PI/180*(180)) + midx;<br>
+yposition= 180*sin(PI/180*(180)) + midy;<br>
+outtextxy(xposition,yposition,&quot;IX&quot;);<br>
+return;<br>
+}<br>
+void tick(void)<br>
+{<br>
+int freq;<br>
+for(freq=4000;freq&lt;=5000;freq+=1)<br>
+sound(freq);<br>
+nosound();<br>
+return;<br>
+}<br>
+void about(void)<br>
+{<br>
+cleardevice();<br>
+getch();<br>
+/*while(!kbhit())<br>
+{<br>
+settextjustify(CENTER_TEXT,CENTER_TEXT);<br>
+setbkcolor(1);<br>
+settextstyle(5,HORIZ_DIR,3);<br>
+outtextxy(midx-180,midy-100,&quot;programmed by:&quot;);<br>
+settextstyle(4,HORIZ_DIR,8);<br>
+setcolor(3);<br>
+settextstyle(8,HORIZ_DIR,3);<br>
+//outtextxy(midx,midy,&quot; Bhaskar Tripathi&quot;);<br>
+outtextxy(midx-120,midy+140,&quot;For source code contact: &quot;);<br>
+outtextxy(midx-100,midy+170,&quot;Bhaskartripathi@yahoo.com &quot;);<br>
+outtextxy(midx-210,midy+200,&quot;Trin-Trin : &quot;);<br>
+outtextxy(midx-190,midy+220,&quot;011-6178940 &quot;);<br>
+}//delay(4000);<br>
+return;*/<br>
+<br>
+#define ARROW_SIZE 40<br>
+<br>
+void draw(int x, int y);<br>
+<br>
+<br>
+/* request autodetection */<br>
+int gdriver = DETECT, gmode, errorcode;<br>
+void *arrow;<br>
+int x, y, maxx;<br>
+unsigned int size;<br>
+<br>
+/* initialize graphics and local variables */<br>
+initgraph(&amp;gdriver, &amp;gmode, &quot;&quot;);<br>
+<br>
+/* read result of initialization */<br>
+errorcode = graphresult();<br>
+if (errorcode != grOk) /* an error occurred */<br>
+{<br>
+printf(&quot;Graphics error: %s\n&quot;, grapherrormsg(errorcode));<br>
+printf(&quot;Press any key to halt:&quot;);<br>
+getch();<br>
+exit(1); /* terminate with an error code */<br>
+}<br>
+<br>
+maxx = getmaxx();<br>
+x = 0;<br>
+y = getmaxy() / 2;<br>
+<br>
+/* draw the image to be grabbed */<br>
+draw(x, y);<br>
+<br>
+/* calculate the size of the image */<br>
+size = imagesize(x, y-ARROW_SIZE, x+(4*ARROW_SIZE), y+ARROW_SIZE);<br>
+<br>
+/* allocate memory to hold the image */<br>
+arrow = malloc(size);<br>
+<br>
+/* grab the image */<br>
+getimage(x, y-ARROW_SIZE, x+(4*ARROW_SIZE), y+ARROW_SIZE, arrow);<br>
+<br>
+/* repeat until a key is pressed */<br>
+while (!kbhit())<br>
+{<br>
+/* erase old image */<br>
+putimage(x, y-ARROW_SIZE, arrow, XOR_PUT);<br>
+<br>
+x += ARROW_SIZE;<br>
+if (x &gt;= maxx)<br>
+&nbsp;&nbsp;&nbsp; x = 0;<br>
+<br>
+/* plot new image */<br>
+putimage(x, y-ARROW_SIZE, arrow, XOR_PUT);<br>
+delay(500);<br>
+}<br>
+<br>
+/* clean up */<br>
+free(arrow);<br>
+closegraph();<br>
+}<br>
+<br>
+<br>
+void draw(int x, int y)<br>
+{<br>
+setbkcolor(MAGENTA);<br>
+setcolor(13);<br>
+settextstyle(6,0,3);<br>
+outtextxy(0,220,&quot; Bhaskar Tripathi&quot;);<br>
+setcolor(13);<br>
+settextstyle(3,0,3);<br>
+outtextxy(0,200,&quot;by:&quot;);<br>
+settextstyle(8,HORIZ_DIR,3);<br>
+outtextxy(midx-300,midy+130,&quot;For source code contact: &quot;);<br>
+outtextxy(midx-300,midy+155,&quot;Bhaskartripathi@yahoo.com &quot;);<br>
+outtextxy(midx-300,midy+180,&quot;Trin-Trin :- &quot;);<br>
+outtextxy(midx-300,midy+200,&quot;011-6178940 &quot;);<br>
+}<br>
+<br>
+</font></small></p>
+</body>
+</html>

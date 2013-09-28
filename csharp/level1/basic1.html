@@ -1,0 +1,72 @@
+<html>
+
+<head>
+<title>Basic Class Example using System</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Verdana">Basic Class Example&nbsp;<br>
+</font><font size="2" face="Verdana"><br>
+using System;<br>
+public class myCalc<br>
+{<br>
+private int result;<br>
+//constructor without a parameter defaults to 0<br>
+public myCalc()<br>
+{<br>
+result = 0;<br>
+}<br>
+//constructor with parameter<br>
+public myCalc(int x)<br>
+{<br>
+result = x;<br>
+}<br>
+//destructor<br>
+~myCalc()<br>
+{<br>
+result = 0;<br>
+}<br>
+//methods<br>
+public void displayResult()<br>
+{<br>
+Console.WriteLine(&quot;Result = {0}&quot;, result);<br>
+}<br>
+public void add(int x)<br>
+{<br>
+result = result + x;<br>
+}<br>
+public void subtract(int x)<br>
+{<br>
+result = result - x;<br>
+}<br>
+}<br>
+<br>
+class myTest<br>
+{<br>
+public static void Main()<br>
+{<br>
+myCalc mC = new myCalc(90);<br>
+mC.displayResult();<br>
+mC.add(45);<br>
+mC.displayResult();<br>
+mC.subtract(35);<br>
+mC.displayResult();<br>
+mC.subtract(110);<br>
+mC.displayResult();<br>
+}<br>
+}<br>
+<br>
+///////////////////////////////////////////////<br>
+///////////////////////////////////////////////<br>
+<br>
+Output<br>
+******<br>
+Result = 90<br>
+Result = 135<br>
+Result = 100<br>
+Result = -10</font></p>
+</body>
+</html>

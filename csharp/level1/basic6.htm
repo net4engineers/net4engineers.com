@@ -1,0 +1,104 @@
+<html>
+
+<head>
+<title>Simple Text File Operations in C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<font class="smallblack">
+
+<p class="MsoNormal"><font face="Verdana">Simple Text File Operations in C#.</font><font
+face="Verdana" size="2"><br>
+</font><font class="smallblack" face="Verdana" size="2"><br>
+C-Sharp provides a File class which is used in manipulating text files. The File class is
+within the System namespace. Also we can use the StreamReader and StreamWriter classes,
+which are within the System.IO, namespace for reading from and writing to a text file. In
+this article we'll see examples of Creating a text file, reading contents of a text file
+and appending lines to a text file.<br>
+<br>
+1.Creating a Text File</font></p>
+
+<p><font face="Verdana" size="2">For creating text file we use the CreateText Method of
+the File Class. The CreateText methods takes in the path of the file to be created as an
+argument. It creates a file in the specified path and returns a StreamWriter object which
+can be used to write contents to the file.<br>
+<br>
+Example</font> </p>
+
+<p><code><font face="Verdana">public class FileClass<br>
+{<br>
+&nbsp;&nbsp;&nbsp; public static void Main()<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; WriteToFile();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; static void WriteToFile()<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; StreamWriter SW;<br>
+&nbsp;&nbsp;&nbsp; SW=File.CreateText(&quot;c:\MyTextFile.txt&quot;);<br>
+&nbsp;&nbsp;&nbsp; SW.WriteLine(&quot;God is greatest of them all&quot;);<br>
+&nbsp;&nbsp;&nbsp; SW.WriteLine(&quot;This is second line&quot;);<br>
+&nbsp;&nbsp;&nbsp; SW.Close();<br>
+&nbsp;&nbsp;&nbsp; Console.WriteLine(&quot;File Created SucacessFully&quot;);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</font><font face="Verdana" size="2"><br>
+</code><br>
+2.Reading Contents Of A Text File</font></p>
+
+<p><font face="Verdana" size="2">For reading the contents of a text file we use the
+OpenText Method of the File Class.The OpenText methods takes in the path of the file to be
+opened as an argument. It opens the specified file and returns a StreamReader object which
+can be used to read the contents of the file.<br>
+<br>
+Example</font> </p>
+
+<p><code><font face="Verdana">public class FileClass<br>
+{<br>
+&nbsp;&nbsp;&nbsp; public static void Main()<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; ReadFromFile(&quot;c:\MyTextFile.txt&quot;);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; static void ReadFromFile(string filename)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; StreamReader SR;<br>
+&nbsp;&nbsp;&nbsp; string S;<br>
+&nbsp;&nbsp;&nbsp; SR=File.OpenText(filename);<br>
+&nbsp;&nbsp;&nbsp; S=SR.ReadLine();<br>
+&nbsp;&nbsp;&nbsp; while(S!=null)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; Console.WriteLine(S);<br>
+&nbsp;&nbsp;&nbsp; S=SR.ReadLine();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; SR.Close();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</font><font face="Verdana" size="2"><br>
+</code><br>
+3.Appending Content To A Text File</font></p>
+
+<p><font face="Verdana" size="2">For appending content to a text file we use the
+AppendText Method of the File Class. The AppendText methods takes in the path of the file
+to which the contents to be appended as an argument. It opens the file in the specified
+path and returns a StreamWriter object which can be used to append contents to the file.<br>
+<br>
+Example</font> </p>
+
+<pre><code><font face="Verdana" size="2">
+public class FileClass
+{
+    public static void Main()
+    {
+    AppendToFile();
+    }
+    static void AppendToFile()
+    {
+    StreamWriter SW;
+    SW=File.AppendText(&quot;C:\MyTextFile.txt&quot;);
+    SW.WriteLine(&quot;This Line Is Appended&quot;);
+    SW.Close();
+    Console.WriteLine(&quot;Text Appended Successfully&quot;);
+    }
+}</font></code></pre>
+</font>
+</body>
+</html>

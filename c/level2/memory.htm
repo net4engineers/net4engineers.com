@@ -1,0 +1,39 @@
+<html>
+
+<head>
+<title>Task </title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Verdana">// :- <b>Find out how much free memory is exists</b> </font></p>
+
+<p><font face="Verdana" size="2">#include&lt;stdio.h&gt;<br>
+#include&lt;stdlib.h&gt;<br>
+#include&lt;conio.h&gt;<br>
+#include&lt;malloc.h&gt;<br>
+<br>
+void main()<br>
+{<br>
+unsigned char huge *array;<br>
+long size;<br>
+size = 8000000;<br>
+#ifdef _MSC_VER<br>
+while((array = (unsigned char huge *) halloc(size,1)) == NULL)<br>
+#else<br>
+while((array = (unsigned char huge *) farmalloc(size)) == NULL)<br>
+#endif<br>
+size -= 100;<br>
+#ifdef _MSC_VER<br>
+hfree(array);<br>
+#else<br>
+farfree(array);<br>
+#endif<br>
+printf(&quot;Largest Allocatable Block is %ld Bytes\n&quot;,size);<br>
+getch();<br>
+return;<br>
+} </font></p>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+
+<head>
+<title>New Page 21</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<table border="0" width="100%" height="4" cellspacing="0" cellpadding="0">
+</table>
+
+<p><font face="Verdana"><font size="1">/</font><b><small>* sortmerge.c - Reads a file
+containing a sequence of records<br>
+* representing students and places them into an<br>
+* array table1. It does the same for a second file<br>
+* placing result in table2. It then sorts table1&nbsp;<br>
+* and table2 in non descending order on the basis&nbsp;<br>
+* of their name fields. It now stores the merge of<br>
+* the two sorted sequences in an array table3.<br>
+* Finally it writes the result to a third file.<br>
+* The names of the three files are passed as<br>
+* command line parameters<br>
+*/&nbsp;</small><br>
+</b><font size="2"><br>
+#include &lt;stdio.h&gt;<br>
+<br>
+#define SIZE 10<br>
+#define NAMESIZE 25<br>
+<br>
+typedef struct {<br>
+char name[NAMESIZE];<br>
+int midterm;<br>
+int final;<br>
+int homeworks;<br>
+} student;<br>
+<br>
+<br>
+void writeStudentArray(char filename[], student a[], int n)<br>
+/* n is the number of elements in the array a.<br>
+* filename is the name of the file where we will<br>
+* write.<br>
+*/<br>
+{<br>
+FILE *fd; /* File descriptor used for filename */<br>
+int i;<br>
+<br>
+if(n&lt;=0)<br>
+return;<br>
+if((fd=fopen(filename,&quot;w&quot;))==NULL){<br>
+perror(&quot;fopen&quot;);<br>
+exit(1);<br>
+}<br>
+for (i=0;i&lt;n;i++){<br>
+fprintf(fd,&quot;%s %d %d %d\n&quot;,<br>
+a-&gt;name, a-&gt;midterm, a-&gt;final, a-&gt;homeworks);<br>
+a++;<br>
+}<br>
+fclose(fd);<br>
+}<br>
+<br>
+int readStudentArray(char filename[], student a[], int nmax)<br>
+/* It reads up to nmax student records&nbsp;<br>
+* from file filename and stores them in a.<br>
+* It returns the number of records actually read.<br>
+* WARNING: We assume that the name of the students contain no spaces.<br>
+*/<br>
+{<br>
+FILE *fd; /* File descriptor used for filename */<br>
+int i=0;<br>
+<br>
+if((fd=fopen(filename,&quot;r&quot;))==NULL){<br>
+perror(&quot;fopen&quot;);<br>
+exit(1);<br>
+}<br>
+while(fscanf(fd,&quot;%s %d %d %d&quot;,<br>
+a-&gt;name, &amp;a-&gt;midterm, &amp;a-&gt;final, &amp;a-&gt;homeworks)!=EOF){<br>
+if(++i==nmax)break; /* We have filled up the table */<br>
+a++;<br>
+}<br>
+fclose(fd);<br>
+return i;<br>
+}<br>
+<br>
+void sortStudentArray(student table[], int n){<br>
+/* It sorts in nondecreasing order on the basis of their<br>
+* names the first n records of table.<br>
+* WARNING: THIS IS A NULL STUB.<br>
+*/<br>
+}<br>
+<br>
+int mergeStudentArray(student table3[], student table1[], int n1,&nbsp;<br>
+student table2[], int n2){<br>
+/* It merges into table3 the first n1 student records of table1<br>
+* and the first n2 student records of table2. The records in<br>
+* table1 and table2 are sorted in nondecreasing order of their&nbsp;<br>
+* name fields. It returns n1+n2.<br>
+* WARNING: THIS IS A STUB WHERE WE JUST COPY, NOT MERGE.<br>
+*/<br>
+int i,j=0;<br>
+<br>
+for(i=0;i&lt;n1;i++){<br>
+table3[j++] = table1[i];<br>
+}<br>
+for(i=0;i&lt;n2;i++){<br>
+table3[j++] = table2[i];<br>
+}<br>
+return n1+n2;<br>
+}<br>
+<br>
+int main(int argc, char *argv[]){<br>
+int n1, /* Number of students in first sequence */<br>
+n2, /* Number of students in second sequence */<br>
+n3; /* Number of students in resulting sequence */<br>
+<br>
+student table1[SIZE], /* Students in first sequence */<br>
+table2[SIZE], /* Students in second sequence */<br>
+table3[SIZE+SIZE]; /* Students in merged sequence */<br>
+<br>
+if(argc!=4){<br>
+printf(&quot;Usage: %s unsfile1 unsfile2 outfile\n&quot;, argv[0]);<br>
+exit(0);<br>
+}<br>
+n1 = readStudentArray(argv[1],table1,SIZE);<br>
+sortStudentArray(table1,n1);<br>
+n2 = readStudentArray(argv[2],table2,SIZE);<br>
+sortStudentArray(table2,n2);<br>
+n3 = mergeStudentArray(table3, table1, n1, table2, n2);<br>
+writeStudentArray(argv[3],table3,n3);<br>
+}<br>
+</font></font></p>
+</body>
+</html>

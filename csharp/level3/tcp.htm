@@ -1,0 +1,176 @@
+<html>
+
+<head>
+<title>TCP Date Client </title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p align="left"><u><b><span
+style="font-size: 10.0pt; font-family: Verdana; mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">TCP
+Date Client / Server - <br>
+<br>
+</span></b></u><font size="2" face="Verdana"><span
+style="mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Free
+to use Tutorials on Communicating using TCP Sockets on Microsoft's .NET Platform using
+C#.&nbsp;<br>
+<br>
+Installation Instructions&nbsp;<br>
+-------------------------&nbsp;<br>
+<br>
+List Of Files&nbsp;<br>
+--------------&nbsp;<br>
+ReadMe.txt -- This File.&nbsp;<br>
+DateServer -- Sample Program to demonstrate the TCP Date Server (run this file before
+running the DateClient) .&nbsp;<br>
+DateClient -- Sample Program to demonstrate the TCP Date Client.&nbsp;<br>
+<br>
+[Source Directory]&nbsp;<br>
+source&gt;DateServer.cs -- Source Code for the DateServer.exe&nbsp;<br>
+source&gt;DateClient.cs -- Source Code for the DateClient.exe&nbsp;<br>
+source&gt;compile.bat -- a Batch file to compile the above source codes.&nbsp;<br>
+<br>
+Requirements&nbsp;<br>
+------------&nbsp;<br>
+Any Pc with the .NET FrameWork SDK Installed on it.&nbsp;<br>
+MsAccess Drivers [Genrally available in all Microsoft Windows releases] .&nbsp;<br>
+<br>
+----------&nbsp;<br>
+<br>
+<br>
+The Code<br>
+DateClient.cs&nbsp;<br>
+/************************************************************<br>
+<br>
+DateServer.cs<br>
+This program is the TCP DateClient.&nbsp;<br>
+It connects to the TCP DateServer on 'localhost' port 4554 and retrives the<br>
+current Date from the Server.<br>
+This program Requires the TCP DateServer to be running before starting it.<br>
+************************************************************/<br>
+<br>
+namespace SaurabhNet {<br>
+<br>
+using System ;<br>
+using System.Net.Sockets ;<br>
+using System.Net ;<br>
+using System.Threading ;<br>
+<br>
+///&lt;summary&gt;<br>
+/// &lt;para&gt;<br>
+/// Class which shows the implementation of the TCP date Client<br>
+/// &lt;/para&gt;<br>
+///&lt;/summary&gt;<br>
+<br>
+public class DateClient&nbsp;<br>
+{<br>
+<br>
+//the needed member feilds<br>
+private TCPClient tcpc;<br>
+private string name ;<br>
+private int port=4554 ;<br>
+private bool readData=false ;<br>
+<br>
+///&lt;summary&gt;<br>
+/// &lt;para&gt;<br>
+/// Contructor whic contains all the code for the client.<br>
+/// It connects to the server and sends the cilents name,&nbsp;<br>
+/// Then it waits and receives the date from the server<br>
+/// &lt;/para&gt;<br>
+///&lt;/summary&gt;<br>
+<br>
+public DateClient(string name)<br>
+{<br>
+//a label<br>
+tryagain :<br>
+<br>
+this.name=name ;<br>
+try<br>
+{<br>
+//connect to the &quot;localhost&quot; at the give port<br>
+//if you have some other servername then you can use that&nbsp;<br>
+//instead of &quot;localhost&quot;<br>
+tcpc =new TCPClient(&quot;localhost&quot;,port) ;<br>
+//get a Network stream from the server<br>
+NetworkStream nts = tcpc.GetStream() ;<br>
+//if the stream is writiable then write to the server<br>
+if(nts.CanWrite)<br>
+{<br>
+string sender = &quot;Hi Server I am &quot;+name ;<br>
+Byte[] sends = System.Text.Encoding.ASCII.GetBytes(sender.ToCharArray());<br>
+nts.Write(sends,0,sends.Length) ;<br>
+//flush to stream&nbsp;<br>
+nts.Flush() ;<br>
+}<br>
+<br>
+//make a loop to wait untill some data is read from the stream<br>
+while(!readData&amp;&amp;nts.CanRead)<br>
+{<br>
+//if data available then read from the stream<br>
+if(nts.DataAvailable)<br>
+{<br>
+byte[] rcd = new byte[128];<br>
+int i=nts.Read( rcd,0,128);<br>
+<br>
+string ree = System.Text.Encoding.ASCII.GetString(rcd);<br>
+char[] unwanted = {' ',' ',' '};<br>
+<br>
+Console.WriteLine(ree.TrimEnd(unwanted)) ;<br>
+readData=true ;<br>
+}<br>
+}<br>
+<br>
+}<br>
+catch(Exception e)<br>
+{<br>
+Console.WriteLine(&quot;Could not Connect to server because &quot;+e.ToString());<br>
+//Here an exception can be cause if the client is started before starting<br>
+//the server.<br>
+//A good technique is used to handle such exceptions and give the client&nbsp;<br>
+//a chance to re-try to connect to the server<br>
+Console.Write(&quot;Do you want to try Again? [y/n]: &quot;) ;<br>
+char check = Console.ReadLine().ToChar();<br>
+if(check=='y'|| check=='Y')<br>
+goto tryagain ;<br>
+}<br>
+<br>
+}<br>
+<br>
+///&lt;summary&gt;<br>
+/// &lt;para&gt;<br>
+/// Main Entry point of the client class<br>
+/// &lt;/para&gt;<br>
+///&lt;/summary&gt;<br>
+public static void Main(string[] argv)<br>
+{<br>
+//check to see if the client has entered his name<br>
+//if not ask him if he wants to enter his name.<br>
+if(argv.Length&lt;=0)<br>
+{<br>
+Console.WriteLine(&quot;Usage: DataClient &lt;yourname&gt;&quot;) ;<br>
+Console.Write(&quot;Would You like to enter your name now [y/n] ?&quot;) ;<br>
+char check = Console.ReadLine().ToChar();<br>
+if(check=='y'|| check=='Y')<br>
+{<br>
+Console.Write(&quot;Please enter you name :&quot;) ;<br>
+string newname=Console.ReadLine();<br>
+DateClient dc = new DateClient(newname) ;<br>
+Console.WriteLine(&quot;Disconnected!!&quot;) ;<br>
+Console.ReadLine() ;<br>
+<br>
+}<br>
+<br>
+}<br>
+else<br>
+{<br>
+DateClient dc = new DateClient(argv[0]) ;<br>
+Console.WriteLine(&quot;Disconnected!!&quot;) ;<br>
+Console.ReadLine() ;<br>
+}<br>
+}<br>
+}<br>
+}</span></font></p>
+</body>
+</html>

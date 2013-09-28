@@ -1,0 +1,216 @@
+<html>
+
+<head>
+<title>String Jargon in C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p class="MsoNormal"><font face="Verdana">String Jargon in C#</font></p>
+
+<p class="MsoNormal"><font class="smallblack"><font face="Verdana" size="2">The following
+examples illustrates the usage of C# String class functions. It also list some additional
+functions which are not currently available in C#.</font></p>
+
+<pre><font face="Verdana" size="2">using System;
+
+class MyString
+{
+  public static void Main()
+  {
+    String strData=&quot;WeLcOmE tO c#.eNjoy FoLkS&quot;;
+
+Console.WriteLine(&quot;String Value: {0}&quot;,strData);
+Console.WriteLine(&quot;LowerCase Equivalent: {0}&quot;,Lower(strData));
+Console.WriteLine(&quot;UpperCase Equivalent: {0}&quot;,Upper(strData));
+Console.WriteLine(&quot;PCase Equivalent: {0}&quot;,PCase(strData));
+Console.WriteLine(&quot;Reverse Equivalent: {0}&quot;,Reverse(strData));
+Console.WriteLine(&quot;Is 'rotator' PalinDrome:{0}&quot;,IsPalindrome(&quot;rotator&quot;));
+Console.WriteLine(&quot;Is 'visualc#' PalinDrome:{0}&quot;,IsPalindrome(&quot;visualc#&quot;));
+Console.WriteLine(&quot;Left(string,5): {0}&quot;,Left(strData,5));
+Console.WriteLine(&quot;Right(String,6): {0}&quot;,Right(strData,6));
+Console.WriteLine(&quot;CharCount(Charcount,c):{0}&quot;,CharCount(&quot;Charcount&quot;,&quot;C&quot;));
+Console.WriteLine(&quot;CharCount(CharCount,c,true):{0}&quot;,
+CharCount(&quot;Charcount&quot;,&quot;C&quot;,true));
+Console.WriteLine(&quot;CharCount(CharCount,d,true):{0}&quot;,
+CharCount(&quot;Charcount&quot;,&quot;d&quot;,true));
+Console.WriteLine(&quot;ToSingleSpace('welcome to C#'):{0}&quot;,
+ToSingleSpace(&quot;welcome to C#&quot;));
+Console.WriteLine(&quot;Replace(aaaaaa,aa,a):{0}&quot;,Replace(&quot;aaaaaa&quot;,&quot;aa&quot;,&quot;a&quot;));
+  }
+
+  // Convert string to LowerCase
+  public static String Lower(String strParam)
+  {
+    return strParam.ToLower();
+  }
+
+  //Convert String to UpperCase
+  public static String Upper(String strParam)
+  {
+    return strParam.ToUpper();
+  }
+
+  //Convert String to ProperCase
+  public static String PCase(String strParam)
+  {
+    String strProper=strParam.Substring(0,1).ToUpper();
+    strParam=strParam.Substring(1).ToLower();
+    String strPrev=&quot;&quot;;
+
+    for(int iIndex=0;iIndex &lt; strParam.Length;iIndex++)
+    {
+      if(iIndex &gt; 1)
+      {
+        strPrev=strParam.Substring(iIndex-1,1);
+      }
+      if( strPrev.Equals(&quot; &quot;) ||
+          strPrev.Equals(&quot;\t&quot;) ||
+          strPrev.Equals(&quot;\n&quot;) ||
+          strPrev.Equals(&quot;.&quot;))
+      {
+          strProper+=strParam.Substring(iIndex,1).ToUpper();
+      }
+      else
+      {
+        strProper+=strParam.Substring(iIndex,1);
+      }
+    }
+    return strProper;
+  }
+
+  // Function to Reverse the String
+  public static String Reverse(String strParam)
+  {
+    if(strParam.Length==1)
+    {
+      return strParam;
+    }
+    else
+    {
+      return Reverse(strParam.Substring(1)) + strParam.Substring(0,1);
+    }
+  }
+
+  // Function to Test for Palindrome
+  public static bool IsPalindrome(String strParam)
+  {
+    int iLength,iHalfLen;
+    iLength=strParam.Length-1;
+    iHalfLen=iLength/2;
+    for(int iIndex=0;iIndex&lt;=iHalfLen;iIndex++)
+    {
+      if(strParam.Substring(iIndex,1)!=strParam.Substring(iLength-iIndex,1))
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Function to get string from beginning.
+
+  public static String Left(String strParam,int iLen)
+  {
+    if(iLen&gt;0)
+      return strParam.Substring(0,iLen);
+    else
+      return strParam;
+  }
+
+  //Function to get string from end
+  public static String Right(String strParam,int iLen)
+  {
+    if(iLen&gt;0)
+      return strParam.Substring(strParam.Length-iLen,iLen);
+    else
+      return strParam;
+  }
+
+  //Function to count no.of occurences of Substring in Main string
+  public static int CharCount(String strSource,String strToCount)
+  {
+    int iCount=0;
+    int iPos=strSource.IndexOf(strToCount);
+    while(iPos!=-1)
+    {
+      iCount++;
+      strSource=strSource.Substring(iPos+1);
+      iPos=strSource.IndexOf(strToCount);
+    }
+    return iCount;
+  }
+
+//Not available in C#
+  //Function to count no.of occurences of Substring in Main string
+  public static int CharCount(String strSource,String strToCount,bool
+IgnoreCase)
+  {
+    if(IgnoreCase)
+    {
+      return CharCount(strSource.ToLower(),strToCount.ToLower());
+    }
+    else
+    {
+      return CharCount(strSource,strToCount);
+    }
+  }
+
+//Useful Function can be used whitespace stripping programs
+  //Function Trim the string to contain Single between words
+  public static String ToSingleSpace(String strParam)
+  {
+    int iPosition=strParam.IndexOf(&quot;  &quot;);
+    if(iPosition==-1)
+    {
+      return strParam;
+    }
+    else
+    {
+      return ToSingleSpace(strParam.Substring(0,iPosition) +
+strParam.Substring(iPosition+1));
+    }
+  }
+
+  //Function Replace string function.
+
+// Currently Not Available in C#
+  public static String Replace(String strText,String strFind,String
+strReplace)
+  {
+    int iPos=strText.IndexOf(strFind);
+    String strReturn=&quot;&quot;;
+    while(iPos!=-1)
+    {
+      strReturn+=strText.Substring(0,iPos) + strReplace;
+      strText=strText.Substring(iPos+strFind.Length);
+      iPos=strText.IndexOf(strFind);
+    }
+    if(strText.Length&gt;0)
+      strReturn+=strText;
+    return strReturn;
+  }
+}
+
+</font></pre>
+
+<p><font face="Verdana" size="2">Here is what the output should look like:</font> </p>
+
+<p><font face="Verdana" size="2">String Value: WeLcOmE tO c#.eNjoy FoLkS<br>
+LowerCase Equivalent:welcome to c#.enjoy folks<br>
+UpperCase Equivalent:WELCOME TO C#.ENJOY FOLKS<br>
+PCase Equivalent:Welcome To C#.Enjoy Folks<br>
+Reverse Equivalent:SkLoF yojNe.#c Ot EmOcLeW<br>
+Is 'rotator' Palindrome :True<br>
+Is 'visualc#' Palindrome:False<br>
+Left(string,5):WeLcO<br>
+Right(string,6):FolkS<br>
+CharCount(CharCount,c):1<br>
+CharCount(CharCount,c,true):2<br>
+CharCount(CharCount,d,true):0<br>
+ToSingleSpace('welcome to C Sharp '):Welcome to C#<br>
+Replace(aaaaaa,aa,a):aaa</font></font> </p>
+</body>
+</html>

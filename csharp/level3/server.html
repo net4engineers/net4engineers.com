@@ -1,0 +1,98 @@
+<html>
+
+<head>
+<title>The Power of C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Server Side Programming In C#</b></font></big></p>
+
+<table>
+  <tr>
+    <td vAlign="center" width="183%"></td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="183%"><font face="Verdana" size="2"><br>
+    This is a very simple server side program which shows the power of the C#. This is a table
+    program requires IIS installed on the machine in order to check. The User entered the
+    table number in the form and then press Submit button. The action of the form will call
+    the C# application and that application disect the QUERY_STRING into the string
+    parameters. All the important things one should have to do in the server side coding is to
+    get the parameters from the Query string. After getting the string, you can convert it
+    into an interger and can then use it in your table program. To generate HTML page, dont
+    forget to write the Content-Type:text/html in the WriteLine.&nbsp;<br>
+    <br>
+    </font></td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="182%"><font face="Verdana" size="2"><b><u>Open Source:</u></b><br>
+    <br>
+    <br>
+    namespace Net2<br>
+    {<br>
+    using System;<br>
+    <br>
+    //&nbsp;<br>
+    // Summary description for Class1.<br>
+    //&nbsp;<br>
+    public class Class1<br>
+    {<br>
+    public Class1()<br>
+    {<br>
+    //<br>
+    // TODO: Add Constructor Logic here<br>
+    //<br>
+    }<br>
+    <br>
+    public static int Main(string[] args)<br>
+    {<br>
+    //<br>
+    // TODO: Add code to start application here<br>
+    //<br>
+    try<br>
+    {<br>
+    //Get the Environment Variabel :) he he<br>
+    string t;<br>
+    t=System.Environment.GetEnvironmentVariable (&quot;QUERY_STRING&quot;);<br>
+    string[] u;<br>
+    char[] v = new char[1];<br>
+    v[0] = '=';<br>
+    u = t.Split(v);<br>
+    //Convert the string into an Integer, thats a trick<br>
+    ushort a = u[1].ToUInt16();<br>
+    <br>
+    //Shows in the browser, send the output to the browser<br>
+    Console.WriteLine(&quot;Content-Type:text/html\n&quot;);<br>
+    Console.WriteLine(&quot;&lt;H1&gt;Table Program&lt;/H1&gt;&quot;);<br>
+    <br>
+    //calculations<br>
+    int res;<br>
+    for(int i=1;i&lt;=10;i++)<br>
+    {<br>
+    res = a * i;&nbsp;<br>
+    Console.WriteLine(&quot;&lt;br&gt; &quot; + a + &quot; x &quot; + i + &quot; = &quot; +
+    res);<br>
+    }<br>
+    //Console.WriteLine(&quot;&lt;i&gt;&lt;br&gt;&lt;hr&gt;Completed&lt;/i&gt;&quot;);<br>
+    Console.WriteLine(&quot;&lt;hr&gt;&lt;br&gt;&lt;b&gt;This Program is created By Furqan
+    Ullah Using C# Beta Compiler&lt;/b&gt;&quot;);<br>
+    Console.WriteLine(&quot;&lt;i&gt;&lt;br&gt;For Questions and Comments: &lt;/i&gt;&quot;);<br>
+    Console.WriteLine(&quot;&lt;a
+    href=mailto:furqan@writeme.com&gt;&lt;i&gt;furqan@writeme.com&lt;/i&gt;&lt;/a&gt;&quot;);<br>
+    }<br>
+    <br>
+    catch(System.Exception e)<br>
+    {<br>
+    System.Console.WriteLine(e.ToString());<br>
+    }<br>
+    return 0;<br>
+    }<br>
+    }<br>
+    }</font> </td>
+  </tr>
+</table>
+</body>
+</html>

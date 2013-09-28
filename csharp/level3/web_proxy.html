@@ -1,0 +1,188 @@
+<html>
+
+<head>
+<title>Web Proxy namespace WebProxy</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font size="2" face="Verdana">Web Proxy <br>
+<br>
+</font><br>
+<span
+style="mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA"><font
+size="2" face="Verdana">namespace WebProxy<br>
+{<br>
+using System;<br>
+using System.Net;<br>
+using System.Net.Sockets;<br>
+using System.Text;<br>
+using System.IO;<br>
+using System.Threading;<br>
+/// &lt;summary&gt;<br>
+/// Summary description for Class1.<br>
+/// &lt;/summary&gt;<br>
+<br>
+public class WebProxy {<br>
+private Socket skServer,skClient;<br>
+private const int iDATABUFFERSIZE = 25;<br>
+private Byte[] read = new Byte[1024];<br>
+private int BUFFER_SIZE=1024;<br>
+private Byte[] buffer = null;<br>
+private Encoding ASCII = Encoding.ASCII;<br>
+private const String HTTP_VERSION = &quot;HTTP/1.0&quot;;<br>
+private const String CRLF = &quot;\r\n&quot;;<br>
+<br>
+public WebProxy (Socket skClient)&nbsp;<br>
+{<br>
+this.skClient = skClient;<br>
+}&nbsp;<br>
+<br>
+public void run()&nbsp;<br>
+{<br>
+String sFromClient, sFromServer;<br>
+<br>
+sFromClient=&quot;&quot;;<br>
+sFromServer=&quot;&quot;;<br>
+try {<br>
+int bytes = readMessage(ref skClient,read,ref sFromClient);<br>
+if (bytes== 0)&nbsp;<br>
+{<br>
+return;<br>
+}<br>
+int i1 = sFromClient.IndexOf(' ');<br>
+int i2 = sFromClient.IndexOf(' ',i1+1);<br>
+if (i1 == -1 || i2 == -1)&nbsp;<br>
+{<br>
+throw new IOException();<br>
+}<br>
+Console.WriteLine(&quot;Connecting to Site {0}&quot;,sFromClient.Substring(i1 + 1,
+i2-i1));<br>
+Console.WriteLine(&quot;Connectiom From {0}&quot;,skClient.RemoteEndpoint);<br>
+WebRequest req= (WebRequest) WebRequestFactory.Create(sFromClient.Substring(i1 + 1,
+i2-i1));<br>
+WebResponse resp=req.GetResponse();<br>
+int ByteRead=0;<br>
+Byte[] Buffer=new Byte[BUFFER_SIZE];<br>
+Stream ResponseStream=resp.GetResponseStream();<br>
+ByteRead=ResponseStream.Read(Buffer,0,BUFFER_SIZE);<br>
+StringBuilder strResponse=new StringBuilder(&quot;&quot;);<br>
+int noBytesSent=0;<br>
+while (ByteRead!=0)<br>
+{<br>
+strResponse.Append(Encoding.ASCII.GetString(Buffer,0,ByteRead));<br>
+skClient.Send(Buffer, ByteRead,0);<br>
+noBytesSent+=ByteRead;<br>
+ByteRead=ResponseStream.Read(Buffer,0,BUFFER_SIZE);<br>
+}<br>
+Console.WriteLine(&quot;No of Bytes Sent {0}&quot;,noBytesSent);<br>
+skClient.Close();<br>
+<br>
+}<br>
+catch(FileNotFoundException e)<br>
+{<br>
+sendErrorPage(404, &quot;File Not Found&quot;, e.ToString());&nbsp;<br>
+}<br>
+catch (IOException e)&nbsp;<br>
+{<br>
+Console.WriteLine( e.StackTrace);<br>
+try&nbsp;<br>
+{&nbsp;<br>
+sendErrorPage(503, &quot;Service unavailable&quot;, e.ToString());&nbsp;<br>
+}&nbsp;<br>
+catch (Exception e1)&nbsp;<br>
+{<br>
+Console.WriteLine(e1.StackTrace);<br>
+}<br>
+}<br>
+catch(Exception e)<br>
+{<br>
+sendErrorPage(1000,&quot;Error &quot;,e.ToString());<br>
+}<br>
+finally<br>
+{<br>
+if(skClient!=null)<br>
+{<br>
+if(skClient.Connected)<br>
+{<br>
+skClient.Close();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+<br>
+public static void Main (string[] args)&nbsp;<br>
+{<br>
+int port = 8089;<br>
+try {<br>
+if (args.Length == 1)&nbsp;<br>
+port = args[0].ToInt32();<br>
+else if (args.Length &gt; 1)<br>
+Console.WriteLine(&quot;Usage: java WebProxy [port]&quot;);<br>
+}<br>
+catch (Exception e)&nbsp;<br>
+{<br>
+Console.WriteLine(e.StackTrace);<br>
+}<br>
+<br>
+try&nbsp;<br>
+{<br>
+TCPListener serversocket = new TCPListener(port);<br>
+Console.WriteLine(&quot;Listening on port &quot; + port);<br>
+serversocket.Start();<br>
+while (true) {<br>
+Socket socket = serversocket.Accept();<br>
+WebProxy webproxy=new WebProxy(socket);<br>
+Thread t =new Thread(new ThreadStart(webproxy.run));<br>
+t.Start();<br>
+}<br>
+} catch (IOException ioe) {<br>
+Console.WriteLine(ioe.ToString());<br>
+}<br>
+}<br>
+<br>
+private void sendErrorPage(int statusCode, String reasonPhrase, String body)&nbsp;<br>
+{<br>
+String s=HTTP_VERSION + &quot; &quot; + statusCode + &quot; &quot; + reasonPhrase + CRLF;<br>
+sendMessage(ref skClient,s);<br>
+//pwClient.Write(HTTP_VERSION + &quot; &quot; + statusCode + &quot; &quot; + reasonPhrase
++ CRLF);<br>
+s=&quot;Content-Type: text/plain&quot; + CRLF;<br>
+sendMessage(ref skClient,s);<br>
+//pwClient.Write(&quot;Content-Type: text/plain&quot; + CRLF);<br>
+s=&quot;Proxy-Connection: close&quot; + CRLF;<br>
+sendMessage(ref skClient,s);<br>
+//pwClient.Write(&quot;Proxy-Connection: close&quot; + CRLF);<br>
+s=CRLF;<br>
+sendMessage(ref skClient,s);<br>
+//pwClient.Write(CRLF);<br>
+s=statusCode + &quot; &quot; + reasonPhrase;<br>
+sendMessage(ref skClient,s);<br>
+//pwClient.WriteLine(statusCode + &quot; &quot; + reasonPhrase);<br>
+s=body;<br>
+sendMessage(ref skClient,s);<br>
+//pwClient.WriteLine(body);<br>
+//brClient.Flush();<br>
+//pwClient.flush();<br>
+}<br>
+private void sendMessage(ref Socket client,String message)<br>
+{<br>
+buffer = new Byte[message.Length + 1];<br>
+// send data to remote peer<br>
+int len = ASCII.GetBytes( message.ToCharArray(), 0, message.Length, buffer, 0);<br>
+client.Send(buffer,len,0);<br>
+}<br>
+private int readMessage(ref Socket s,byte[] byteArray,ref String message)<br>
+{<br>
+int iBytes = s.Receive(byteArray,1024, 0);<br>
+string MessageFromClient = Encoding.ASCII.GetString(byteArray);<br>
+message=(String)MessageFromClient;<br>
+return iBytes;<br>
+}<br>
+}<br>
+}<br>
+</font></span></p>
+</body>
+</html>

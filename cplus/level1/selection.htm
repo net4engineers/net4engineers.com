@@ -1,0 +1,90 @@
+<html>
+
+<head>
+<title></title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><br>
+<small><font face="Verdana">/* selection.cpp -- Read an integer array, print it, then sort
+it and<br>
+* print it. Use the selection sort method.<br>
+*/<br>
+<br>
+#include &lt;iostream&gt;<br>
+#include &lt;iomanip&gt;<br>
+<br>
+enum {NMAX = 10};<br>
+<br>
+void printIntArray(int a[], int n)<br>
+/* n is the number of elements in the array a.<br>
+* These values are printed out, five per line. */<br>
+{<br>
+for (int i = 0; i &lt; n; ){<br>
+cout &lt;&lt; setw(10) &lt;&lt; a[i++];<br>
+if (i%5==0)<br>
+cout &lt;&lt; endl;<br>
+}<br>
+cout &lt;&lt; endl;<br>
+}<br>
+<br>
+int getIntArray(int a[], int nmax, int sentinel)<br>
+/* It reads up to nmax integers and stores then in a; sentinel&nbsp;<br>
+* terminates input. */<br>
+{<br>
+int n = 0;<br>
+int temp;<br>
+<br>
+while (1) {<br>
+cout &lt;&lt; &quot;Enter integer [&quot; &lt;&lt; sentinel &lt;&lt; &quot; to terminate]
+: &quot;;<br>
+cin &gt;&gt; temp;<br>
+if (temp==sentinel) break;<br>
+if (n==nmax)<br>
+cout &lt;&lt; &quot;array is full\n&quot;;<br>
+else&nbsp;<br>
+a[n++] = temp;<br>
+}<br>
+return n;<br>
+}<br>
+<br>
+void selectionSort(int a[], int n)<br>
+/* It sorts in non-decreasing order the first N positions of A. It uses&nbsp;<br>
+* the selection sort method.<br>
+*/<br>
+{<br>
+for(int where, rh = n-1; rh &gt; 0; rh--){<br>
+//Elements in interval rh..n-1 are in their final position<br>
+//Find position of largest element in range 0..rh<br>
+where = 0; // where is the position with the current maximum<br>
+for (int lcv=1;lcv&lt;=rh;lcv++)<br>
+if (a[lcv]&gt;a[where])<br>
+where = lcv;<br>
+int temp = a[where];<br>
+a[where] = a[rh];<br>
+a[rh] = temp;<br>
+}<br>
+}<br>
+<br>
+int main(void) {<br>
+int x[NMAX];<br>
+int hmny;<br>
+int who;<br>
+int where;<br>
+<br>
+hmny = getIntArray(x, NMAX, 0);<br>
+if (hmny==0)<br>
+cout &lt;&lt; &quot;This is the empty array!\n&quot;;<br>
+else{<br>
+cout &lt;&lt; &quot;The array was: \n&quot;;<br>
+printIntArray(x, hmny);<br>
+selectionSort(x, hmny);<br>
+cout &lt;&lt; &quot;The sorted array is: &quot; &lt;&lt; endl;<br>
+printIntArray(x, hmny);<br>
+}<br>
+}<br>
+</font></small></p>
+</body>
+</html>

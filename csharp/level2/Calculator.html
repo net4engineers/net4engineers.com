@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta content="Microsoft FrontPage 3.0" name="GENERATOR">
+<title></title>
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><big><font face="Bookman Old Style"><b>Calculator In C#</b></font></big></p>
+
+<p>//To compile the file, use the following command:csc /r:MicroSoft.Win32.Interop.dll
+/r:System.dll <br>
+/r:System.WinForms.dll /r:System.Drawing.dll /t:Winexe editor.cs </p>
+
+<p>using System;<br>
+using System.Windows.Forms;<br>
+using System.ComponentModel; <br>
+using System.Drawing; <br>
+class Calculator:Form {<br>
+const int BUTTON_VERTICALSPACING=5;<br>
+const int BUTTON_HORIZONTALSPACING=3; <br>
+const int MEMORY_BUTTON_WIDTH=35;<br>
+const int MEMORY_BUTTON_HEIGHT=35;<br>
+const int MEMORY_BUTTONY=70; <br>
+const int MEMORY_BUTTONX=5; <br>
+const int DIGIT_BUTTON_WIDTH=35;<br>
+const int DIGIT_BUTTON_HEIGHT=35;<br>
+const int DIGIT_BUTTONY=MEMORY_BUTTONY; <br>
+const int DIGIT_BUTTONX=MEMORY_BUTTONX<br>
++MEMORY_BUTTON_WIDTH+BUTTON_HORIZONTALSPACING+5; <br>
+const int DISPLAY_HEIGHT=25; <br>
+const int OTHER_BUTTON_HEIGHT=DIGIT_BUTTON_HEIGHT-10; <br>
+const int OTHER_BUTTON_WIDTH=60;<br>
+const int OTHER_BUTTONY=5+DISPLAY_HEIGHT+10;<br>
+const int OTHER_BUTTONX=DIGIT_BUTTONX; <br>
+const int FORM_HEIGHT=260;<br>
+const int FORM_WIDTH=250;<br>
+Button[] btnDigitOperator=new Button[20];<br>
+Button[] btnMemory=new Button[4];<br>
+Button[] btnOther=new Button[3]; <br>
+Label lblDisplay;<br>
+Label lblMemory;<br>
+string[,] DigitCaption=new
+String[5,4]{{&quot;7&quot;,&quot;4&quot;,&quot;1&quot;,&quot;0&quot;},{&quot;8&quot;,&quot;5&quot;,&quot;2&quot;,&quot;+/-&quot;},{&quot;9&quot;,&quot;6&quot;,&quot;3&quot;,&quot;.&quot;},{&quot;/&quot;,&quot;*&quot;,&quot;-&quot;,&quot;+&quot;},{&quot;sqrt&quot;,&quot;%&quot;,&quot;1/x&quot;,&quot;=&quot;}};
+<br>
+string[] MemoryCaption={&quot;MC&quot;,&quot;MR&quot;,&quot;MS&quot;,&quot;M+&quot;};
+string[] OtherCaption={&quot;BackSpace&quot;,&quot;CE&quot;,&quot;C&quot;};<br>
+static double BufferValue=0.0;<br>
+static double Operand1=0.0;<br>
+static double Operand2=0.0;<br>
+static string Operator=&quot;<br>
+&quot;; //if true then the number does not have integral part.<br>
+static bool IsFraction=false; //if digit pressed just after operator then clear display
+and //display only the clicked digit otherwise do concatenation static bool
+IsOperatorClicked=false; <br>
+public Calculator() { lblDisplay=new Label(); lblDisplay.Text=&quot;0.&quot;;
+lblDisplay.BackColor=Color.White; lblDisplay.Location=new Point(5,5); lblDisplay.Size=new
+Size(FORM_WIDTH-20,DISPLAY_HEIGHT);
+lblDisplay.BorderStyle=System.Windows.Forms.BorderStyle.Fixed3D;
+lblDisplay.TextAlign=ContentAlignment.MiddleRight; this.Controls.Add(lblDisplay);
+lblMemory=new Label(); lblMemory.Text=&quot;&quot;; lblMemory.BackColor=this.BackColor;
+lblMemory.Location=new Point(MEMORY_BUTTONX,OTHER_BUTTONY); lblMemory.Size=new
+Size(MEMORY_BUTTON_WIDTH,OTHER_BUTTON_HEIGHT);
+lblMemory.BorderStyle=System.Windows.Forms.BorderStyle.Fixed3D;
+lblMemory.TextAlign=ContentAlignment.MiddleCenter; this.Controls.Add(lblMemory); // Adding
+Memory Buttons for(int i=0;i<btnMemory.Length;i++) { btnMemory[i]="new" Button(); btnMemory[i].ForeColor="Color.Red;" btnMemory[i].Text="MemoryCaption[i];" btnMemory[i].Size="new" Size(MEMORY_BUTTON_WIDTH,MEMORY_BUTTON_HEIGHT); if(i="=0)" { btnMemory[i].Location="new" Point(MEMORY_BUTTONX,MEMORY_BUTTONY); } else { btnMemory[i].Location="new" Point(MEMORY_BUTTONX,MEMORY_BUTTONY + i*MEMORY_BUTTON_HEIGHT + i*BUTTON_VERTICALSPACING); } btnMemory[i].Click+="new" EventHandler(Memory_Click); this.Controls.Add(btnMemory[i]); } // Adding Digit/Operator Buttons int btnIndex="0;" for(int i="DigitCaption.GetLowerBound(0);i&lt;=DigitCaption.GetUpperBound(0);i++)" { for(int j="DigitCaption.GetLowerBound(1);j&lt;=DigitCaption.GetUpperBound(1);j++)" { btnDigitOperator[btnIndex]="new" Button(); btnDigitOperator[btnIndex].Text="DigitCaption[i,j];" btnDigitOperator[btnIndex].ForeColor="Color.Blue;" btnDigitOperator[btnIndex].Size="new" Size(DIGIT_BUTTON_WIDTH,DIGIT_BUTTON_HEIGHT); int buttonX="DIGIT_BUTTONX+i*DIGIT_BUTTON_WIDTH+i*BUTTON_HORIZONTALSPACING;" if(j="=0)" { btnDigitOperator[btnIndex].Location="new" Point(buttonX,DIGIT_BUTTONY); } else { btnDigitOperator[btnIndex].Location="new" Point(buttonX,DIGIT_BUTTONY + j*DIGIT_BUTTON_HEIGHT+j*BUTTON_VERTICALSPACING); } if(i="=DigitCaption.GetUpperBound(0)-1)" btnDigitOperator[btnIndex].ForeColor="Color.Red;" if(i="=DigitCaption.GetUpperBound(0)" && j="=DigitCaption.GetUpperBound(1))" btnDigitOperator[btnIndex].ForeColor="Color.Red;" btnDigitOperator[btnIndex].Click+="new" EventHandler(DigitOpertor_Click); this.Controls.Add(btnDigitOperator[btnIndex++]); } } // Adding Other Buttons for(int i="0;i&lt;btnOther.Length;i++)" { btnOther[i]="new" Button(); btnOther[i].ForeColor="Color.Red;" btnOther[i].Text="OtherCaption[i];" if(i="=0)" { btnOther[i].Location="new" Point(OTHER_BUTTONX,OTHER_BUTTONY); btnOther[i].Size="new" Size(OTHER_BUTTON_WIDTH+10,OTHER_BUTTON_HEIGHT); } else { btnOther[i].Location="new" Point((2-i)*5+10+OTHER_BUTTONX + i*OTHER_BUTTON_WIDTH + i*BUTTON_HORIZONTALSPACING,OTHER_BUTTONY); btnOther[i].Size="new" Size(OTHER_BUTTON_WIDTH-10,OTHER_BUTTON_HEIGHT); } btnOther[i].Click+="new" EventHandler(OtherButton_Click); this.Controls.Add(btnOther[i]); } this.Size="new" Size(FORM_WIDTH,FORM_HEIGHT); this.MaximizeBox="false;" this.Text="Calculator" ; } public void Memory_Click(object sender,EventArgs eArgs) { switch(((Button)sender).Text) { case "MR": lblDisplay.Text="BufferValue.ToString()+&quot;.&quot;;" break; case "MS": BufferValue="Double.Parse(lblDisplay.Text);" lblMemory.Text="M" ; break; case "M+": try { BufferValue+="Double.Parse(lblDisplay.Text);" } catch(Exception) { BufferValue="0.0;" } break; case "MC": BufferValue="0.0;" lblMemory.Text ; break; } } public void DigitOpertor_Click(object sender,EventArgs eArgs) { string Caption="((Button)sender).Text;" bool IsError="false;" switch(Caption) { case "+": case "-": case "*": case "/": Operand1="Double.Parse(lblDisplay.Text);" Operator="Caption;" IsOperatorClicked="true;" IsFraction="false;" break; case "=":
+        Operand2=Double.Parse(lblDisplay.Text);
+        IsOperatorClicked=false;
+        switch(Operator)
+        {
+          case " +": try { lblDisplay.Text="(Operand1+Operand2).ToString();" } catch(Exception) { IsError="true;" lblDisplay.Text="Error." ; } break; case "-": try { lblDisplay.Text="(Operand1-Operand2).ToString();" } catch(Exception) { IsError="true;" lblDisplay.Text="Error." ; } break; case "*": try { lblDisplay.Text="(Operand1*Operand2).ToString();" } catch(Exception) { IsError="true;" lblDisplay.Text="Error." ; } break; case "/": try { lblDisplay.Text="(Operand1/Operand2).ToString();" } catch(Exception) { IsError="true;" if(Operand2="=0)" lblDisplay.Text="Cannot Divide by Zero." ; else lblDisplay.Text="Error." ; } break; } if(!IsError && lblDisplay.Text.IndexOf(".")<0) { lblDisplay.Text+="." ; } break; case "+/-": try { if(lblDisplay.Text!="0." ) { if(lblDisplay.Text.Substring(lblDisplay.Text.Length-1)="=&quot;.&quot;)" lblDisplay.Text="(-Double.Parse(lblDisplay.Text)).ToString()+&quot;.&quot;;" else lblDisplay.Text="(-Double.Parse(lblDisplay.Text)).ToString();" } } catch(Exception) { lblDisplay.Text="Error." ; } break; case ".": IsFraction="true;" break; case "1/x": try { if(lblDisplay.Text!="0." ) lblDisplay.Text="(1.0/Double.Parse(lblDisplay.Text)).ToString();" if(lblDisplay.Text.IndexOf(".")<0) lblDisplay.Text+="." ; } catch(Exception) { lblDisplay.Text="Error." ; } break; case "%": break; case "sqrt": try { lblDisplay.Text="Math.Sqrt(Double.Parse(lblDisplay.Text)).ToString();" if(lblDisplay.Text.IndexOf(".")<0) lblDisplay.Text+="." ; } catch(Exception) { lblDisplay.Text="Error." ; } break; default: if(IsOperatorClicked) { lblDisplay.Text="0." ; } if(lblDisplay.Text!="0." ) { if(!IsFraction) { lblDisplay.Text="lblDisplay.Text.Substring(0,lblDisplay.Text.Length-1)" + Caption + "."; } else { lblDisplay.Text="lblDisplay.Text.Substring(0,lblDisplay.Text.Length)" + Caption; } } else { if(!IsFraction) { lblDisplay.Text="Caption" + "."; } else { lblDisplay.Text="lblDisplay.Text+Caption;" } } IsOperatorClicked="false;" break; } } public void OtherButton_Click(object sender,EventArgs eArgs) { switch(((Button)sender).Text) { case "CE": case "C": lblDisplay.Text="0." ; IsFraction="false;" break; default: if(lblDisplay.Text.Length>2) {
+if(lblDisplay.Text.Substring(lblDisplay.Text.Length-1)==&quot;.&quot;) {
+lblDisplay.Text=lblDisplay.Text.Substring(0,lblDisplay.Text.Length-2) + &quot;.&quot;; }
+else { lblDisplay.Text=lblDisplay.Text.Substring(0,lblDisplay.Text.Length-1); } } else {
+IsFraction=false; lblDisplay.Text=&quot;0.&quot;; } break; } } public static void Main() {
+Application.Run(new Calculator()); } } </XMP></p>
+</body>
+</html>

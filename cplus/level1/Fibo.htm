@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<title>New Page 20</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p><font face="Verdana"><b>/* fibo.cpp -- It prints out the first N Fibonacci<br>
+* numbers.<br>
+*/<br>
+</b><font size="2"><br>
+#include &lt;iostream&gt;<br>
+#include &lt;iomanip&gt;<br>
+<br>
+int main(void) {<br>
+int n; // The number of fibonacci numbers we will print&nbsp;<br>
+int current; // The value of the (i)th fibonacci number&nbsp;<br>
+int next; // The value of the (i+1)th fibonacci number&nbsp;<br>
+int twoaway; // The value of the (i+2)th fibonacci number&nbsp;<br>
+<br>
+cout &lt;&lt; &quot;How many Fibonacci numbers do you want to compute? &quot;;<br>
+cin &gt;&gt; n;<br>
+if (n&lt;=0)<br>
+cout &lt;&lt; &quot;The number should be positive.&quot; &lt;&lt; endl;<br>
+else {<br>
+cout &lt;&lt; &quot;\n\n\t I \t Fibonacci(I) \n\t=====================&quot; &lt;&lt;
+endl;<br>
+next = current = 1;<br>
+for (int i=1; i&lt;=n; i++) {<br>
+cout &lt;&lt; &quot;\t&quot; &lt;&lt; setw(3) &lt;&lt; i &lt;&lt; &quot;\t\t&quot;&nbsp;<br>
+&lt;&lt; setw(4) &lt;&lt; current &lt;&lt; endl;<br>
+twoaway = current+next;<br>
+current = next;<br>
+next = twoaway;<br>
+}<br>
+}<br>
+}<br>
+<br>
+/* The output from a run of this program was:<br>
+<br>
+How many Fibonacci numbers do you want to compute? 12<br>
+<br>
+I Fibonacci(I)&nbsp;<br>
+=====================<br>
+1 1<br>
+2 1<br>
+3 2<br>
+4 3<br>
+5 5<br>
+6 8<br>
+7 13<br>
+8 21<br>
+9 34<br>
+10 55<br>
+11 89<br>
+12 144<br>
+</font><br>
+*/</font></p>
+</body>
+</html>

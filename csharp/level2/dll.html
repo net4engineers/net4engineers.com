@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<title>Creating a Dll And Using It With C</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<table>
+  <tr>
+    <td vAlign="center" width="183%"><p align="center"><font face="Verdana" size="2"><b>Creating
+    a Dll And Using It With C# </b></font></td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="182%"><hr>
+    </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="183%"><font face="Verdana" size="2"><br>
+    Here is a very quick and easy way to create a Dll and use it in C#.</font> </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="182%"><font face="Verdana" size="2"><br>
+    <br>
+    <b><u>NameSpace.CS</u></b><br>
+    <br>
+    //Compilation is done using &quot;csc /target:library NameSpace.cs &quot;<br>
+    <br>
+    //UseName.cs is the file which uses this dll.<br>
+    <br>
+    namespace DllMessage<br>
+    {<br>
+    public class HiMessage<br>
+    {<br>
+    public string Messages()<br>
+    {<br>
+    return &quot;Hi, Thats Mine&quot;;<br>
+    }<br>
+    }<br>
+    }<br>
+    <br>
+    <br>
+    <b><u>UserName.CS</u></b><br>
+    <br>
+    // Use this Command to compile &quot;csc /reference:NameSpace.dll UseName.cs&quot;<br>
+    <br>
+    using DllMessage;<br>
+    <br>
+    public class GetHi<br>
+    {<br>
+    public static void Main()<br>
+    {<br>
+    HiMessage hi = new HiMessage();<br>
+    System.Console.WriteLine(hi.Messages());<br>
+    }<br>
+    }</font> </td>
+  </tr>
+</table>
+</body>
+</html>

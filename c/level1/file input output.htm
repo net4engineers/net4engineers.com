@@ -1,0 +1,79 @@
+<html>
+
+<head>
+<title>Reads a file containing a sequence of text records and writes it out to a new
+binary files</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<base target="_top">
+</head>
+
+<body link="#0000FF" vlink="#0000FF" alink="#0000FF">
+
+<p align="left"><font face="Verdana" size="2"><b>Reads a file containing a sequence of
+text records and writes it out to a new binary files. The names of the files are passed in
+as command&nbsp; line parameters.</b></font> </p>
+
+<p align="left"><font face="Verdana" size="2">#include &lt;stdio.h&gt;<br>
+<br>
+#define SIZE 10<br>
+#define NAMESIZE 25<br>
+<br>
+typedef struct {<br>
+char name[NAMESIZE];<br>
+int midterm;<br>
+int final;<br>
+int homeworks;<br>
+} student;<br>
+<br>
+int writeastudent(FILE *fdout, student * who){<br>
+/* Write to an open binary file fdout the content of who.<br>
+* Return the number of bytes that were written out.<br>
+*/<br>
+<br>
+char * p; /* Cursor in outputting a byte at a time */<br>
+char * limit = ((char *)who)+sizeof(student); /*Address just past who */<br>
+<br>
+for (p=(char *)who;p&lt;limit;p++){<br>
+fputc(*p, fdout);<br>
+}<br>
+return (limit - (char *)who);<br>
+}<br>
+<br>
+int main (int argc, char *argv[]){<br>
+int n = 0; /* Number of records read */<br>
+int m; /* Number of bytes in a record */<br>
+student who; /* Buffer for a record */<br>
+<br>
+FILE *fdin; /* File descriptor for input file */<br>
+FILE *fdout; /* File descriptor for output file */<br>
+<br>
+if(argc!=3){<br>
+printf(&quot;Usage: %s infile outfile\n&quot;, argv[0]);<br>
+exit(0);<br>
+}<br>
+<br>
+if((fdin=fopen(argv[1],&quot;r&quot;))==NULL){<br>
+perror(&quot;fopen&quot;);<br>
+exit(1);<br>
+}<br>
+<br>
+if((fdout=fopen(argv[2],&quot;w&quot;))==NULL){<br>
+perror(&quot;fopen&quot;);<br>
+exit(1);<br>
+}<br>
+<br>
+while(fscanf(fdin,&quot;%s %d %d %d&quot;,<br>
+who.name, &amp;who.midterm, &amp;who.final, &amp;who.homeworks)!=EOF){<br>
+m = writeastudent(fdout, &amp;who);<br>
+printf(&quot;m=%d\n&quot;, m);<br>
+n++;<br>
+}<br>
+<br>
+printf(&quot;n=%d\n&quot;, n);<br>
+<br>
+fclose(fdin);<br>
+fclose(fdout);<br>
+<br>
+} </font></p>
+</body>
+</html>
